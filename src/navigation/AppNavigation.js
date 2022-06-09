@@ -13,7 +13,7 @@ import {
   ChatActive,
   ProfileInactive,
   ProfileActive,
-} from '../assets/SVGicons';
+} from '../../assets/SVGicons';
 import {bottomBarTHeme as styles} from '../theme/bottomBar';
 // import {core} from '../data/core/index';
 import {useStateValue} from '../provider';

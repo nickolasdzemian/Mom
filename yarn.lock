@@ -5747,6 +5747,11 @@ react-native-curved-bottom-bar@^1.7.9:
   dependencies:
     d3-shape "*"
 
+react-native-date-picker@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.2.2.tgz#07fb8a9021fb48ef9a20b043d33c14e858220883"
+  integrity sha512-x0jxWbJXKDXivRDwsUx58tKOxe719XoVqqq6UzMSYSsTiPL2i13r7PyDxop3f3et/62qbcMgeswl+/CLdX6+Eg==
+
 react-native-gradle-plugin@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz#b61a9234ad2f61430937911003cddd7e15c72b45"
@@ -5804,6 +5809,11 @@ react-native-vector-icons@9.1.0:
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
+
+react-native-wheely@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-wheely/-/react-native-wheely-0.4.1.tgz#f9dffcc73965825074c48bb69cb54b7d1850188a"
+  integrity sha512-fr4BTRy3YnnxmZeSHKGms4MPcvLC5rnGqfqes9lKDEYRmZTLwuCVOy5Lad/VH4MUI5VE+FM40AQ/JZldB2PFQw==
 
 react-native@0.68.2:
   version "0.68.2"

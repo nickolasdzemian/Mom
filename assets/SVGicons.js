@@ -10,7 +10,7 @@ import Svg, {
   Defs,
   Stop,
 } from 'react-native-svg';
-import {bottomBarTHeme} from '../theme/bottomBar';
+import {bottomBarTHeme} from '../src/theme/bottomBar';
 
 const colorRef = '#AAACAE';
 const barProps = {height: 20, width: 20};

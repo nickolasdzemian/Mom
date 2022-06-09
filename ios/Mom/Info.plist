@@ -39,20 +39,21 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Poppins-Light.ttf</string>
-		<string>Poppins-Medium.ttf</string>
-		<string>Poppins-SemiBoldItalic.ttf</string>
-		<string>Poppins-Regular.ttf</string>
-		<string>Poppins-Bold.ttf</string>
-		<string>Poppins-Thin.ttf</string>
-		<string>Poppins-SemiBold.ttf</string>
-		<string>Poppins-Italic.ttf</string>
-		<string>FSAlbertProNarrow-Bold.ttf</string>
-		<string>FSAlbertProNarrow-BoldItalic.ttf</string>
-		<string>FSAlbertProNarrow-Italic.ttf</string>
-		<string>FSAlbertProNarrow-Light.ttf</string>
-		<string>FSAlbertProNarrow-Thin.ttf</string>
 		<string>FSAlbertProNarrow.ttf</string>
+		<string>FSAlbertProNarrow_Bold.ttf</string>
+		<string>FSAlbertProNarrow_BoldItalic.ttf</string>
+		<string>FSAlbertProNarrow_Italic.ttf</string>
+		<string>FSAlbertProNarrow_Light.ttf</string>
+		<string>FSAlbertProNarrow_Thin.ttf</string>
+		<string>Poppins_Black.ttf</string>
+		<string>Poppins_Bold.ttf</string>
+		<string>Poppins_BoldItalic.ttf</string>
+		<string>Poppins_Italic.ttf</string>
+		<string>Poppins_Light.ttf</string>
+		<string>Poppins_Medium.ttf</string>
+		<string>Poppins_Regular.ttf</string>
+		<string>Poppins_SemiBold.ttf</string>
+		<string>Poppins_Thin.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
