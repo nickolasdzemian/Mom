@@ -15,12 +15,9 @@ import { YellowButton } from "../../../components";
 
 export const PregScreen = ({ navigation }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(10);
-  const route = (r) => {
-    navigation.navigate(r);
-  };
   const WeekPicker = () => {
     let weeks = [];
-    for (i = 0; i <= 40; i++) {
+    for (let i = 1; i <= 40; i++) {
       weeks.push([i] + " недель");
     }
     return (
@@ -58,6 +55,7 @@ export const PregScreen = ({ navigation }) => {
           route="Reg"
           style={{ marginTop: 40 }}
           nav={navigation}
+          rdata={{type: 0, selectedIndex: selectedIndex + 1}}
         />
       </View>
       <View style={styles.bottom}>

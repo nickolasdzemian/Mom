@@ -3,10 +3,10 @@ import { Text, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { BUTTON, BLUETXT } from "../theme/main";
 
-export const YellowButton = ({txt, route, style, nav, event}) => {
+export const YellowButton = ({txt, route, style, nav, event, rdata}) => {
   const action = () => {
     event ? event() : null;
-    route ? nav.navigate(route) : null;
+    route ? nav.navigate(route, {rdata: rdata ? rdata : null}) : null;
   }
   return (
     <TouchableOpacity onPress={() => action()}>

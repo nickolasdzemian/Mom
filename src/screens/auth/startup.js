@@ -29,7 +29,7 @@ export const StartupScreen = ({ navigation }) => {
           nav={navigation}
         />
         <TouchableOpacity
-          onPress={() => alert("dfv gbplf")}
+          onPress={() => navigation.navigate("SimpleAuth")}
           style={[styles.btn, { marginTop: 8 }]}
         >
           <Text style={[styles.btnTXT, { color: "#FFF5DC" }]}>

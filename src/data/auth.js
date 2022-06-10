@@ -2,13 +2,13 @@ import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
 
-export async function registration(data, dispatch) {
-  const URL = url + "auth/register";
+export async function login(data, dispatch, token) {
+  const URL = url + "auth/login";
 
   async function created(json) {
     dispatch({
       type: 'changeData',
-      globalData: json.data,
+      globalData: { auth: true, user: json}
     });
     await userData.set("user", json);
   }
@@ -16,29 +16,23 @@ export async function registration(data, dispatch) {
   try {
     const response = await fetch(URL, {
       method: "POST",
-      headers: {
+      headers: token ? {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      } : {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
         email: data.email,
         password: data.pswrd,
-        city: data.city,
-        status: data.status,
-        gestational_age: data.gestational,
-        children: data.children,
       }),
     });
     const json = await response.json();
     json?.errors
       ? Alert.alert(
           "Ошибка",
-          json.errors?.name
-            ? "Имя: " + json.errors.name
-            : null + json.errors?.city
-            ? "Город: " + json.errors.city
-            : null + json.errors?.email
+          json.errors?.email
             ? "Почта: " + json.errors.email
             : null + json.errors?.password
             ? "Пароль: " + json.errors.password
