@@ -55,7 +55,7 @@ export const PregScreen = ({ navigation }) => {
           route="Reg"
           style={{ marginTop: 40 }}
           nav={navigation}
-          rdata={{type: 0, selectedIndex: selectedIndex + 1}}
+          rdata={{ type: 0, selectedIndex: selectedIndex + 1 }}
         />
       </View>
       <View style={styles.bottom}>

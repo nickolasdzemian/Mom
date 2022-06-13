@@ -27,7 +27,12 @@ export const RegistrationScreen = ({ route, navigation }) => {
     children: rdata.type == 1 ? rdata.newChildsIds : [],
   });
   const [{ globalData }, dispatch] = useStateValue();
-  console.log(data);
+
+  const global = (newData) =>
+    dispatch({
+      type: "changeData",
+      newGlobalData: newData,
+    });
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
@@ -85,7 +90,7 @@ export const RegistrationScreen = ({ route, navigation }) => {
             // route="Reg"
             style={{ marginTop: 45 }}
             nav={navigation}
-            event={() => registration(data, dispatch)}
+            event={() => registration(data, global)}
           />
         </View>
         <View style={[styles.bottom, { flex: 0.25 }]}>

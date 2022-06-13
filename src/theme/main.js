@@ -1,12 +1,14 @@
-import {Platform } from 'react-native';
-export const OS = Platform.OS === 'android';
+import { Platform } from "react-native";
+export const OS = Platform.OS === "android";
 
 // Fonts
-export const fonts = OS ? {
-    Albert: "FSAlbertProNarrow_Bold"
-} : {
-    Albert: "FSAlbertProNarrow"
-}
+export const fonts = OS
+  ? {
+      Albert: "FSAlbertProNarrow_Bold",
+    }
+  : {
+      Albert: "FSAlbertProNarrow",
+    };
 
 // Assets
 export const bg_blue = require("../../assets/auth/bg_blue.png");

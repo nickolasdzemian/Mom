@@ -30,13 +30,13 @@ export const AddChild = ({ navigation }) => {
   };
 
   function parsedDate(date) {
-    const day = date.getDate() < 10 ? String('0' + date.getDate()) : date.getDate();
-    const month = date.getMonth() < 10 ? String('0' + date.getMonth()) : date.getMonth();
+    const day =
+      date.getDate() < 10 ? String("0" + date.getDate()) : date.getDate();
+    const month =
+      date.getMonth() < 10 ? String("0" + date.getMonth()) : date.getMonth();
     const year = date.getFullYear();
-    return String(
-      day + "-" + month + "-" + year
-    );
-  };
+    return String(day + "-" + month + "-" + year);
+  }
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
@@ -125,13 +125,16 @@ export const AddChild = ({ navigation }) => {
 
         <YellowButton
           txt="Продолжить"
-          // route="Reg"
           style={{ marginTop: 40 }}
           nav={navigation}
           event={() => addChild(childData, null, navigation, "Reg")}
         />
         <TouchableOpacity
-          onPress={() => alert("Отсутствует логика кнопки!!!")}
+          onPress={() =>
+            addChild(childData, null, navigation, null).then(
+              setChildData({ name: "", date: "", gender: 1 })
+            )
+          }
           style={[styles.btn, { marginTop: 8 }]}
         >
           <Text style={[styles.btnTXT, { color: "#FFF5DC" }]}>

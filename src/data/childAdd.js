@@ -5,7 +5,6 @@ import { childsData } from "../storage/childs";
 export async function addChild(childObj, oauth, nav, route) {
   const URL = url + "child/register";
   const childs = await childsData.get("childs");
-  let newChildsIds = [];
 
   function getChildsIds(newChilds) {
     let newChildsIds = Object.values(newChilds);
@@ -17,12 +16,18 @@ export async function addChild(childObj, oauth, nav, route) {
     const newChilds = childs
       ? [...childs, { c: json.data }]
       : [{ c: json.data }];
-    nav.navigate(route, {
-      rdata: {
-        type: 1,
-        newChildsIds: getChildsIds(newChilds),
-      },
-    });
+    route
+      ? nav.navigate(route, {
+          rdata: {
+            type: 1,
+            newChildsIds: getChildsIds(newChilds),
+          },
+        })
+      : Alert.alert(
+          "Выполнено",
+          "Ребенок успешно добавлен, добавьте следующего",
+          [{ text: "OK" }]
+        );
     await childsData.set("childs", newChilds);
   }
 

@@ -1,7 +1,13 @@
 import * as React from "react";
-import { StatusBar, View, Text, TouchableOpacity } from "react-native";
+import {
+  StatusBar,
+  View,
+  ImageBackground,
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import {
   HomeActive,
@@ -14,10 +20,12 @@ import {
   ProfileInactive,
   ProfileActive,
 } from "../../assets/SVGicons";
+import { authIcons } from "../../assets/auth/media";
 import { OS } from "../theme/main";
 import { bottomBarTHeme as styles } from "../theme/bottomBar";
 import { useStateValue } from "../provider";
 import { userData } from "../storage/auth";
+import { auth as authProvider } from "../data";
 import { AuthStack } from "./AuthStack";
 
 function BlankScreen() {
@@ -30,8 +38,8 @@ function BlankScreen() {
 }
 
 export const AppNavigation = () => {
-  const [auth, setAuth] = React.useState(false);
   const [{ globalData }, dispatch] = useStateValue();
+  const [splash, setSplash] = React.useState(true);
 
   // *** [Global listener from provider] ***
   const global = (newData) =>
@@ -44,12 +52,28 @@ export const AppNavigation = () => {
   React.useEffect(() => {
     userData.get("user").then((response) => {
       if (response !== undefined && globalData == undefined) {
-        setAuth(true);
-        global(response.data);
+        authProvider(global, setSplash);
       }
     });
-  });
-  console.log(globalData, "statestater");
+  }, []);
+
+  console.log(globalData, "statestater 2");
+
+  const _renderSplash = () => {
+    return (
+      <ImageBackground
+        source={authIcons.splash}
+        resizeMode="stretch"
+        style={{ flex: 1, justifyContent: "flex-end" }}
+      >
+        <ActivityIndicator
+          size="small"
+          color="white"
+          style={{ marginBottom: "55%" }}
+        />
+      </ImageBackground>
+    );
+  };
 
   const _renderIcon = (routeName, selectedTab) => {
     switch (routeName) {
@@ -94,7 +118,9 @@ export const AppNavigation = () => {
           barStyle="dark-content"
         />
       ) : null}
-      {auth ? (
+      {splash ? (
+        _renderSplash()
+      ) : globalData ? (
         <CurvedBottomBar.Navigator
           type="up"
           style={styles.styles.bottomBar}

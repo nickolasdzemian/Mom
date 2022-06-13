@@ -13,7 +13,9 @@ import { authIcons } from "../../../assets/auth/media";
 
 export const StatusScreen = ({ navigation }) => {
   const route = (r) => {
-    r == "Reg" ? navigation.navigate(r, {rdata: { type: 2 }}) : navigation.navigate(r);
+    r == "Reg"
+      ? navigation.navigate(r, { rdata: { type: 2 } })
+      : navigation.navigate(r);
   };
 
   return (

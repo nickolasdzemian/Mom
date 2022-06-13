@@ -21,6 +21,11 @@ export const SimpleAuthScreen = ({ navigation }) => {
     pswrd: "",
   });
   const [{ globalData }, dispatch] = useStateValue();
+  const global = (newData) =>
+    dispatch({
+      type: "changeData",
+      newGlobalData: newData,
+    });
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
@@ -31,14 +36,18 @@ export const SimpleAuthScreen = ({ navigation }) => {
           <Image style={styles.star2} source={authIcons.star2} />
         </View>
         <View style={[styles.center, { flex: 0.5 }]}>
-          <Image style={[styles.default, {height: 150, marginTop: -50}]} resizeMode="contain" source={authIcons.logoC} />
-          <Text style={[styles.title, { marginTop: 20 }]}>Мы скучали по вам!</Text>
-          <Text style={styles.subTitle}>
-            Введите данные для входа{" "}
+          <Image
+            style={[styles.default, { height: 150, marginTop: -50 }]}
+            resizeMode="contain"
+            source={authIcons.logoC}
+          />
+          <Text style={[styles.title, { marginTop: 20 }]}>
+            Мы скучали по вам!
           </Text>
+          <Text style={styles.subTitle}>Введите данные для входа </Text>
           <TextInput
             style={[styles.input, { marginTop: 45 }]}
-            placeholder="Имя"
+            placeholder="Эл. почта"
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, email: txt })}
             value={data.email}
@@ -58,7 +67,7 @@ export const SimpleAuthScreen = ({ navigation }) => {
             txt="Войти"
             style={{ marginTop: 45 }}
             nav={navigation}
-            event={() => login(data, dispatch)}
+            event={() => login(data, global)}
           />
         </View>
         <View style={[styles.bottom, { flex: 0.25 }]}>

@@ -1,2 +1,2 @@
-export {YellowButton} from './yellowButton';
+export { YellowButton } from "./yButton/yellowButton";
 // export {Select} from './select';

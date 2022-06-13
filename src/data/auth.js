@@ -2,43 +2,45 @@ import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
 
-export async function login(data, dispatch, token) {
-  const URL = url + "auth/login";
+export async function auth(global, setSplash) {
+  const prevData = await userData.get("user");
+  const token = prevData.data.token;
+  const URL = url + "auth/user";
+
+  function error(json) {
+    Alert.alert(
+      "Ошибка",
+      json.errors?.email
+        ? "Почта: " + json.errors.email
+        : null + json.errors?.password
+        ? "Пароль: " + json.errors.password
+        : json?.message
+        ? String(json.message)
+        : "Возникла непредвиденная ошибка, повторите попытку позднее",
+      [{ text: "OK" }]
+    );
+  }
 
   async function created(json) {
-    dispatch({
-      type: 'changeData',
-      globalData: { auth: true, user: json}
-    });
-    await userData.set("user", json);
+    let newData = json.data;
+    newData = await { ...prevData.data, ...newData };
+    await userData.set("user", {data: newData});
+    global(newData);
+    setTimeout(() => setSplash(false), 1200);
   }
 
   try {
     const response = await fetch(URL, {
-      method: "POST",
-      headers: token ? {
+      method: "GET",
+      headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-      } : {
-        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.pswrd,
-      }),
     });
     const json = await response.json();
-    json?.errors
-      ? Alert.alert(
-          "Ошибка",
-          json.errors?.email
-            ? "Почта: " + json.errors.email
-            : null + json.errors?.password
-            ? "Пароль: " + json.errors.password
-            : null,
-          [{ text: "OK" }]
-        )
+    json?.errors || json?.message
+      ? error(json)
       : created(json);
 
     console.log(json);
