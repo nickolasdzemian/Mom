@@ -3,7 +3,7 @@ import { TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
-  StartupScreen,
+  NewsScreen,
   StatusScreen,
   PregScreen,
   AddChild,
@@ -29,8 +29,8 @@ export function NewsStack() {
   return (
     <StackNews.Navigator>
       <StackNews.Screen
-        name="Start"
-        component={StartupScreen}
+        name="News"
+        component={NewsScreen}
         options={{ headerShown: false }}
       />
       <StackNews.Screen

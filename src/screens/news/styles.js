@@ -6,6 +6,22 @@ export const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
+  shadow: {
+    position: 'absolute',
+    height: 115,
+    width: "100%",
+    marginTop: "175%",
+  },
+  shadowCenter: {
+    alignSelf: 'center',
+    height: 80,
+    width: 65,
+    marginTop: "5%",
+    borderRadius: 80,
+  },
+
+
+
   ftop: {
     flex: 0.25,
     flexDirection: "row",

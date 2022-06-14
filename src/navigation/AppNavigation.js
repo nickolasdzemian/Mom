@@ -27,6 +27,7 @@ import { useStateValue } from "../provider";
 import { userData } from "../storage/auth";
 import { auth as authProvider } from "../data";
 import { AuthStack } from "./AuthStack";
+import { NewsStack } from "./NewsStack";
 
 function BlankScreen() {
   return (
@@ -146,7 +147,7 @@ export const AppNavigation = () => {
           <CurvedBottomBar.Screen
             name="News"
             position="left"
-            component={BlankScreen}
+            component={NewsStack}
           />
           <CurvedBottomBar.Screen
             name="Library"
