@@ -27,7 +27,7 @@ function backIco() {
 
 export function AuthStack() {
   return (
-    <StackAuth.Navigator>
+    <StackAuth.Navigator initialRouteName="Start">
       <StackAuth.Screen
         name="Start"
         component={StartupScreen}

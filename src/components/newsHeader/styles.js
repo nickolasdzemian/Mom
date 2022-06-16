@@ -1,5 +1,5 @@
-import { StyleSheet, Platform } from "react-native";
-import { COLORS, BUTTON, BLUETXT } from "../../theme/main";
+import { StyleSheet } from "react-native";
+import { BLUETXT, OS } from "../../theme/main";
 
 export const styles = StyleSheet.create({
   header: {
@@ -8,11 +8,12 @@ export const styles = StyleSheet.create({
     alignContent: "space-between",
     justifyContent: "space-between",
     backgroundColor: "transparent",
-    paddingTop: 40,
+    paddingTop: OS ? 40 : 60,
     paddingBottom: 20,
     paddingHorizontal: 12,
   },
   btn: {
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "white",
@@ -23,6 +24,7 @@ export const styles = StyleSheet.create({
     borderColor: "#0001",
   },
   title: {
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",

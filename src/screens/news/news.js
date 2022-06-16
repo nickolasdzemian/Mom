@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
 import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
 import {
@@ -16,18 +15,20 @@ import {
   Looopa,
   Check,
 } from "../../../assets/SVGnewsHeader";
-import { authIcons } from "../../../assets/auth/media";
-import { YellowButton, NewsHeader } from "../../components";
+import { NewsHeader, BottomShadow, Post } from "../../components";
 
 export const NewsScreen = ({ navigation }) => {
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
       <NewsHeader
         lIco={<Parmalat />}
-        tTxt="Лента новостей ˅"
+        tTxt="Лента новостей"
+        tIco
         rIco={<Looopa />}
       />
-      <LinearGradient colors={["#FFF0", "#0005"]} style={styles.shadow} />
+      <Post />
+      {/* <BigList data={data} renderItem={renderItem} itemHeight={490} /> */}
+      <BottomShadow />
     </ImageBackground>
   );
 };

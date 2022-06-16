@@ -54,7 +54,7 @@ export const AppNavigation = () => {
     userData.get("user").then((response) => {
       if (response !== undefined && globalData == undefined) {
         authProvider(global, setSplash);
-      }
+      } else setTimeout(() => setSplash(false), 1000);
     });
   }, []);
 
@@ -68,7 +68,7 @@ export const AppNavigation = () => {
         style={{ flex: 1, justifyContent: "flex-end" }}
       >
         <ActivityIndicator
-          size="small"
+          size="large"
           color="white"
           style={{ marginBottom: "55%" }}
         />

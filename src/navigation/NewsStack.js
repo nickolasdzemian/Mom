@@ -2,14 +2,7 @@ import * as React from "react";
 import { TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {
-  NewsScreen,
-  StatusScreen,
-  PregScreen,
-  AddChild,
-  RegistrationScreen,
-  SimpleAuthScreen,
-} from "../screens";
+import { NewsScreen } from "../screens";
 
 const StackNews = createNativeStackNavigator();
 function backIco() {
@@ -27,13 +20,16 @@ function backIco() {
 
 export function NewsStack() {
   return (
-    <StackNews.Navigator>
+    <StackNews.Navigator
+      initialRouteName="News"
+      // options={{ animationEnabled: false }}
+    >
       <StackNews.Screen
         name="News"
         component={NewsScreen}
         options={{ headerShown: false }}
       />
-      <StackNews.Screen
+      {/* <StackNews.Screen
         name="Status"
         component={StatusScreen}
         options={{
@@ -42,47 +38,7 @@ export function NewsStack() {
           headerTitle: "",
           headerLeft: () => backIco(),
         }}
-      />
-      <StackNews.Screen
-        name="Preg"
-        component={PregScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackNews.Screen
-        name="Child"
-        component={AddChild}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackNews.Screen
-        name="Reg"
-        component={RegistrationScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackNews.Screen
-        name="SimpleAuth"
-        component={SimpleAuthScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
+      /> */}
     </StackNews.Navigator>
   );
 }

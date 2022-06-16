@@ -8,6 +8,7 @@ export const fonts = OS
     }
   : {
       Albert: "FSAlbertProNarrow",
+      Poppins: "Poppins",
     };
 
 // Assets
@@ -16,8 +17,10 @@ export const bg_blue = require("../../assets/auth/bg_blue.png");
 // Colors
 export const COLORS = {
   black1: "#4B4B4B",
+  gray1: "#AAACAE",
   gray_buttons: "#EAF3FC",
   blue_text: "#2C78BA",
+  blue_darling: "#D0ECFA",
   yellow: "#FFF2C5",
 };
 
@@ -35,5 +38,13 @@ export const BLUETXT = {
   fontFamily: fonts.Albert,
   fontSize: 16,
   fontWeight: OS ? null : "700", // bold
+  color: COLORS.blue_text,
+};
+
+// Blue nickname/title
+export const NICKNAME = {
+  fontFamily: fonts.Poppins,
+  fontSize: 14,
+  fontWeight: OS ? null : "600", // semi-bold
   color: COLORS.blue_text,
 };

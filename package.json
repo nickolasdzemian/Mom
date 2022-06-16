@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.6.2",
     "react": "17.0.2",
     "react-native": "0.68.2",
+    "react-native-big-list": "^1.5.4",
     "react-native-cache": "^2.0.2",
     "react-native-curved-bottom-bar": "^1.7.9",
     "react-native-date-picker": "^4.2.2",

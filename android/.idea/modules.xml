@@ -5,8 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Mom.iml" filepath="$PROJECT_DIR$/.idea/modules/Mom.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Mom.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Mom.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1835834184/Mom.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/1835834184/Mom.react-native-async-storage_async-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2104342368/Mom.react-native-date-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/-2104342368/Mom.react-native-date-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1040727403/Mom.react-native-linear-gradient.iml" filepath="$PROJECT_DIR$/.idea/modules/1040727403/Mom.react-native-linear-gradient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-935677508/Mom.react-native-pager-view.iml" filepath="$PROJECT_DIR$/.idea/modules/-935677508/Mom.react-native-pager-view.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1366708996/Mom.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-1366708996/Mom.react-native-safe-area-context.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1978804204/Mom.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/-1978804204/Mom.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/518684535/Mom.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/518684535/Mom.react-native-svg.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1350847645/Mom.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/-1350847645/Mom.react-native-vector-icons.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-266681114/react-native-gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/-266681114/react-native-gradle-plugin.iml" />
     </modules>
