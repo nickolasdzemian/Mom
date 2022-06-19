@@ -1,10 +1,19 @@
-import { Platform } from "react-native";
+import { Platform, Dimensions } from "react-native";
 export const OS = Platform.OS === "android";
+
+// Dimensions
+export const window = {
+  width: Dimensions.get("window").width,
+  height: Dimensions.get("window").height,
+};
 
 // Fonts
 export const fonts = OS
   ? {
       Albert: "FSAlbertProNarrow_Bold",
+      AlbertThin: "FSAlbertProNarrow",
+      Poppins: "Poppins_Regular",
+      PoppinsBold: "Poppins_Bold",
     }
   : {
       Albert: "FSAlbertProNarrow",
@@ -16,6 +25,7 @@ export const bg_blue = require("../../assets/auth/bg_blue.png");
 
 // Colors
 export const COLORS = {
+  black_txt: "#33393F",
   black1: "#4B4B4B",
   gray1: "#AAACAE",
   gray_buttons: "#EAF3FC",
@@ -43,7 +53,7 @@ export const BLUETXT = {
 
 // Blue nickname/title
 export const NICKNAME = {
-  fontFamily: fonts.Poppins,
+  fontFamily: OS ? fonts.PoppinsBold : fonts.Poppins,
   fontSize: 14,
   fontWeight: OS ? null : "600", // semi-bold
   color: COLORS.blue_text,

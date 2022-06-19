@@ -1,8 +1,7 @@
 import * as React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { View, Text, TouchableOpacity, TextInput, Modal } from "react-native";
 import { styles } from "./styles";
-import { BUTTON, BLUETXT } from "../../theme/main";
+import { COLORS } from "../../theme/main";
 import { DropDown } from "../../../assets/SVGnewsHeader";
 
 /**
@@ -15,21 +14,93 @@ import { DropDown } from "../../../assets/SVGnewsHeader";
  * @param {Function} rEv Действие правой иконки хедера.
  * @param {Boolean} sch Есть ли в хедере компонент поиска.
  */
-export const NewsHeader = ({ lIco, lEv, tTxt, tIco, tEv, rIco, rEv, sch }) => {
-  const action = (event, route) => {
-    event ? event() : null;
-    route ? nav.navigate(route) : null;
-  };
-  return (
+
+const titles = ["Лента новостей", "Лента подписок", "Лента каналов"];
+
+export const NewsHeader = ({
+  lIco,
+  lEv,
+  tTxt,
+  tIco,
+  tEv,
+  rIco,
+  rEv,
+  sch,
+  filter,
+  setFilter,
+}) => {
+  const [modal, setModal] = React.useState(false);
+  const [title, setTitle] = React.useState(tTxt);
+
+  return sch ? (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.btn} onPress={() => action()}>
+      <TouchableOpacity style={styles.btn} onPress={() => lEv()}>
         {lIco}
       </TouchableOpacity>
-      <TouchableOpacity style={styles.title} onPress={() => action()}>
-        <Text style={styles.titleTxt}>{tTxt ? tTxt : null}</Text>
+      <View style={styles.search}>
+        {rIco}
+        <TextInput
+          style={styles.input}
+          placeholder="Ищи по запросам"
+          placeholderTextColor={COLORS.gray1}
+          onChangeText={(txt) => setFilter({ ...filter, text: txt })}
+          value={filter.text}
+          onSubmitEditing={() => lEv()}
+          returnKeyType="search"
+        />
+      </View>
+    </View>
+  ) : (
+    <View
+      style={[
+        styles.header,
+        { backgroundColor: modal ? "white" : "transparent" },
+      ]}
+    >
+      <TouchableOpacity style={styles.btn} onPress={() => lEv()}>
+        {lIco}
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.title} onPress={() => setModal(!modal)}>
+        <Text style={styles.titleTxt}>{title ? title : null}</Text>
         {tIco ? <DropDown /> : null}
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={() => action()}>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modal}
+        onShow={() => {
+          setTimeout(() => setModal(false), 7000);
+        }}
+        onRequestClose={() => {
+          setModal(!modal);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            {titles.map((item) => (
+              <Text
+                key={item}
+                style={styles.modalText}
+                onPress={() => {
+                  setTitle(item);
+                  setModal(!modal);
+                }}
+              >
+                {item}
+              </Text>
+            ))}
+          </View>
+        </View>
+      </Modal>
+
+      <TouchableOpacity
+        style={[
+          styles.btn,
+          { backgroundColor: rIco ? "white" : "transparent" },
+        ]}
+        onPress={() => rEv()}
+      >
         {rIco}
       </TouchableOpacity>
     </View>

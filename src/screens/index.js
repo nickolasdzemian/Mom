@@ -8,3 +8,5 @@ export { SimpleAuthScreen } from "./auth/auth";
 
 // News (Homepage)
 export { NewsScreen } from "./news/news";
+export { NewsSetting } from "./news/newsSetting";
+export { NewsSearch } from "./news/newsSearch";

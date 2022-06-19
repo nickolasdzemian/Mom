@@ -1,22 +1,8 @@
 import * as React from "react";
-import { TouchableOpacity, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NewsScreen } from "../screens";
+import { NewsScreen, NewsSetting, NewsSearch } from "../screens";
 
 const StackNews = createNativeStackNavigator();
-function backIco() {
-  const navigation = useNavigation();
-  return (
-    <TouchableOpacity onPress={() => navigation.goBack()}>
-      <Image
-        style={{ width: 25, height: 15 }}
-        resizeMode="contain"
-        source={require("../../assets/auth/ArrowLeft.png")}
-      />
-    </TouchableOpacity>
-  );
-}
 
 export function NewsStack() {
   return (
@@ -29,16 +15,16 @@ export function NewsStack() {
         component={NewsScreen}
         options={{ headerShown: false }}
       />
-      {/* <StackNews.Screen
-        name="Status"
-        component={StatusScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      /> */}
+      <StackNews.Screen
+        name="NewsSetting"
+        component={NewsSetting}
+        options={{ headerShown: false }}
+      />
+      <StackNews.Screen
+        name="NewsSearch"
+        component={NewsSearch}
+        options={{ headerShown: false }}
+      />
     </StackNews.Navigator>
   );
 }

@@ -53,7 +53,7 @@ export const AppNavigation = () => {
   React.useEffect(() => {
     userData.get("user").then((response) => {
       if (response !== undefined && globalData == undefined) {
-        authProvider(global, setSplash);
+        authProvider(global, setSplash, true);
       } else setTimeout(() => setSplash(false), 1000);
     });
   }, []);

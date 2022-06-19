@@ -1,8 +1,9 @@
 import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
+import { newsAll } from "./";
 
-export async function auth(global, setSplash) {
+export async function auth(global, setSplash, load) {
   const prevData = await userData.get("user");
   const token = prevData.data.token;
   const URL = url + "auth/user";
@@ -26,6 +27,9 @@ export async function auth(global, setSplash) {
     newData = await { ...prevData.data, ...newData };
     await userData.set("user", {data: newData});
     global(newData);
+    // Initialization homescreen [iOS fix]
+    if (load) {await newsAll(newData, Date.now(), null, null, global)};
+    // Starting the app
     setTimeout(() => setSplash(false), 1200);
   }
 
