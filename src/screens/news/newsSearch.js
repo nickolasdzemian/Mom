@@ -4,17 +4,18 @@ import {
   View,
   Text,
   ImageBackground,
-  Switch,
+  DeviceEventEmitter,
   TouchableOpacity,
 } from "react-native";
-import { styles, switcher } from "./styles";
+import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
 import { BackBtn, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsAll } from "../../data";
 
-export const NewsSearch = ({ navigation }) => {
+export const NewsSearch = ({ route, navigation }) => {
+  const { type } = route.params;
   const [{ globalData }, dispatch] = useStateValue();
   const global = (newData) =>
     dispatch({
@@ -36,8 +37,18 @@ export const NewsSearch = ({ navigation }) => {
     "#Тесты",
   ];
   function saveBack() {
-    console.log(filter);
-    newsAll(globalData, Date.now(), null, null, global, filter.text);
+    if (filter.text != "") {
+      newsAll(
+        globalData,
+        Date.now(),
+        null,
+        null,
+        global,
+        filter.text.replace("#", "%23"),
+        type
+      );
+      DeviceEventEmitter.emit("event.search", filter.text.replace("#", "%23"));
+    }
     navigation.goBack();
   }
   return (
@@ -91,7 +102,13 @@ export const NewsSearch = ({ navigation }) => {
         </View>
         <Text style={styles.upperTitle2}>Популярные запросы</Text>
         {recentReq.map((item) => (
-          <Text key={item} style={styles.recentReq} onPress={() => {}}>
+          <Text
+            key={item}
+            style={styles.recentReq}
+            onPress={() => {
+              setFilter({ ...filter, text: item });
+            }}
+          >
             {item}
           </Text>
         ))}

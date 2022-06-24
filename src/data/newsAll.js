@@ -1,21 +1,33 @@
 import { url } from "./env";
-import { Alert } from "react-native";
+import { Alert, DeviceEventEmitter } from "react-native";
 
-export async function newsAll(globalData, time, next, setNext, global, searchW) {
+export async function newsAll(
+  globalData,
+  time,
+  next,
+  setNext,
+  global,
+  searchW,
+  type = 0,
+) {
+  const types = ["all", "subscribers", "channels"];
   let page = next ? next : "?page=1";
-  let timestamp = `&timestamp=${time}`;
-  let search = searchW ? `&search=${searchW}` :`&search=`;
-  const URL = url + "feed/all";
+  let timestamp = `&timestamp=${Math.round(time / 1000)}`;
+  let search = searchW ? `&search=${searchW}` : `&search=`;
+  const URL = url + "feed/" + types[type];
 
   async function created(json) {
     let feed = json.data;
     if (json?.links?.next != null) {
-      page = (json?.links?.next).slice(1);
-      if (next) {setNext(page)};
-    };
+      const num = json.links.next.slice(-5).match(/\d+/g);
+      page = `?page=${num[0]}`;
+      setNext ? setNext(page) : DeviceEventEmitter.emit("event.next", page);
+    } else {
+      setNext ? setNext(null) : DeviceEventEmitter.emit("event.next", null);
+    }
     if (next) {
-        feed = [...globalData?.feed, ...feed];
-    };
+      feed = [...globalData?.feed, ...feed];
+    }
     global({ ...globalData, feed: feed });
   }
 
@@ -29,6 +41,7 @@ export async function newsAll(globalData, time, next, setNext, global, searchW) 
       },
     });
     const json = await response.json();
+    console.log(response);
     json?.errors || json?.message
       ? Alert.alert(
           "Ошибка",

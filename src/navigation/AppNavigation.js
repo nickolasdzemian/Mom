@@ -6,6 +6,8 @@ import {
   ActivityIndicator,
   Text,
   TouchableOpacity,
+  Modal,
+  StyleSheet,Alert,  Pressable, 
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
@@ -41,6 +43,7 @@ function BlankScreen() {
 export const AppNavigation = () => {
   const [{ globalData }, dispatch] = useStateValue();
   const [splash, setSplash] = React.useState(true);
+  const [showNew, setShowNew] = React.useState(false);
 
   // *** [Global listener from provider] ***
   const global = (newData) =>
@@ -136,8 +139,30 @@ export const AppNavigation = () => {
             <TouchableOpacity
               activeOpacity={1}
               style={styles.styles.btnCircleUp}
-              onPress={() => alert("Не так быстро, дорогой!")}
+              onPress={() => setShowNew(!showNew)}
+            ><View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showNew}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setShowNew(!showNew);
+        }}
+      >
+        <View style={styless.centeredView}>
+          <View style={styless.modalView}>
+            <Text style={styless.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styless.button, styless.buttonClose]}
+              onPress={() => setShowNew(!showNew)}
             >
+              <Text style={styless.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    </View>
               <AddNew />
             </TouchableOpacity>
           )}
@@ -171,3 +196,47 @@ export const AppNavigation = () => {
     </NavigationContainer>
   );
 };
+
+const styless = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+});

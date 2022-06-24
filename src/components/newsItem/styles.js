@@ -52,7 +52,8 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   mainImg: {
-    width: window.width - 60,
+    width: window.width - 65,
+    height: window.height / 3,
     borderRadius: 20,
   },
   // Text
@@ -88,5 +89,10 @@ export const styles = StyleSheet.create({
   comments: {
     marginTop: 10,
     paddingBottom: 1,
+  },
+
+  // Comments for alone post
+  commentsContent: {
+    backgroundColor: "transparent",
   }
 });

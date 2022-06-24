@@ -1,4 +1,4 @@
-import { Platform, Dimensions } from "react-native";
+import { Platform, Dimensions, Image } from "react-native";
 export const OS = Platform.OS === "android";
 
 // Dimensions
@@ -57,4 +57,19 @@ export const NICKNAME = {
   fontSize: 14,
   fontWeight: OS ? null : "600", // semi-bold
   color: COLORS.blue_text,
+};
+
+// Calculate local imgs ratio
+export const imageRatio = (url, width = 0) => {
+  const image = Image.resolveAssetSource(url);
+  const ratio = image.height / image.width;
+  const height = ratio * width;
+  return {image, ratio, height};
+};
+
+export const imageRatioStyle = (url, width = 0) => {
+  const image = Image.resolveAssetSource(url);
+  const ratio = image.height / image.width;
+  const height = ratio * width;
+  return {width, height};
 };

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NewsScreen, NewsSetting, NewsSearch } from "../screens";
+import { NewsScreen, NewsSetting, NewsSearch, NewsPost } from "../screens";
 
 const StackNews = createNativeStackNavigator();
 
@@ -23,6 +23,11 @@ export function NewsStack() {
       <StackNews.Screen
         name="NewsSearch"
         component={NewsSearch}
+        options={{ headerShown: false }}
+      />
+      <StackNews.Screen
+        name="NewsPost"
+        component={NewsPost}
         options={{ headerShown: false }}
       />
     </StackNews.Navigator>

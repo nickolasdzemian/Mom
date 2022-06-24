@@ -81,6 +81,26 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  // Comments view
+  comments: {
+    marginBottom: 80,
+  },
+  commentsItem: {
+    marginHorizontal: 13,
+    marginVertical: 2,
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 5,
+  },
+
+  // No comments
+  nocomments: {},
+  nocommentsTxt: {
+    ...BLUETXT,
+    alignSelf: "center",
+    marginTop: "45%",
+  },
+
 
   ftop: {
     flex: 0.25,

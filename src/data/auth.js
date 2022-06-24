@@ -20,6 +20,7 @@ export async function auth(global, setSplash, load) {
         : "Возникла непредвиденная ошибка, повторите попытку позднее",
       [{ text: "OK" }]
     );
+    setTimeout(() => setSplash(false), 2000);
   }
 
   async function created(json) {
@@ -28,7 +29,7 @@ export async function auth(global, setSplash, load) {
     await userData.set("user", {data: newData});
     global(newData);
     // Initialization homescreen [iOS fix]
-    if (load) {await newsAll(newData, Date.now(), null, null, global)};
+    if (load) {await newsAll(newData, Date.now(), null, null, global, null, 0)};
     // Starting the app
     setTimeout(() => setSplash(false), 1200);
   }

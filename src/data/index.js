@@ -5,3 +5,5 @@ export { login } from "./login";
 export { auth } from "./auth";
 export { newsSetting } from "./newsSetting";
 export { newsAll } from "./newsAll";
+export { newsLike } from "./newsLike";
+export { getComments } from "./commentsAll";

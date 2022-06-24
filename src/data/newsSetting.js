@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import { userData } from "../storage/auth";
 import { newsAll } from "./";
 
-export async function newsSetting(globalData, data, global) {
+export async function newsSetting(globalData, data, global, type) {
   const URL = url + "feed/settings";
   const { from_pregnant, from_planing, from_mom } = data;
 
@@ -13,7 +13,7 @@ export async function newsSetting(globalData, data, global) {
     await userData.set("user", {
       data: newData,
     });
-    newsAll(newData, Date.now(), null, null, global);
+    newsAll(newData, Date.now(), null, null, global, null, type);
   }
 
   try {

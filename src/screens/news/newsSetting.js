@@ -8,7 +8,8 @@ import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsSetting } from "../../data";
 
-export const NewsSetting = ({ navigation }) => {
+export const NewsSetting = ({ route, navigation }) => {
+  const { type } = route.params;
   const [{ globalData }, dispatch] = useStateValue();
   const { from_pregnant, from_planing, from_mom } = globalData?.feed_settings;
   const [set, setSet] = React.useState({
@@ -28,7 +29,7 @@ export const NewsSetting = ({ navigation }) => {
       from_planing != set.from_planing ||
       from_mom != set.from_mom
     ) {
-      newsSetting(globalData, set, global);
+      newsSetting(globalData, set, global, type);
     }
   }
   return (

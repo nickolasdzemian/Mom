@@ -10,3 +10,4 @@ export { SimpleAuthScreen } from "./auth/auth";
 export { NewsScreen } from "./news/news";
 export { NewsSetting } from "./news/newsSetting";
 export { NewsSearch } from "./news/newsSearch";
+export { NewsPost } from "./news/newsPost";

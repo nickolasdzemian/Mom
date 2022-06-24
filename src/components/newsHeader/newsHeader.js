@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, TextInput, Modal } from "react-native";
 import { styles } from "./styles";
 import { COLORS } from "../../theme/main";
 import { DropDown } from "../../../assets/SVGnewsHeader";
+import { newsAll } from "../../data";
 
 /**
  * @param {Function} lIco Иконка хедера слева.
@@ -28,9 +29,17 @@ export const NewsHeader = ({
   sch,
   filter,
   setFilter,
+  updateEv,
 }) => {
   const [modal, setModal] = React.useState(false);
-  const [title, setTitle] = React.useState(tTxt);
+  const [title, setTitle] = React.useState(titles[tTxt]);
+
+  const changeNews = (item) => {
+    setTitle(item);
+    setModal(!modal);
+    const type = titles.indexOf(item);
+    updateEv(type);
+  };
 
   return sch ? (
     <View style={styles.header}>
@@ -82,10 +91,7 @@ export const NewsHeader = ({
               <Text
                 key={item}
                 style={styles.modalText}
-                onPress={() => {
-                  setTitle(item);
-                  setModal(!modal);
-                }}
+                onPress={() => changeNews(item)}
               >
                 {item}
               </Text>
@@ -97,9 +103,12 @@ export const NewsHeader = ({
       <TouchableOpacity
         style={[
           styles.btn,
-          { backgroundColor: rIco ? "white" : "transparent" },
+          {
+            backgroundColor: rIco ? "white" : "transparent",
+            borderColor: rIco ? "white" : "transparent",
+          },
         ]}
-        onPress={() => rEv()}
+        onPress={() => rEv ? rEv() : null}
       >
         {rIco}
       </TouchableOpacity>
