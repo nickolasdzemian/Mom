@@ -2,6 +2,7 @@ import * as React from "react";
 import { TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   StartupScreen,
   StatusScreen,
@@ -27,62 +28,64 @@ function backIco() {
 
 export function AuthStack() {
   return (
-    <StackAuth.Navigator initialRouteName="Start">
-      <StackAuth.Screen
-        name="Start"
-        component={StartupScreen}
-        options={{ headerShown: false }}
-      />
-      <StackAuth.Screen
-        name="Status"
-        component={StatusScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackAuth.Screen
-        name="Preg"
-        component={PregScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackAuth.Screen
-        name="Child"
-        component={AddChild}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackAuth.Screen
-        name="Reg"
-        component={RegistrationScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-      <StackAuth.Screen
-        name="SimpleAuth"
-        component={SimpleAuthScreen}
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-          headerLeft: () => backIco(),
-        }}
-      />
-    </StackAuth.Navigator>
+    <NavigationContainer independent={true}>
+      <StackAuth.Navigator initialRouteName="Start">
+        <StackAuth.Screen
+          name="Start"
+          component={StartupScreen}
+          options={{ headerShown: false }}
+        />
+        <StackAuth.Screen
+          name="Status"
+          component={StatusScreen}
+          options={{
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => backIco(),
+          }}
+        />
+        <StackAuth.Screen
+          name="Preg"
+          component={PregScreen}
+          options={{
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => backIco(),
+          }}
+        />
+        <StackAuth.Screen
+          name="Child"
+          component={AddChild}
+          options={{
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => backIco(),
+          }}
+        />
+        <StackAuth.Screen
+          name="Reg"
+          component={RegistrationScreen}
+          options={{
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => backIco(),
+          }}
+        />
+        <StackAuth.Screen
+          name="SimpleAuth"
+          component={SimpleAuthScreen}
+          options={{
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: "",
+            headerLeft: () => backIco(),
+          }}
+        />
+      </StackAuth.Navigator>
+    </NavigationContainer>
   );
 }

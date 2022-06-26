@@ -53,6 +53,7 @@ export const styles = StyleSheet.create({
     height: 40,
     width: "90%",
     marginLeft: 5,
+    color: "black",
   },
 
   // Top dropdown menu

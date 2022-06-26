@@ -37,7 +37,7 @@ export const NewsSetting = ({ route, navigation }) => {
       <NewsHeader
         lIco={<BackBtn />}
         lEv={() => saveBack()}
-        tTxt="Настройки ленты"
+        tTxt0="Настройки ленты"
       />
       <View style={styles.main}>
         <Text style={styles.upperTitle}>ЗАПИСИ ОТ</Text>

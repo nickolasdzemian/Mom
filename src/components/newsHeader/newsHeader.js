@@ -22,6 +22,7 @@ export const NewsHeader = ({
   lIco,
   lEv,
   tTxt,
+  tTxt0,
   tIco,
   tEv,
   rIco,
@@ -43,7 +44,7 @@ export const NewsHeader = ({
 
   return sch ? (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.btn} onPress={() => lEv()}>
+      <TouchableOpacity style={styles.btn} onPress={() => (lEv ? lEv() : null)}>
         {lIco}
       </TouchableOpacity>
       <View style={styles.search}>
@@ -66,11 +67,13 @@ export const NewsHeader = ({
         { backgroundColor: modal ? "white" : "transparent" },
       ]}
     >
-      <TouchableOpacity style={styles.btn} onPress={() => lEv()}>
+      <TouchableOpacity style={styles.btn} onPress={() => lEv ? lEv() : null}>
         {lIco}
       </TouchableOpacity>
       <TouchableOpacity style={styles.title} onPress={() => setModal(!modal)}>
-        <Text style={styles.titleTxt}>{title ? title : null}</Text>
+        <Text style={styles.titleTxt}>
+          {tTxt0 ? tTxt0 : title ? title : null}
+        </Text>
         {tIco ? <DropDown /> : null}
       </TouchableOpacity>
 
@@ -108,7 +111,7 @@ export const NewsHeader = ({
             borderColor: rIco ? "white" : "transparent",
           },
         ]}
-        onPress={() => rEv ? rEv() : null}
+        onPress={() => (rEv ? rEv() : null)}
       >
         {rIco}
       </TouchableOpacity>

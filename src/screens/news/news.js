@@ -14,6 +14,8 @@ import { NewsHeader, BottomShadow, Post } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsAll } from "../../data";
 
+import { NewScreen } from "../";
+
 export const NewsScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
   const [time, setTime] = React.useState(Date.now());
@@ -32,6 +34,9 @@ export const NewsScreen = ({ navigation }) => {
   DeviceEventEmitter.addListener("event.search", (eventData) =>
     setSearch(eventData)
   );
+  DeviceEventEmitter.addListener("event.newPost", (eventData) =>
+    eventData ? navigation.navigate("NewScreen") : navigation.navigate("News")
+  );
 
   const renderItem = ({ item, index }) => (
     <Post
@@ -48,6 +53,9 @@ export const NewsScreen = ({ navigation }) => {
     setSearch(null);
     newsAll(globalData, Date.now(), null, setNext, global, null, type);
   };
+  DeviceEventEmitter.addListener("event.update", (eventData) =>
+    eventData ? update() : null
+  );
 
   const more = () => {
     newsAll(
@@ -84,11 +92,11 @@ export const NewsScreen = ({ navigation }) => {
         ListHeaderComponent={
           <NewsHeader
             lIco={<Parmalat />}
-            lEv={() => navigation.navigate("NewsSetting", {type: type})}
+            lEv={() => navigation.navigate("NewsSetting", { type: type })}
             tTxt={type}
             tIco
             rIco={<Looopa />}
-            rEv={() => navigation.navigate("NewsSearch", {type: type})}
+            rEv={() => navigation.navigate("NewsSearch", { type: type })}
             updateEv={(t) => {
               newsAll(globalData, Date.now(), null, setNext, global, null, t);
               setType(t);
@@ -96,9 +104,6 @@ export const NewsScreen = ({ navigation }) => {
           />
         }
       />
-      {globalData?.feed == [] ? (
-        <Text style={styles.noNews}>123123321321321</Text>
-      ) : null}
       <BottomShadow />
     </ImageBackground>
   );

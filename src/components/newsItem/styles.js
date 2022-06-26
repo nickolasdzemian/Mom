@@ -1,18 +1,18 @@
 import { StyleSheet } from "react-native";
-import { COLORS, NICKNAME, fonts, window } from "../../theme/main";
+import { COLORS, NICKNAME, BUTTON, BLUETXT, fonts, window } from "../../theme/main";
 
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    marginHorizontal: 10,
+    marginHorizontal: 11,
     marginTop: 20,
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: COLORS.blue_darling,
+    // borderWidth: 2,
+    // borderColor: COLORS.blue_darling,
     paddingHorizontal: 20,
     paddingTop: 10,
     paddingBottom: 15,
-    shadowColor: COLORS.blue_darling,
+    // shadowColor: COLORS.blue_darling,
   },
   // Top
   topContent: {
@@ -39,6 +39,7 @@ export const styles = StyleSheet.create({
     fontSize: 11,
     color: COLORS.gray1,
     marginHorizontal: 5,
+    alignSelf: "center",
   },
   uName: {
     ...NICKNAME,
@@ -94,5 +95,17 @@ export const styles = StyleSheet.create({
   // Comments for alone post
   commentsContent: {
     backgroundColor: "transparent",
-  }
+  },
+
+  // Add comment
+  input: {
+    ...BUTTON,
+    ...BLUETXT,
+    width: "90%",
+    height: 70,
+    backgroundColor: COLORS.gray_buttons,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginTop: 5,
+  },
 });

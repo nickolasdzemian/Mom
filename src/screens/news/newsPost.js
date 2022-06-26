@@ -9,14 +9,24 @@ import { NewsHeader, BottomShadow, Post } from "../../components";
 import { getComments } from "../../data";
 
 export const NewsPost = ({ route, navigation }) => {
-  const { item, token } = route.params;
+  const { item, token, isChannel } = route.params;
   const [comments, setComments] = React.useState();
   const [next, setNext] = React.useState(null);
 
   const renderItem = ({ item, index }) => (
-    <View style={[commentStyles.commentsContent, styles.commentsItem]}>
-      <Text style={[commentStyles.post, {fontSize: 12}]}>
-        <Text style={[commentStyles.uName, {fontSize: 12}]}>
+    <View
+      style={[
+        commentStyles.commentsContent,
+        styles.commentsItem,
+        {
+          borderBottomStartRadius: index + 1 == comments?.length ? 10 : 0,
+          borderBottomEndRadius: index + 1 == comments?.length ? 10 : 0,
+          paddingBottom: index + 1 == comments?.length ? 30 : 15,
+        },
+      ]}
+    >
+      <Text style={[commentStyles.post, { fontSize: 12 }]}>
+        <Text style={[commentStyles.uName, { fontSize: 12 }]}>
           {item.user.username}
           {"  "}
         </Text>
@@ -55,7 +65,14 @@ export const NewsPost = ({ route, navigation }) => {
           onEndReached={() => (next ? more() : null)}
           onEndReachedThreshold={1}
           ListHeaderComponent={
-            <Post item={item} token={token} navigation={navigation} isAlone />
+            <Post
+              item={item}
+              token={token}
+              navigation={navigation}
+              isAlone
+              isChannel={isChannel}
+              getComments={() => getComments(item.uuid, token, null, setNext, comments, setComments)}
+            />
           }
         />
       ) : (

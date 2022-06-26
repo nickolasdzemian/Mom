@@ -1,8 +1,15 @@
 import * as React from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  TextInput,
+} from "react-native";
 import { newsLike } from "../../data";
 import { styles } from "./styles";
-import { Comments as CommentsView } from "./comments";
+import { COLORS } from "../../theme/main";
 import {
   Clock,
   Geo,
@@ -12,6 +19,7 @@ import {
   Comments,
   Reptiler,
 } from "../../../assets/SVGpost";
+import { commentPost, getUser } from "../../data";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -26,10 +34,22 @@ const test = {
     "Привет, с удовольствием помогу вам, напишите мне в личку. Буду ждать)",
 };
 
-export const Post = ({ item, token, navigation, isAlone, isChannel }) => {
+export const Post = ({
+  item,
+  token,
+  navigation,
+  isAlone,
+  isChannel,
+  getComments,
+}) => {
   const [more, setMore] = React.useState(item?.content.length > 500);
   const [like, setLike] = React.useState(item.like_status);
   const [likes, setLikes] = React.useState(item.likes_count);
+  const [input, setInput] = React.useState(false);
+  const [text, setText] = React.useState();
+  const [commentsCount, setCommentsCount] = React.useState(
+    item?.comments_count
+  );
 
   const thisDate = new Date().getDate();
   let date = new Date(item.created_at.replace(" ", "T"));
@@ -53,10 +73,35 @@ export const Post = ({ item, token, navigation, isAlone, isChannel }) => {
     hasComment ? item.comments : null
   );
 
+  function sendComment() {
+    commentPost(token, item?.uuid, text, commentsCount, setCommentsCount);
+    setTimeout(() => {
+      getComments();
+    }, 500);
+    setInput(false);
+    setText();
+  }
+
+  function showUser(username) {
+    getUser(token, username, navigation);
+  }
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          // borderBottomWidth: isAlone && item?.comments_count ? 0 : 2,
+          borderBottomStartRadius: isAlone && item?.comments_count ? 0 : 10,
+          borderBottomEndRadius: isAlone && item?.comments_count ? 0 : 10,
+        },
+      ]}
+    >
       <View style={styles.topContent}>
-        <TouchableOpacity style={styles.info}>
+        <TouchableOpacity
+          style={styles.info}
+          onPress={() => (!isChannel ? showUser(item?.user.username) : null)}
+        >
           <Image style={styles.userImg} source={test.img} resizeMode="cover" />
           <View style={styles.postInfo}>
             <Text style={styles.uName}>
@@ -122,14 +167,20 @@ export const Post = ({ item, token, navigation, isAlone, isChannel }) => {
             onPress={() => {}}
           >
             <Comments />
-            <Text style={styles.count}>{item.comments_count}</Text>
+            <Text style={styles.count}>{commentsCount}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
           style={styles.likecomm}
           onPress={() => {
             !isAlone
-              ? navigation.navigate("NewsPost", { item: item, token: token })
+              ? navigation.navigate("NewsPost", {
+                  item: item,
+                  token: token,
+                  isChannel: isChannel,
+                })
+              : item?.comments_count
+              ? setInput(!input)
               : null;
           }}
         >
@@ -142,6 +193,20 @@ export const Post = ({ item, token, navigation, isAlone, isChannel }) => {
           { marginBottom: !hasComment && !isAlone ? -27 : null },
         ]}
       >
+        {input ? (
+          <TextInput
+            style={styles.input}
+            placeholder="Введите текст комментария.."
+            placeholderTextColor={COLORS.blue_text}
+            onChangeText={(txt) => setText(txt)}
+            maxLength={300}
+            multiline
+            numberOfLines={5}
+            value={text}
+            returnKeyType="send"
+            onSubmitEditing={() => sendComment()}
+          />
+        ) : null}
         {!isAlone ? (
           <Text style={styles.post}>
             <Text style={styles.uName}>
