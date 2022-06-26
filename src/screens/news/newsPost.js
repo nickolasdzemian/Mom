@@ -9,7 +9,7 @@ import { NewsHeader, BottomShadow, Post } from "../../components";
 import { getComments } from "../../data";
 
 export const NewsPost = ({ route, navigation }) => {
-  const { item, token, isChannel } = route.params;
+  const { item, token, isChannel, myUname } = route.params;
   const [comments, setComments] = React.useState();
   const [next, setNext] = React.useState(null);
 
@@ -68,6 +68,7 @@ export const NewsPost = ({ route, navigation }) => {
             <Post
               item={item}
               token={token}
+              myUname={myUname}
               navigation={navigation}
               isAlone
               isChannel={isChannel}

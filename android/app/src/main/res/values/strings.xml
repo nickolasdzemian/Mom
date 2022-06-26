@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mom</string>
+    <string name="app_name">U Mom</string>
     <string name="title_activity_splash">SplashActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

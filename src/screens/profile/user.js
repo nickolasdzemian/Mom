@@ -13,7 +13,7 @@ import { bg_blue, preg_state, child } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { UserThreePoints, Geo } from "../../../assets/SVGpost";
 import { NewsHeader } from "../../components";
-import { userSubscribe } from "../../data"
+import { userSubscribe } from "../../data";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -21,11 +21,12 @@ const test = {
 };
 
 export const UserScreen = ({ route, navigation }) => {
-  const { info, token } = route.params;
-  const [sub, setSub] = React.useState(false);
-  
+  const { info, token, myUname } = route.params;
+  const [sub, setSub] = React.useState(info.subscription_status);
+  const [subCount, setSubCount] = React.useState(info.subscribers_count);
+
   function subsrcribe() {
-    userSubscribe(token, info.username, sub, setSub);
+    userSubscribe(token, info.username, sub, setSub, subCount, setSubCount);
   }
 
   return (
@@ -50,7 +51,7 @@ export const UserScreen = ({ route, navigation }) => {
               <Text style={styles.counterSubTxt}>Записей</Text>
             </View>
             <View style={styles.center}>
-              <Text style={styles.counterTxt}>{info.subscribers_count}</Text>
+              <Text style={styles.counterTxt}>{subCount}</Text>
               <Text style={styles.counterSubTxt}>Подписчики</Text>
             </View>
             <View style={styles.border}>
@@ -58,14 +59,23 @@ export const UserScreen = ({ route, navigation }) => {
               <Text style={styles.counterSubTxt}>Подписки</Text>
             </View>
           </View>
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.button} onPress={() => {subsrcribe()}}>
-              <Text style={styles.btnTxt}>{sub ? "Отписаться" : "Подписаться"}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => {}}>
-              <Text style={styles.btnTxt}>Написать</Text>
-            </TouchableOpacity>
-          </View>
+          {info.username != myUname ? (
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  subsrcribe();
+                }}
+              >
+                <Text style={styles.btnTxt}>
+                  {sub ? "Отписаться" : "Подписаться"}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => {}}>
+                <Text style={styles.btnTxt}>Написать</Text>
+              </TouchableOpacity>
+            </View>
+          ) : null}
           <Text style={styles.title}>Семья</Text>
           <ScrollView style={styles.family} horizontal>
             {/* [Need to change to **[0]** (**[1]** set for tests only)] */}
@@ -91,7 +101,7 @@ export const UserScreen = ({ route, navigation }) => {
               </View>
             ) : null}
             {info?.children?.length > 0 ? (
-              <View style={{flexDirection: "row"}}>
+              <View style={{ flexDirection: "row" }}>
                 {info?.children.map((item) => (
                   <View>
                     <ImageBackground

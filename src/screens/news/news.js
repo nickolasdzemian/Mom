@@ -42,6 +42,7 @@ export const NewsScreen = ({ navigation }) => {
     <Post
       item={item}
       token={globalData?.token}
+      myUname={globalData?.user.username}
       navigation={navigation}
       isChannel={type == 2}
     />

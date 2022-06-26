@@ -1,11 +1,11 @@
 import { url } from "./env";
 import { Alert } from "react-native";
 
-export async function getUser(token, username, navigation) {
+export async function getUser(token, username, navigation, myUname) {
   const URL = url + "user/profile/" + username;
 
   async function created(json) {
-    navigation.navigate("UserScreen", { info: json.data, token: token });
+    navigation.navigate("UserScreen", { info: json.data, token: token, myUname: myUname });
   }
 
   try {

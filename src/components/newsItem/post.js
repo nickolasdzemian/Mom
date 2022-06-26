@@ -37,6 +37,7 @@ const test = {
 export const Post = ({
   item,
   token,
+  myUname,
   navigation,
   isAlone,
   isChannel,
@@ -83,7 +84,7 @@ export const Post = ({
   }
 
   function showUser(username) {
-    getUser(token, username, navigation);
+    getUser(token, username, navigation, myUname);
   }
 
   return (
@@ -177,6 +178,7 @@ export const Post = ({
               ? navigation.navigate("NewsPost", {
                   item: item,
                   token: token,
+                  myUname: myUname,
                   isChannel: isChannel,
                 })
               : item?.comments_count
