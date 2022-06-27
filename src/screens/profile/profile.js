@@ -21,9 +21,7 @@ export const ProfileScreen = ({ navigation }) => {
         <NewsHeader
           lIco={<BackBtn />}
           rIco={<Lines />}
-          rEv={() =>
-            navigation.navigate("ProfileSettings")
-          }
+          rEv={() => navigation.navigate("ProfileSettings")}
         />
         <View style={styles.profileContent}>
           <Image style={styles.userImg} source={test.img} resizeMode="cover" />
@@ -54,7 +52,11 @@ export const ProfileScreen = ({ navigation }) => {
             </View>
           </View>
           <Text style={styles.title}>Семья</Text>
-          <ScrollView style={styles.family} horizontal>
+          <ScrollView
+            style={styles.family}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
             {/* [Need to change to **[0]** (**[1]** set for tests only)] */}
             {globalData?.user.status == 1 &&
             globalData?.user?.gestational_age ? (
@@ -79,7 +81,7 @@ export const ProfileScreen = ({ navigation }) => {
               </View>
             ) : null}
             {globalData?.user?.children?.length > 0 ? (
-              <View style={{flexDirection: "row"}}>
+              <View style={{ flexDirection: "row" }}>
                 {globalData?.user?.children.map((item) => (
                   <View>
                     <ImageBackground

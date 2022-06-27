@@ -68,7 +68,7 @@ export const Post = ({
           hh < 10 ? `0${hh}` : hh
         }:${mm < 10 ? `0${mm}` : mm}`;
 
-  const hasComment = item?.comments?.length > 0;
+  const hasComment = item?.comments?.length;
   const hasImages = item?.images?.length > 0;
   const [comment, setComment] = React.useState(
     hasComment ? item.comments : null
@@ -181,7 +181,7 @@ export const Post = ({
                   myUname: myUname,
                   isChannel: isChannel,
                 })
-              : item?.comments_count
+              : "comments_count" in item
               ? setInput(!input)
               : null;
           }}
@@ -196,18 +196,29 @@ export const Post = ({
         ]}
       >
         {input ? (
-          <TextInput
-            style={styles.input}
-            placeholder="Введите текст комментария.."
-            placeholderTextColor={COLORS.blue_text}
-            onChangeText={(txt) => setText(txt)}
-            maxLength={300}
-            multiline
-            numberOfLines={5}
-            value={text}
-            returnKeyType="send"
-            onSubmitEditing={() => sendComment()}
-          />
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Введите текст комментария.."
+              placeholderTextColor={COLORS.blue_text}
+              onChangeText={(txt) => setText(txt)}
+              maxLength={300}
+              multiline
+              numberOfLines={5}
+              value={text}
+              returnKeyType="send"
+              onSubmitEditing={() => sendComment()}
+            />
+            <Text
+              style={[
+                styles.postShowTxt,
+                { paddingVertical: 5, paddingHorizontal: 5, alignSelf: "flex-end" },
+              ]}
+              onPress={() => sendComment()}
+            >
+              Отправить
+            </Text>
+          </View>
         ) : null}
         {!isAlone ? (
           <Text style={styles.post}>

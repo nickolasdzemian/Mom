@@ -2,19 +2,17 @@
 import * as React from "react";
 import {
   ImageBackground,
-  FlatList,
+  //FlatList,
   DeviceEventEmitter,
   Text,
 } from "react-native";
-// import BigList from "react-native-big-list";
+import BigList from "react-native-big-list";
 import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
 import { Parmalat, Looopa } from "../../../assets/SVGnewsHeader";
-import { NewsHeader, BottomShadow, Post } from "../../components";
+import { NewsHeader, BottomShadow, PostItem } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsAll } from "../../data";
-
-import { NewScreen } from "../";
 
 export const NewsScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -39,7 +37,7 @@ export const NewsScreen = ({ navigation }) => {
   );
 
   const renderItem = ({ item, index }) => (
-    <Post
+    <PostItem
       item={item}
       token={globalData?.token}
       myUname={globalData?.user.username}
@@ -74,15 +72,17 @@ export const NewsScreen = ({ navigation }) => {
     setNext(null);
     newsAll(globalData, time, next, setNext, global, null, type);
   }, []);
+
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <FlatList
+      <BigList
         data={globalData?.feed}
         style={{ marginBottom: 80 }}
         renderItem={renderItem}
         stickyHeaderIndices={[0]}
         keyExtractor={(item) => item.uuid}
-        removeClippedSubviews
+        itemHeight={500}
+        headerHeight={100}
         refreshing={globalData?.feed == undefined}
         onRefresh={() => update()}
         onEndReached={() => (next ? more() : null)}
@@ -105,6 +105,37 @@ export const NewsScreen = ({ navigation }) => {
           />
         }
       />
+      {/* <FlatList
+        data={globalData?.feed}
+        style={{ marginBottom: 80 }}
+        renderItem={renderItem}
+        stickyHeaderIndices={[0]}
+        keyExtractor={(item) => item.uuid.slice(10)}
+        maxToRenderPerBatch={5}
+        updateCellsBatchingPeriod={25}
+        windowSize={41}
+        refreshing={globalData?.feed == undefined}
+        onRefresh={() => update()}
+        onEndReached={() => (next ? more() : null)}
+        onEndReachedThreshold={1}
+        ListEmptyComponent={
+          <Text style={styles.nocommentsTxt}>Здесь пока ничего нет..</Text>
+        }
+        ListHeaderComponent={
+          <NewsHeader
+            lIco={<Parmalat />}
+            lEv={() => navigation.navigate("NewsSetting", { type: type })}
+            tTxt={type}
+            tIco
+            rIco={<Looopa />}
+            rEv={() => navigation.navigate("NewsSearch", { type: type })}
+            updateEv={(t) => {
+              newsAll(globalData, Date.now(), null, setNext, global, null, t);
+              setType(t);
+            }}
+          />
+        }
+      /> */}
       <BottomShadow />
     </ImageBackground>
   );

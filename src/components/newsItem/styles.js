@@ -101,7 +101,7 @@ export const styles = StyleSheet.create({
   input: {
     ...BUTTON,
     ...BLUETXT,
-    width: "90%",
+    width: "100%",
     height: 70,
     backgroundColor: COLORS.gray_buttons,
     borderRadius: 10,

@@ -53,14 +53,13 @@ export const NewsPost = ({ route, navigation }) => {
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
       <NewsHeader lIco={<BackBtn />} lEv={() => navigation.goBack()} />
-      {item?.comments_count ? (
+      {"comments_count" in item ? (
         <FlatList
           data={comments}
           style={styles.comments}
           renderItem={renderItem}
           keyExtractor={(item) => item.uuid}
-          removeClippedSubviews
-          refreshing={comments == undefined}
+          refreshing={comments == undefined && item?.comments_count != 0}
           onRefresh={() => update()}
           onEndReached={() => (next ? more() : null)}
           onEndReachedThreshold={1}
@@ -72,7 +71,16 @@ export const NewsPost = ({ route, navigation }) => {
               navigation={navigation}
               isAlone
               isChannel={isChannel}
-              getComments={() => getComments(item.uuid, token, null, setNext, comments, setComments)}
+              getComments={() =>
+                getComments(
+                  item.uuid,
+                  token,
+                  null,
+                  setNext,
+                  comments,
+                  setComments
+                )
+              }
             />
           }
         />

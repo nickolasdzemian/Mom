@@ -102,6 +102,7 @@ export const styles = StyleSheet.create({
     ...BLUETXT,
     alignSelf: "center",
     marginTop: "45%",
+    marginLeft: "35%" // for big list only
   },
 
   // New post

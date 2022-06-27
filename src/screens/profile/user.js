@@ -77,7 +77,11 @@ export const UserScreen = ({ route, navigation }) => {
             </View>
           ) : null}
           <Text style={styles.title}>Семья</Text>
-          <ScrollView style={styles.family} horizontal>
+          <ScrollView
+            style={styles.family}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
             {/* [Need to change to **[0]** (**[1]** set for tests only)] */}
             {info.status == 1 && info?.gestational_age ? (
               <View>
