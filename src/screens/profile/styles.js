@@ -15,9 +15,25 @@ export const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     paddingHorizontal: 20,
-    height: window.height / 1.4,
+    marginHorizontal: 11,
     backgroundColor: "white",
     borderRadius: 10,
+    paddingBottom: 25,
+    marginBottom: -36,
+  },
+  nocomments: {
+    marginTop: 7,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    marginHorizontal: 11,
+    backgroundColor: "white",
+    borderRadius: 10,
+  },
+  nocommentsTxt: {
+    ...BLUETXT,
+    alignSelf: "center",
+    marginTop: "10%",
+    //marginLeft: "35%" // for big list only
   },
   userImg: {
     width: 150,

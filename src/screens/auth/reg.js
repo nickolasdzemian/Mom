@@ -6,16 +6,17 @@ import {
   ImageBackground,
   Image,
   TextInput,
-  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, COLORS } from "../../theme/main";
+import { bg_blue, COLORS, window, OS } from "../../theme/main";
 import { authIcons } from "../../../assets/auth/media";
 import { YellowButton } from "../../components";
 import { registration } from "../../data";
 import { useStateValue } from "../../provider";
 
 export const RegistrationScreen = ({ route, navigation }) => {
+  //alert(window.height)
   const { rdata } = route.params;
   const [data, setData] = React.useState({
     name: "",
@@ -27,6 +28,7 @@ export const RegistrationScreen = ({ route, navigation }) => {
     children: rdata.type == 1 ? rdata.newChildsIds : [],
   });
   const [{ globalData }, dispatch] = useStateValue();
+  const [focus, setFocus] = React.useState(false);
 
   const global = (newData) =>
     dispatch({
@@ -36,7 +38,10 @@ export const RegistrationScreen = ({ route, navigation }) => {
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <ScrollView>
+      <KeyboardAvoidingView
+        behavior={!OS ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
         <View style={[styles.ftop, { flex: 0.21 }]}>
           <Image style={styles.topimg} source={authIcons.topimg} />
           <Image style={styles.star1} source={authIcons.star1} />
@@ -56,6 +61,8 @@ export const RegistrationScreen = ({ route, navigation }) => {
             onChangeText={(txt) => setData({ ...data, name: txt })}
             maxLength={30}
             value={data.name}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
           />
           <TextInput
             style={styles.input}
@@ -65,6 +72,8 @@ export const RegistrationScreen = ({ route, navigation }) => {
             maxLength={30}
             value={data.city}
             textContentType="addressCity"
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
           />
           <TextInput
             style={styles.input}
@@ -74,6 +83,8 @@ export const RegistrationScreen = ({ route, navigation }) => {
             maxLength={30}
             value={data.email}
             textContentType="emailAddress"
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
           />
           <TextInput
             style={styles.input}
@@ -84,6 +95,8 @@ export const RegistrationScreen = ({ route, navigation }) => {
             value={data.pswrd}
             secureTextEntry={true}
             textContentType="newPassword"
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
           />
           <YellowButton
             txt="Создать аккаунт"
@@ -93,13 +106,25 @@ export const RegistrationScreen = ({ route, navigation }) => {
             event={() => registration(data, global)}
           />
         </View>
-        <View style={[styles.bottom, { flex: 0.25 }]}>
+        {!focus ?
+        <View
+          style={[
+            styles.bottom,
+            {
+              marginTop: 50,
+              marginBottom:
+              window.height > 700 || window.width > 375
+                  ? window.height / 1.09 - window.height
+                  : window.height / 1.35 - window.height,
+            },
+          ]}
+        >
           <Image style={styles.bottomimg} source={authIcons.bottomimg} />
           <Image style={styles.star3} source={authIcons.star3} />
           <Image style={styles.star4} source={authIcons.star4} />
           <Image style={styles.pchel} source={authIcons.pchel} />
-        </View>
-      </ScrollView>
+        </View> : null}
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };

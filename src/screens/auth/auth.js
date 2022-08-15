@@ -6,10 +6,10 @@ import {
   ImageBackground,
   Image,
   TextInput,
-  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, COLORS } from "../../theme/main";
+import { bg_blue, window, COLORS, OS } from "../../theme/main";
 import { authIcons } from "../../../assets/auth/media";
 import { YellowButton } from "../../components";
 import { login } from "../../data";
@@ -26,10 +26,14 @@ export const SimpleAuthScreen = ({ navigation }) => {
       type: "changeData",
       newGlobalData: newData,
     });
+  const [focus, setFocus] = React.useState(false);
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <ScrollView>
+      <KeyboardAvoidingView
+        behavior={!OS ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
         <View style={[styles.ftop, { flex: 0.25 }]}>
           <Image style={styles.topimg} source={authIcons.topimg} />
           <Image style={styles.star1} source={authIcons.star1} />
@@ -52,6 +56,8 @@ export const SimpleAuthScreen = ({ navigation }) => {
             onChangeText={(txt) => setData({ ...data, email: txt })}
             value={data.email}
             textContentType="emailAddress"
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
           />
           <TextInput
             style={styles.input}
@@ -62,6 +68,8 @@ export const SimpleAuthScreen = ({ navigation }) => {
             value={data.pswrd}
             secureTextEntry={true}
             textContentType="password"
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
           />
           <YellowButton
             txt="Войти"
@@ -70,12 +78,25 @@ export const SimpleAuthScreen = ({ navigation }) => {
             event={() => login(data, global)}
           />
         </View>
-        <View style={[styles.bottom, { flex: 0.25 }]}>
-          <Image style={styles.bottomimg} source={authIcons.bottomimg} />
-          <Image style={styles.star3} source={authIcons.star3} />
-          <Image style={styles.star4} source={authIcons.star4} />
-        </View>
-      </ScrollView>
+        {!focus ? (
+          <View
+            style={[
+              styles.bottom,
+              {
+                marginTop: 50,
+                marginBottom:
+                  window.height > 700 || window.width > 375
+                    ? window.height / 1.35 - window.height
+                    : window.height / 2.1 - window.height,
+              },
+            ]}
+          >
+            <Image style={styles.bottomimg} source={authIcons.bottomimg} />
+            <Image style={styles.star3} source={authIcons.star3} />
+            <Image style={styles.star4} source={authIcons.star4} />
+          </View>
+        ) : null}
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };

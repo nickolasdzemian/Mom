@@ -53,10 +53,10 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
 
   function showUser(username) {
     getUser(token, username, navigation, myUname);
-  };
+  }
 
   return (
-    <View style={[styles.container, {height: 485}]}>
+    <View style={styles.container}>
       <View style={styles.topContent}>
         <TouchableOpacity
           style={styles.info}
@@ -71,7 +71,7 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
               <Clock />
               <Text style={styles.subInfoTxt}>{date}</Text>
               <Geo />
-              <Text style={styles.subInfoTxt}>{test.location}</Text>
+              <Text style={styles.subInfoTxt}>{item?.user?.city}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -79,7 +79,14 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
           <ThreePoints />
         </TouchableOpacity>
       </View>
-      {item?.images?.length > 0 ? (
+      <View style={styles.middle}>
+        <Image
+          style={item?.images?.length > 0 ? styles.mainImg : null}
+          source={{ uri: item?.images?.[0] }}
+          resizeMode="cover"
+        />
+      </View>
+      {/* {item?.images?.length > 0 ? (
         <View style={styles.middle}>
           <Image
             style={styles.mainImg}
@@ -87,14 +94,11 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
             resizeMode="cover"
           />
         </View>
-      ) : 
+      ) : (
         <View style={styles.middle}>
-          <Image
-            style={styles.mainImg}
-            source={test.img}
-            resizeMode="cover"
-          />
-        </View>}
+          <Image style={styles.mainImg} source={test.img} resizeMode="cover" />
+        </View>
+      )} */}
       <View style={styles.text}>
         <Text style={styles.post}>
           {more ? item?.content.substring(0, 500) + " ..." : item?.content}
@@ -119,7 +123,14 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
 
           <TouchableOpacity
             style={[styles.likecomm, { marginLeft: 8 }]}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("NewsPost", {
+                item: item,
+                token: token,
+                myUname: myUname,
+                isChannel: isChannel,
+              });
+            }}
           >
             <Comments />
             <Text style={styles.count}>{commentsCount}</Text>

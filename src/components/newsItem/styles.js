@@ -3,6 +3,21 @@ import { COLORS, NICKNAME, BUTTON, BLUETXT, fonts, window } from "../../theme/ma
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: "white",
+    marginHorizontal: 11,
+    marginTop: 20,
+    borderRadius: 10,
+    // borderWidth: 2,
+    // borderColor: COLORS.blue_darling,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 15,
+    // shadowColor: COLORS.blue_darling,
+  },
+  container_P: {
+    marginTop: -55,
+    flex: 1,
     backgroundColor: "white",
     marginHorizontal: 11,
     marginTop: 20,

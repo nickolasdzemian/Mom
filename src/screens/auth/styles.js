@@ -1,5 +1,5 @@
-import { StyleSheet, Platform } from "react-native";
-import { COLORS, BUTTON, BLUETXT } from "../../theme/main";
+import { StyleSheet } from "react-native";
+import { COLORS, BUTTON, BLUETXT, window } from "../../theme/main";
 
 export const styles = StyleSheet.create({
   // Hello
@@ -35,9 +35,10 @@ export const styles = StyleSheet.create({
   },
   btnTXT: BLUETXT,
   bottom: {
-    flex: 0.25,
+    //flex: 0.25,
     flexDirection: "row",
     alignSelf: "flex-end",
+    marginBottom: window.height / 1.35 - window.height,
   },
   bottomimg: {},
   star3: {

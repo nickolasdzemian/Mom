@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -35,8 +35,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Add new note with photo to make post</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location nearby users</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Locating nearby users</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Location nearby users</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Add new photo from library to make post</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FSAlbertProNarrow.ttf</string>

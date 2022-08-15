@@ -1,15 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from "react";
-import {
-  View,
-  Text,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ImageBackground, Image } from "react-native";
 import WheelPicker from "react-native-wheely";
 import { styles } from "../styles";
-import { bg_blue } from "../../../theme/main";
+import { bg_blue, window } from "../../../theme/main";
 import { authIcons } from "../../../../assets/auth/media";
 import { YellowButton } from "../../../components";
 
@@ -58,7 +52,18 @@ export const PregScreen = ({ navigation }) => {
           rdata={{ type: 0, selectedIndex: selectedIndex + 1 }}
         />
       </View>
-      <View style={styles.bottom}>
+      <View
+        style={[
+          styles.bottom,
+          {
+            marginTop: 50,
+            marginBottom:
+              window.height > 700 || window.width > 375
+                ? window.height / 1.35 - window.height
+                : window.height / 1.35 - window.height,
+          },
+        ]}
+      >
         <Image style={styles.bottomimg} source={authIcons.bottomimg} />
         <Image style={styles.star3} source={authIcons.star3} />
         <Image style={styles.star4} source={authIcons.star4} />

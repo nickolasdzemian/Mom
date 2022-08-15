@@ -15,3 +15,4 @@ export { userSubscribe } from "./userSubscribe";
 export { logout } from "./logout";
 export { userEdit } from "./userEdit";
 export { userNewPassword } from "./userPswrd";
+export { newsUser } from "./newsUser";

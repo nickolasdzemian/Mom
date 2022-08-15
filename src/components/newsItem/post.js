@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TextInput,
+  KeyboardAvoidingView,
 } from "react-native";
 import { newsLike } from "../../data";
 import { styles } from "./styles";
@@ -51,6 +52,7 @@ export const Post = ({
   const [commentsCount, setCommentsCount] = React.useState(
     item?.comments_count
   );
+  const [focus, setFocus] = React.useState(false);
 
   const thisDate = new Date().getDate();
   let date = new Date(item.created_at.replace(" ", "T"));
@@ -93,8 +95,8 @@ export const Post = ({
         styles.container,
         {
           // borderBottomWidth: isAlone && item?.comments_count ? 0 : 2,
-          borderBottomStartRadius: isAlone && item?.comments_count ? 0 : 10,
-          borderBottomEndRadius: isAlone && item?.comments_count ? 0 : 10,
+          borderBottomStartRadius: isAlone && commentsCount > 0 ? 0 : 10,
+          borderBottomEndRadius: isAlone && commentsCount > 0 ? 0 : 10,
         },
       ]}
     >
@@ -112,7 +114,7 @@ export const Post = ({
               <Clock />
               <Text style={styles.subInfoTxt}>{date}</Text>
               <Geo />
-              <Text style={styles.subInfoTxt}>{test.location}</Text>
+              <Text style={styles.subInfoTxt}>{item?.user?.city}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -212,7 +214,11 @@ export const Post = ({
             <Text
               style={[
                 styles.postShowTxt,
-                { paddingVertical: 5, paddingHorizontal: 5, alignSelf: "flex-end" },
+                {
+                  paddingVertical: 5,
+                  paddingHorizontal: 5,
+                  alignSelf: "flex-end",
+                },
               ]}
               onPress={() => sendComment()}
             >

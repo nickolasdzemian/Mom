@@ -2,11 +2,11 @@
 import * as React from "react";
 import {
   ImageBackground,
-  //FlatList,
+  FlatList,
   DeviceEventEmitter,
   Text,
 } from "react-native";
-import BigList from "react-native-big-list";
+// import BigList from "react-native-big-list";
 import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
 import { Parmalat, Looopa } from "../../../assets/SVGnewsHeader";
@@ -75,7 +75,7 @@ export const NewsScreen = ({ navigation }) => {
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <BigList
+      {/* <BigList
         data={globalData?.feed}
         style={{ marginBottom: 80 }}
         renderItem={renderItem}
@@ -104,8 +104,8 @@ export const NewsScreen = ({ navigation }) => {
             }}
           />
         }
-      />
-      {/* <FlatList
+      /> */}
+      <FlatList
         data={globalData?.feed}
         style={{ marginBottom: 80 }}
         renderItem={renderItem}
@@ -135,7 +135,7 @@ export const NewsScreen = ({ navigation }) => {
             }}
           />
         }
-      /> */}
+      />
       <BottomShadow />
     </ImageBackground>
   );

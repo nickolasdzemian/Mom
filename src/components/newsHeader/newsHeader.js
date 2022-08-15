@@ -67,7 +67,7 @@ export const NewsHeader = ({
         { backgroundColor: modal ? "white" : "transparent" },
       ]}
     >
-      <TouchableOpacity style={styles.btn} onPress={() => lEv ? lEv() : null}>
+      <TouchableOpacity style={styles.btn} onPress={() => (lEv ? lEv() : null)}>
         {lIco}
       </TouchableOpacity>
       <TouchableOpacity style={styles.title} onPress={() => setModal(!modal)}>
@@ -82,13 +82,16 @@ export const NewsHeader = ({
         transparent={true}
         visible={modal}
         onShow={() => {
-          setTimeout(() => setModal(false), 7000);
+          // setTimeout(() => setModal(false), 7000);
         }}
         onRequestClose={() => {
-          setModal(!modal);
+          setModal(false);
         }}
       >
-        <View style={styles.centeredView}>
+        <TouchableOpacity
+          onPress={() => setModal(!modal)}
+          style={styles.centeredView}
+        >
           <View style={styles.modalView}>
             {titles.map((item) => (
               <Text
@@ -100,7 +103,7 @@ export const NewsHeader = ({
               </Text>
             ))}
           </View>
-        </View>
+        </TouchableOpacity>
       </Modal>
 
       <TouchableOpacity

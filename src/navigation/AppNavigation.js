@@ -136,7 +136,7 @@ export const AppNavigation = () => {
           bgColor="white"
           initialRouteName="News"
           borderTopLeftRight
-          swipeEnabled
+          //swipeEnabled
           renderCircle={({ selectedTab, navigate }) => (
             <TouchableOpacity
               activeOpacity={1}

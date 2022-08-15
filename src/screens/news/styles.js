@@ -97,12 +97,14 @@ export const styles = StyleSheet.create({
   },
 
   // No comments
-  nocomments: {},
+  nocomments: {
+    height: 'auto',
+  },
   nocommentsTxt: {
     ...BLUETXT,
     alignSelf: "center",
     marginTop: "45%",
-    marginLeft: "35%" // for big list only
+    //marginLeft: "35%" // for big list only
   },
 
   // New post
