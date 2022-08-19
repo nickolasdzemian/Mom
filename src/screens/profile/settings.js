@@ -17,6 +17,8 @@ import { ChevronRight } from "../../../assets/SVGprofile";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { logout, userEdit, userNewPassword } from "../../data";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const states = ["Беременна", "Мама", "Планирую беременность"];
 
@@ -45,6 +47,14 @@ export const ProfileSettings = ({ navigation }) => {
     status: 0,
   });
 
+  const signOutNow = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   function saveBack() {
     navigation.goBack();
   }
@@ -71,6 +81,7 @@ export const ProfileSettings = ({ navigation }) => {
     setColor("red");
     setTimeout(() => {
       logout(globalData?.token, global);
+      signOutNow();
     }, 750);
   }
 
@@ -120,7 +131,10 @@ export const ProfileSettings = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.block}>
-          <TouchableOpacity style={styles.settingsBtn}>
+          <TouchableOpacity
+            style={styles.settingsBtn}
+            onPress={() => navi("ProfileEdit")}
+          >
             <Text style={styles.settingsBtnTxt}>Данные профиля</Text>
             <ChevronRight />
           </TouchableOpacity>

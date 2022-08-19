@@ -71,7 +71,7 @@ export const NewsHeader = ({
         {lIco}
       </TouchableOpacity>
       <TouchableOpacity style={styles.title} onPress={() => setModal(!modal)}>
-        <Text style={styles.titleTxt}>
+        <Text style={styles.titleTxt} numberOfLines={1} ellipsizeMode="tail">
           {tTxt0 ? tTxt0 : title ? title : null}
         </Text>
         {tIco ? <DropDown /> : null}

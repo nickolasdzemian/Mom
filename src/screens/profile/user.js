@@ -14,7 +14,7 @@ import { styles } from "./styles";
 import { bg_blue, preg_state, child } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { UserThreePoints, Geo } from "../../../assets/SVGpost";
-import { NewsHeader, PostItem } from "../../components";
+import { NewsHeader, PostItem, BottomShadow } from "../../components";
 import { userSubscribe, newsUser } from "../../data";
 import { useStateValue } from "../../provider";
 
@@ -106,7 +106,13 @@ export const UserScreen = ({ route, navigation }) => {
         rIco={<UserThreePoints />}
       />
       <View style={styles.profileContent}>
-        <Image style={styles.userImg} source={test.img} resizeMode="cover" />
+        <Image
+          style={styles.userImg}
+          source={
+            info?.avatar_url ? {uri: info.avatar_url} : test.img
+          }
+          resizeMode="cover"
+        />
         <Text style={styles.name}>{info.name}</Text>
         <Text style={styles.nick}>{"@" + info.username}</Text>
         <View style={styles.subInfo}>
@@ -176,9 +182,9 @@ export const UserScreen = ({ route, navigation }) => {
             <View style={{ flexDirection: "row" }}>
               {info?.children.map((item) => (
                 <View>
-                  <ImageBackground
+                  <Image
                     style={[styles.pregState, { marginLeft: 10 }]}
-                    source={child}
+                    source={item?.avatar_url ? {uri: item.avatar_url} : child}
                   />
                   <Text style={[styles.pregCountSubTxt, { marginLeft: 10 }]}>
                     {item.name}
@@ -215,6 +221,7 @@ export const UserScreen = ({ route, navigation }) => {
         }
         ListHeaderComponent={Header}
       />
+      <BottomShadow />
     </ImageBackground>
   );
 };

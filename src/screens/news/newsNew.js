@@ -49,7 +49,15 @@ export const NewScreen = ({ navigation }) => {
         />
         <View style={styles.newContent} behavior={!OSA ? "position" : "height"}>
           <View style={post.info}>
-            <Image style={post.userImg} source={test.img} resizeMode="cover" />
+            <Image
+              style={post.userImg}
+              source={
+                globalData?.user?.avatar_url
+                  ? { uri: globalData.user.avatar_url }
+                  : test.img
+              }
+              resizeMode="cover"
+            />
             <View style={post.postInfo}>
               <Text style={post.uName}>{globalData?.user.name}</Text>
               <View style={post.subInfo}>

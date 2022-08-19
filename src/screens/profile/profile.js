@@ -7,13 +7,12 @@ import {
   Text,
   ScrollView,
   FlatList,
-  DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
 import { bg_blue, preg_state, child } from "../../theme/main";
 import { BackBtn, Lines } from "../../../assets/SVGnewsHeader";
 import { Geo } from "../../../assets/SVGpost";
-import { NewsHeader, PostItem } from "../../components";
+import { NewsHeader, PostItem, BottomShadow } from "../../components";
 import { newsUser } from "../../data";
 import { useStateValue } from "../../provider";
 
@@ -98,7 +97,13 @@ export const ProfileScreen = ({ navigation }) => {
         rEv={() => navigation.navigate("ProfileSettings")}
       />
       <View style={styles.profileContent}>
-        <Image style={styles.userImg} source={test.img} resizeMode="cover" />
+        <Image
+          style={styles.userImg}
+          source={
+            globalData?.user?.avatar_url ? {uri: globalData.user.avatar_url} : test.img
+          }
+          resizeMode="cover"
+        />
         <Text style={styles.name}>{globalData?.user.name}</Text>
         <Text style={styles.nick}>{"@" + globalData?.user.username}</Text>
         <View style={styles.subInfo}>
@@ -108,19 +113,23 @@ export const ProfileScreen = ({ navigation }) => {
         <View style={styles.counters}>
           <View style={styles.border}>
             <Text style={styles.counterTxt}>
-              {globalData?.user.posts_count}
+              {globalData?.user.posts_count ? globalData.user.posts_count : 0}
             </Text>
             <Text style={styles.counterSubTxt}>Записей</Text>
           </View>
           <View style={styles.center}>
             <Text style={styles.counterTxt}>
-              {globalData?.user.subscribers_count}
+              {globalData?.user.subscribers_count
+                ? globalData.user.subscribers_count
+                : 0}
             </Text>
             <Text style={styles.counterSubTxt}>Подписчики</Text>
           </View>
           <View style={styles.border}>
             <Text style={styles.counterTxt}>
-              {globalData?.user.subscriptions_count}
+              {globalData?.user.subscriptions_count
+                ? globalData.user.subscriptions_count
+                : 0}
             </Text>
             <Text style={styles.counterSubTxt}>Подписки</Text>
           </View>
@@ -154,13 +163,14 @@ export const ProfileScreen = ({ navigation }) => {
               </Text>
             </View>
           ) : null}
-          {globalData?.user?.children?.length > 0 || globalData?.user.status == 1 ? (
+          {globalData?.user?.children?.length > 0 ||
+          globalData?.user.status == 1 ? (
             <View style={{ flexDirection: "row" }}>
-              {globalData?.user?.children.map((item) => (
+              {globalData?.user?.children.map((item, index) => (
                 <View>
-                  <ImageBackground
+                  <Image
                     style={[styles.pregState, { marginLeft: 10 }]}
-                    source={child}
+                    source={item?.avatar_url ? {uri: item.avatar_url} : child}
                   />
                   <Text style={[styles.pregCountSubTxt, { marginLeft: 10 }]}>
                     {item.name}
@@ -197,6 +207,7 @@ export const ProfileScreen = ({ navigation }) => {
         }
         ListHeaderComponent={Header}
       />
+      <BottomShadow />
     </ImageBackground>
   );
 };

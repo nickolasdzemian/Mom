@@ -42,6 +42,17 @@ export const styles = StyleSheet.create({
     marginLeft: window.width / 2 - 212 / 2,
     marginVertical: -(150 / 2),
   },
+  userImgEditView: {
+    width: 150,
+    height: 150,
+    borderRadius: 360,
+    marginTop: "13%",
+  },
+  editIco: {
+    position: "absolute",
+    marginLeft: window.width / 1.8,
+    marginTop: 57,
+  },
   name: {
     ...BLUETXT,
     fontSize: 20,
@@ -217,4 +228,30 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.yellow,
     marginTop: 40,
   },
+
+  // Children
+  sex: {
+    ...BUTTON,
+    flexDirection: "row",
+    justifyContent: "center",
+    height: 32,
+    marginTop: 50,
+    borderRadius: 9,
+    backgroundColor: COLORS.gray_buttons,
+    alignSelf: "center",
+    marginVertical: window.height / 20,
+  },
+  selBtn: {
+    width: 141.5,
+    height: 28.5,
+    borderRadius: 7,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "black",
+  },
+  selTxt: {
+    ...BLUETXT,
+    color: COLORS.black1,
+  },
+
 });

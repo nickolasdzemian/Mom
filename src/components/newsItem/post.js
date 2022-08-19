@@ -105,7 +105,13 @@ export const Post = ({
           style={styles.info}
           onPress={() => (!isChannel ? showUser(item?.user.username) : null)}
         >
-          <Image style={styles.userImg} source={test.img} resizeMode="cover" />
+          <Image
+            style={styles.userImg}
+            source={
+              item?.user?.avatar ? { uri: item.user.avatar } : test.img
+            }
+            resizeMode="cover"
+          />
           <View style={styles.postInfo}>
             <Text style={styles.uName}>
               {isChannel ? item?.channel?.title : item?.user?.username}

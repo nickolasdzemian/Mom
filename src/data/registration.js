@@ -1,13 +1,53 @@
 import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
+import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+// import { sec } from '../storage/sec';
 
 export async function registration(data, global) {
   const URL = url + "auth/register";
 
+  // FireBase
+  const register = () => {
+    createUserWithEmailAndPassword(auth, data.email, data.pswrd)
+      .then((userCredential) => {
+        // Registered
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: data.name,
+        })
+          .then(() => {
+            // Login FireBase
+            signInWithEmailAndPassword(auth, data.email, data.pswrd)
+              .then((userCredential) => {})
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+              });
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  };
+  // ---
+
   async function created(json) {
     global(json.data);
     await userData.set("user", json);
+    // await sec.set("sec", data.pswrd);
+    register();
   }
 
   try {

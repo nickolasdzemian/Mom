@@ -30,17 +30,19 @@ import { auth as authProvider } from "../data";
 import { AuthStack } from "./AuthStack";
 import { NewsStack } from "./NewsStack";
 import { ProfileStack } from "./ProfileStack";
+import { LibraryStack } from "./LibraryStack";
+import { ChatStack } from "./ChatStack"
 
-function BlankScreen() {
-  return (
-    // eslint-disable-next-line react-native/no-inline-styles
-    <View style={{ flex: 1, backgroundColor: "red" }}>
-      <Text style={{ alignSelf: "center", marginTop: "40%" }}>
-        Blank screen. This is a placeholder
-      </Text>
-    </View>
-  );
-}
+// function BlankScreen() {
+//   return (
+//     // eslint-disable-next-line react-native/no-inline-styles
+//     <View style={{ flex: 1, backgroundColor: "red" }}>
+//       <Text style={{ alignSelf: "center", marginTop: "40%" }}>
+//         Blank screen. This is a placeholder
+//       </Text>
+//     </View>
+//   );
+// }
 
 export const AppNavigation = () => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -161,11 +163,11 @@ export const AppNavigation = () => {
           <CurvedBottomBar.Screen
             name="Library"
             position="left"
-            component={BlankScreen}
+            component={LibraryStack}
           />
           <CurvedBottomBar.Screen
             name="Chat"
-            component={BlankScreen}
+            component={ChatStack}
             position="right"
           />
           <CurvedBottomBar.Screen

@@ -1,13 +1,28 @@
 import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+// import { sec } from '../storage/sec';
 
 export async function login(data, global) {
   const URL = url + "auth/login";
 
+  const signin = () => {
+    signInWithEmailAndPassword(auth, data.email, data.pswrd)
+      .then((userCredential) => {})
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  };
+
   async function created(json) {
     global(json.data);
     await userData.set("user", json);
+    // await sec.set("sec", data.pswrd);
+    signin();
   }
 
   try {

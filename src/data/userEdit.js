@@ -1,7 +1,16 @@
 import { url } from "./env";
 import { Alert } from "react-native";
+import { auth } from "../firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { sec } from "../storage/sec";
 
-export async function userEdit(globalData, data, global) {
+export async function userEdit(globalData, data, global, assets) {
+  const token = await sec.get("sec");
   const URL = url + "user/profile";
 
   let formdata = new FormData();
@@ -36,18 +45,27 @@ export async function userEdit(globalData, data, global) {
   } else {
     formdata.append("gestational_age", globalData.user.gestational_age);
   }
-//   if (data.assets) {
-//     formdata.append("images[0]", {
-//       uri: assets.assets[0].uri,
-//       name: assets.assets[0].fileName,
-//       type: assets.assets[0].type,
-//     });
-//   }
+  if (assets) {
+    formdata.append("avatar", {
+      uri: assets.assets[0].uri,
+      name: assets.assets[0].fileName,
+      type: assets.assets[0].type,
+    });
+  }
 
   function done(json) {
     let newData = json.data;
     newData = { ...globalData, user: newData };
     global(newData);
+
+    const auth = getAuth();
+    updateProfile(auth.currentUser, {
+      displayName: data.name ? data.name : globalData.user.name,
+      photoURL: json.data?.avatar_url,
+    })
+      .then(() => {})
+      .catch((error) => {});
+
     Alert.alert("Выполнено", "Данные успешно обновлены", [{ text: "OK" }]);
   }
 
