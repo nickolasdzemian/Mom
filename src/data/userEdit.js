@@ -60,7 +60,7 @@ export async function userEdit(globalData, data, global, assets) {
 
     const auth = getAuth();
     updateProfile(auth.currentUser, {
-      displayName: data.name ? data.name : globalData.user.name,
+      displayName: json.data.username,
       photoURL: json.data?.avatar_url,
     })
       .then(() => {})

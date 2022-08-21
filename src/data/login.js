@@ -8,7 +8,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 export async function login(data, global) {
   const URL = url + "auth/login";
 
-  const signin = () => {
+  const signin = (username) => {
     signInWithEmailAndPassword(auth, data.email, data.pswrd)
       .then((userCredential) => {})
       .catch((error) => {
@@ -22,7 +22,7 @@ export async function login(data, global) {
     global(json.data);
     await userData.set("user", json);
     // await sec.set("sec", data.pswrd);
-    signin();
+    seetTimeout(() => {signin(json.data.username);}, 500);
   }
 
   try {

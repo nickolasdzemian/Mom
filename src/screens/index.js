@@ -33,3 +33,4 @@ export { CalendarAllPostsScreen } from "./library/calendarAllPosts";
 
 // Chat
 export { ChatOnceScreen } from "./chat/chat";
+export { AllChatsScreen } from "./chat/chatAll";

@@ -108,9 +108,7 @@ export const UserScreen = ({ route, navigation }) => {
       <View style={styles.profileContent}>
         <Image
           style={styles.userImg}
-          source={
-            info?.avatar_url ? {uri: info.avatar_url} : test.img
-          }
+          source={info?.avatar_url ? { uri: info.avatar_url } : test.img}
           resizeMode="cover"
         />
         <Text style={styles.name}>{info.name}</Text>
@@ -145,7 +143,12 @@ export const UserScreen = ({ route, navigation }) => {
                 {sub ? "Отписаться" : "Подписаться"}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("ChatTo", { uName: info.username });
+              }}
+            >
               <Text style={styles.btnTxt}>Написать</Text>
             </TouchableOpacity>
           </View>
@@ -184,7 +187,7 @@ export const UserScreen = ({ route, navigation }) => {
                 <View>
                   <Image
                     style={[styles.pregState, { marginLeft: 10 }]}
-                    source={item?.avatar_url ? {uri: item.avatar_url} : child}
+                    source={item?.avatar_url ? { uri: item.avatar_url } : child}
                   />
                   <Text style={[styles.pregCountSubTxt, { marginLeft: 10 }]}>
                     {item.name}

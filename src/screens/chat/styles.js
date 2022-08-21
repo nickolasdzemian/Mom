@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-  // Library
+  // Chat
   content: {
     alignSelf: "center",
     height: window.height * 0.75,
@@ -21,14 +21,70 @@ export const styles = StyleSheet.create({
     marginHorizontal: 11,
     backgroundColor: "white",
     borderRadius: 10,
-    // paddingBottom: 25,
-    // marginBottom: 25,
   },
+  msgTxt: {
+    fontFamily: fonts.Poppins,
+    fontSize: 13,
+    color: "#33393F",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  msgInputContainer: {
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    width: window.width, //asd
+    // height: 80,
+    backgroundColor: COLORS.gray_buttons,
+    padding: 10,
+    paddingBottom: window.height * 0.15,
+    marginBottom: -90,
+  },
+  msgInputTxt: {
+    width: window.width * 0.90,
+    margin: 0,
+    height: 60,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: 'white',
+  },
+  sendBtn: {
+    height: 40,
+    marginLeft: 10,
+    alignSelf: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  renderLeftBubble: {
+    backgroundColor: "#FEF4CF",
+  },
+  renderRightBubble: {
+    backgroundColor: "#DFF6FF",
+  },
+  chatBottomBar: {
+    width: window.width,
+    backgroundColor: COLORS.gray_buttons,
+  },
+
+  
+  // Other
   libTitle: {
     ...BLUETXT,
     fontSize: 18,
     marginBottom: 15,
   },
+  noChats: {
+    alignSelf: "center",
+    textAlign: "center",
+    marginTop: window.height * 0.15,
+  },
+
   cloud: {
     justifyContent: "center",
     width: 130,
@@ -173,7 +229,7 @@ export const styles = StyleSheet.create({
     borderRadius: 180,
     marginRight: 15,
   },
-  postTitle:{
+  postTitle: {
     //alignItems: "center",
   },
   postTitleTxt: {

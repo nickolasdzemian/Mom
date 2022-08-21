@@ -9,6 +9,7 @@ import {
   NewScreen,
   NewScreenSet,
   UserScreen,
+  ChatOnceScreen,
 } from "../screens";
 
 const StackNews = createNativeStackNavigator();
@@ -53,6 +54,11 @@ export function NewsStack() {
         <StackNews.Screen
           name="UserScreen"
           component={UserScreen}
+          options={{ headerShown: false }}
+        />
+        <StackNews.Screen
+          name="ChatTo"
+          component={ChatOnceScreen}
           options={{ headerShown: false }}
         />
       </StackNews.Navigator>

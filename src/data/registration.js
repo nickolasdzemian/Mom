@@ -13,13 +13,13 @@ export async function registration(data, global) {
   const URL = url + "auth/register";
 
   // FireBase
-  const register = () => {
+  const register = (username) => {
     createUserWithEmailAndPassword(auth, data.email, data.pswrd)
       .then((userCredential) => {
         // Registered
         const user = userCredential.user;
         updateProfile(user, {
-          displayName: data.name,
+          displayName: username,
         })
           .then(() => {
             // Login FireBase
@@ -47,7 +47,7 @@ export async function registration(data, global) {
     global(json.data);
     await userData.set("user", json);
     // await sec.set("sec", data.pswrd);
-    register();
+    register(json.data.username);
   }
 
   try {

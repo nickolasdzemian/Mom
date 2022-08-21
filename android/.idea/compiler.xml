@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
       <module name="react-native-gradle-plugin" target="1.8" />
+      <module name="react-native-gradle-plugin.main" target="1.8" />
+      <module name="react-native-gradle-plugin.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

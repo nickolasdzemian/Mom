@@ -22,3 +22,4 @@ export { libraryGet } from "./libraryGetCal";
 export { libraryCalWeek } from "./libraryCalWeek";
 export { libraryCalendarAllPosts } from "./libraryCalAllPsts";
 export { librarySinglePost } from "./libraryCalPost";
+export { getUserChat } from "./userChat";
