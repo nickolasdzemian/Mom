@@ -1,0 +1,23 @@
+export const authIcons = {
+  splash: require("./startup_full.png"),
+
+  logoC: require("./U_Mom_1.png"),
+  topimg: require("./ftop.png"),
+  bottomimg: require("./fbot.png"),
+  star1: require("./Star3.png"),
+  star2: require("./Star2.png"),
+  star3: require("./Star1.png"),
+  star4: require("./Star3.png"),
+  fly: require("./Fly.png"),
+  smoky: require("./Smoky.png"),
+  shirt: require("./Tshirt.png"),
+  bantic: require("./Bantic.png"),
+  lshirt: require("./Lshirt.png"),
+  bottle: require("./Bottle.png"),
+  horse: require("./Horse.png"),
+  bear: require("./Bear.png"),
+  pchel: require("./Pchel.png"),
+  smoky2: require("./Smoky2.png"),
+  cloud: require("./Cloud.png"),
+  babyShirt: require("./BabyShirt.png"),
+};

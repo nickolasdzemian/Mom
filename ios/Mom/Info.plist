@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>U Mom</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Add new note with photo to make post</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location nearby users</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Locating nearby users</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location nearby users</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Add new photo from library to make post</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FSAlbertProNarrow.ttf</string>
+		<string>FSAlbertProNarrow_Bold.ttf</string>
+		<string>FSAlbertProNarrow_BoldItalic.ttf</string>
+		<string>FSAlbertProNarrow_Italic.ttf</string>
+		<string>FSAlbertProNarrow_Light.ttf</string>
+		<string>FSAlbertProNarrow_Thin.ttf</string>
+		<string>Poppins_Black.ttf</string>
+		<string>Poppins_Bold.ttf</string>
+		<string>Poppins_BoldItalic.ttf</string>
+		<string>Poppins_Italic.ttf</string>
+		<string>Poppins_Light.ttf</string>
+		<string>Poppins_Medium.ttf</string>
+		<string>Poppins_Regular.ttf</string>
+		<string>Poppins_SemiBold.ttf</string>
+		<string>Poppins_Thin.ttf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
+</plist>
