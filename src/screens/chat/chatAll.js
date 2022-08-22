@@ -29,15 +29,17 @@ export const AllChatsScreen = ({ navigation }) => {
   React.useEffect(() => {
     const q = query(collection(db, "user", globalData.user.username, "list"));
     onSnapshot(q, (snapshot) => {
-      getUserChat(
-        globalData.token,
-        snapshot.docs.map((doc) => ({
-          username: doc.data()._id,
-        })),
-        setUsers
-      );
+      const u = snapshot.docs.map((item) => item.username);
+      if (users?.length !== u?.length) {
+        getUserChat(
+          globalData.token,
+          snapshot.docs.map((doc) => ({
+            username: doc.data()._id,
+          })),
+          setUsers
+        );
+      }
     });
-    console.log(users);
   }, []);
 
   return (
@@ -90,7 +92,9 @@ export const AllChatsScreen = ({ navigation }) => {
               </TouchableOpacity>
             ))
           ) : (
-            <Text style={[styles.libTitle, styles.noChats]}>Нет активных чатов..</Text>
+            <Text style={[styles.libTitle, styles.noChats]}>
+              Нет активных чатов..
+            </Text>
           )}
         </View>
       </ScrollView>

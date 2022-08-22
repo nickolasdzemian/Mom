@@ -146,6 +146,7 @@ export const ChatOnceScreen = ({ route, navigation }) => {
       GiftedChat.append(previousMessages, messages)
     );
     const { _id, createdAt, text, user } = messages[0];
+    console.log(_id, createdAt, text, user)
     addDoc(collection(db, "chats", "chats", chatID), {
       _id,
       createdAt,

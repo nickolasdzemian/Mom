@@ -26,7 +26,8 @@ export async function getUserChat(token, chats, setUsers) {
         : null;
       users = users.concat(json.data);
       if (i == chats.length -1) {
-        setUsers(users);
+        await setUsers(users);
+        setTimeout(() => {users = []}, 10);
         console.log(users, 'setUsers');
       }
       console.log(json);

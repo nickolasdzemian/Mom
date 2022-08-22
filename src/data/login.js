@@ -10,7 +10,9 @@ export async function login(data, global) {
 
   const signin = (username) => {
     signInWithEmailAndPassword(auth, data.email, data.pswrd)
-      .then((userCredential) => {})
+      .then((userCredential) => {
+        console.log(userCredential, 'sfjhdghdhsfhzdhzdfhzdfhzdfzdhfh');
+      })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -22,7 +24,7 @@ export async function login(data, global) {
     global(json.data);
     await userData.set("user", json);
     // await sec.set("sec", data.pswrd);
-    seetTimeout(() => {signin(json.data.username);}, 500);
+    setTimeout(() => {signin();}, 100);
   }
 
   try {
