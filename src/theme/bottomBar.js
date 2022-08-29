@@ -1,6 +1,6 @@
 export const bottomBarTHeme = {
-  inactiveColor: '#AAACAE',
-  activeColor: '#68ABE8',
+  inactiveColor: "#AAACAE",
+  activeColor: "#68ABE8",
   styles: {
     container: {
       flex: 1,
@@ -14,11 +14,11 @@ export const bottomBarTHeme = {
       width: 61,
       height: 61,
       borderRadius: 180,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'transparent',
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "transparent",
       bottom: 25,
-      shadowColor: '#000',
+      shadowColor: "#000",
       shadowOffset: {
         width: 0,
         height: 2,
@@ -37,8 +37,8 @@ export const bottomBarTHeme = {
     },
     touch: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'flex-start',
+      alignItems: "center",
+      justifyContent: "flex-start",
       marginVertical: 15,
     },
   },

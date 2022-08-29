@@ -13,6 +13,7 @@ import { BackBtn, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsAll } from "../../data";
+import { Strings } from "../../storage/strings";
 
 export const NewsSearch = ({ route, navigation }) => {
   const { type } = route.params;
@@ -79,7 +80,7 @@ export const NewsSearch = ({ route, navigation }) => {
             ]}
             onPress={() => setFilter({ ...filter, srch: !filter.srch })}
           >
-            <Text style={styles.selTxt2}>Мамы</Text>
+            <Text style={styles.selTxt2}>{Strings().news_h_sm}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -97,10 +98,10 @@ export const NewsSearch = ({ route, navigation }) => {
             ]}
             onPress={() => setFilter({ ...filter, srch: !filter.srch })}
           >
-            <Text style={styles.selTxt2}>Записи</Text>
+            <Text style={styles.selTxt2}>{Strings().news_h_sn}</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.upperTitle2}>Популярные запросы</Text>
+        <Text style={styles.upperTitle2}>{Strings().news_s_re}</Text>
         {recentReq.map((item) => (
           <Text
             key={item}

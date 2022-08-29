@@ -31,7 +31,7 @@ import { AuthStack } from "./AuthStack";
 import { NewsStack } from "./NewsStack";
 import { ProfileStack } from "./ProfileStack";
 import { LibraryStack } from "./LibraryStack";
-import { ChatStack } from "./ChatStack"
+import { ChatStack } from "./ChatStack";
 
 // function BlankScreen() {
 //   return (

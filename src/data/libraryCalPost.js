@@ -7,7 +7,7 @@ export async function librarySinglePost(token, id, navigation, title) {
   function created(json) {
     navigation.navigate("CalendarPostScreen", {
       data: json.data,
-      title: title?.substring(0, 25) + '...',
+      title: title?.substring(0, 25) + "...",
     });
   }
 

@@ -4,6 +4,7 @@ import { styles } from "./styles";
 import { COLORS } from "../../theme/main";
 import { DropDown } from "../../../assets/SVGnewsHeader";
 import { newsAll } from "../../data";
+import { Strings } from "../../storage/strings";
 
 /**
  * @param {Function} lIco Иконка хедера слева.
@@ -16,7 +17,11 @@ import { newsAll } from "../../data";
  * @param {Boolean} sch Есть ли в хедере компонент поиска.
  */
 
-const titles = ["Лента новостей", "Лента подписок", "Лента каналов"];
+const titles = [
+  Strings().news_h_all,
+  Strings().news_h_sub,
+  Strings().news_h_ch,
+];
 
 export const NewsHeader = ({
   lIco,
@@ -51,7 +56,7 @@ export const NewsHeader = ({
         {rIco}
         <TextInput
           style={styles.input}
-          placeholder="Ищи по запросам"
+          placeholder={Strings().news_h_sch}
           placeholderTextColor={COLORS.gray1}
           onChangeText={(txt) => setFilter({ ...filter, text: txt })}
           value={filter.text}

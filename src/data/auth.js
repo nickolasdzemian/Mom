@@ -20,18 +20,24 @@ export async function auth(global, setSplash, load) {
         : "Возникла непредвиденная ошибка, повторите попытку позднее",
       [{ text: "OK" }]
     );
-    if (setSplash) {setTimeout(() => setSplash(false), 2000)};
+    if (setSplash) {
+      setTimeout(() => setSplash(false), 2000);
+    }
   }
 
   async function created(json) {
     let newData = json.data;
     newData = await { ...prevData.data, ...newData };
-    await userData.set("user", {data: newData});
+    await userData.set("user", { data: newData });
     global(newData);
     // Initialization homescreen [iOS fix]
-    if (load) {await newsAll(newData, Date.now(), null, null, global, null, 0)};
+    if (load) {
+      await newsAll(newData, Date.now(), null, null, global, null, 0);
+    }
     // Starting the app
-    if (setSplash) {setTimeout(() => setSplash(false), 1200)};
+    if (setSplash) {
+      setTimeout(() => setSplash(false), 1200);
+    }
   }
 
   try {
@@ -44,9 +50,7 @@ export async function auth(global, setSplash, load) {
       },
     });
     const json = await response.json();
-    json?.errors || json?.message
-      ? error(json)
-      : created(json);
+    json?.errors || json?.message ? error(json) : created(json);
 
     console.log(json);
   } catch (e) {

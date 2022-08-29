@@ -7,6 +7,7 @@ import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsSetting } from "../../data";
+import { Strings } from "../../storage/strings";
 
 export const NewsSetting = ({ route, navigation }) => {
   const { type } = route.params;
@@ -37,12 +38,12 @@ export const NewsSetting = ({ route, navigation }) => {
       <NewsHeader
         lIco={<BackBtn />}
         lEv={() => saveBack()}
-        tTxt0="Настройки ленты"
+        tTxt0={Strings().news_s_t}
       />
       <View style={styles.main}>
-        <Text style={styles.upperTitle}>ЗАПИСИ ОТ</Text>
+        <Text style={styles.upperTitle}>{Strings().news_s_p}</Text>
         <View style={styles.field}>
-          <Text style={styles.fieldTitle}>Планирующих</Text>
+          <Text style={styles.fieldTitle}>{Strings().news_s_pl}</Text>
           <Switch
             trackColor={{ false: switcher.false, true: switcher.true }}
             thumbColor="white"
@@ -53,11 +54,9 @@ export const NewsSetting = ({ route, navigation }) => {
             value={set.from_planing}
           />
         </View>
-        <Text style={styles.fieldSubTitle}>
-          Вы будете видеть записи от планирующих беременность
-        </Text>
+        <Text style={styles.fieldSubTitle}>{Strings().news_s_plD}</Text>
         <View style={styles.field}>
-          <Text style={styles.fieldTitle}>Беременных</Text>
+          <Text style={styles.fieldTitle}>{Strings().news_s_pr}</Text>
           <Switch
             trackColor={{ false: switcher.false, true: switcher.true }}
             thumbColor="white"
@@ -68,11 +67,9 @@ export const NewsSetting = ({ route, navigation }) => {
             value={set.from_pregnant}
           />
         </View>
-        <Text style={styles.fieldSubTitle}>
-          Краткий текст, описание данного фильтра
-        </Text>
+        <Text style={styles.fieldSubTitle}>{Strings().news_s_prD}</Text>
         <View style={styles.field}>
-          <Text style={styles.fieldTitle}>Мам</Text>
+          <Text style={styles.fieldTitle}>{Strings().news_s_mo}</Text>
           <Switch
             trackColor={{ false: switcher.false, true: switcher.true }}
             thumbColor="white"
@@ -81,9 +78,7 @@ export const NewsSetting = ({ route, navigation }) => {
             value={set.from_mom}
           />
         </View>
-        <Text style={styles.fieldSubTitle}>
-          Все тот же небольшой текст, с описанием
-        </Text>
+        <Text style={styles.fieldSubTitle}>{Strings().news_s_moD}</Text>
       </View>
       <BottomShadow />
     </ImageBackground>

@@ -18,6 +18,7 @@ import { Edit } from "../../../assets/SVGprofile";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
 import { userEdit } from "../../data";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -49,7 +50,7 @@ export const ProfileEditScreen = ({ navigation }) => {
         <NewsHeader
           lIco={<BackBtn />}
           lEv={() => navigation.goBack()}
-          tTxt0="Данные профиля"
+          tTxt0={Strings().pe_ti}
           rIco={<Check />}
           rEv={() => userEdit(globalData, data, global, assets ? assets : null)}
         />
@@ -102,11 +103,11 @@ export const ProfileEditScreen = ({ navigation }) => {
                       { fontSize: 18, marginBottom: 15 },
                     ]}
                   >
-                    Изменение имени
+                    {Strings().pe_ne_ti}
                   </Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="Ваше имя"
+                    placeholder={Strings().pe_ne_ph}
                     placeholderTextColor={COLORS.gray1}
                     onChangeText={(txt) => setData({ ...data, name: txt })}
                     maxLength={30}
@@ -119,7 +120,9 @@ export const ProfileEditScreen = ({ navigation }) => {
                       userEdit(globalData, data, global);
                     }}
                   >
-                    <Text style={styles.settingsBtnTxt}>Сохранить</Text>
+                    <Text style={styles.settingsBtnTxt}>
+                      {Strings().set_ad_sv}
+                    </Text>
                   </TouchableOpacity>
                   <Text
                     style={[styles.settingsBtnTxt, { marginTop: 15 }]}
@@ -128,7 +131,7 @@ export const ProfileEditScreen = ({ navigation }) => {
                       setData({ ...data, name: undefined });
                     }}
                   >
-                    Отменить
+                    {Strings().set_st_ca}
                   </Text>
                 </View>
               </View>
@@ -164,11 +167,11 @@ export const ProfileEditScreen = ({ navigation }) => {
                       { fontSize: 18, marginBottom: 15 },
                     ]}
                   >
-                    Изменение никнейма
+                    {Strings().pe_ni_ti}
                   </Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="Ваш новый никнейм"
+                    placeholder={Strings().pe_ni_ph}
                     placeholderTextColor={COLORS.gray1}
                     onChangeText={(txt) => setData({ ...data, username: txt })}
                     maxLength={30}
@@ -181,7 +184,9 @@ export const ProfileEditScreen = ({ navigation }) => {
                       userEdit(globalData, data, global);
                     }}
                   >
-                    <Text style={styles.settingsBtnTxt}>Сохранить</Text>
+                    <Text style={styles.settingsBtnTxt}>
+                      {Strings().set_ad_sv}
+                    </Text>
                   </TouchableOpacity>
                   <Text
                     style={[styles.settingsBtnTxt, { marginTop: 15 }]}
@@ -190,13 +195,13 @@ export const ProfileEditScreen = ({ navigation }) => {
                       setData({ ...data, username: undefined });
                     }}
                   >
-                    Отменить
+                    {Strings().set_st_ca}
                   </Text>
                 </View>
               </View>
             </Modal>
           </TouchableOpacity>
-          <Text style={styles.title}>Семья</Text>
+          <Text style={styles.title}>{Strings().pe_fa}</Text>
           <ScrollView
             style={styles.family}
             horizontal
@@ -222,7 +227,7 @@ export const ProfileEditScreen = ({ navigation }) => {
                         },
                       ]}
                     >
-                      {`Добавить\nчлена семьи`}
+                      {Strings().pe_ac}
                     </Text>
                   </TouchableOpacity>
                 </View>

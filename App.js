@@ -1,6 +1,6 @@
-import React from 'react';
-import {StateProvider} from './src/provider';
-import {AppNavigation} from './src/navigation/AppNavigation';
+import React from "react";
+import { StateProvider } from "./src/provider";
+import { AppNavigation } from "./src/navigation/AppNavigation";
 
 const App = () => {
   // [Initial state]
@@ -10,7 +10,7 @@ const App = () => {
   // [Reducer]
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'changeData':
+      case "changeData":
         return {
           ...state,
           globalData: action.newGlobalData,

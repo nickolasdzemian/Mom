@@ -7,6 +7,8 @@ import {
   CalendarScreen,
   CalendarPostScreen,
   CalendarAllPostsScreen,
+  ChannelScreen,
+  NewsPost,
 } from "../screens";
 
 const StackLibrary = createNativeStackNavigator();
@@ -28,6 +30,16 @@ export function LibraryStack() {
         <StackLibrary.Screen
           name="CalendarScreen"
           component={CalendarScreen}
+          options={{ headerShown: false }}
+        />
+        <StackLibrary.Screen
+          name="ChannelScreen"
+          component={ChannelScreen}
+          options={{ headerShown: false }}
+        />
+        <StackLibrary.Screen
+          name="NewsPost"
+          component={NewsPost}
           options={{ headerShown: false }}
         />
         <StackLibrary.Screen

@@ -5,7 +5,14 @@ import React, {
   useState,
   useLayoutEffect,
 } from "react";
-import { ImageBackground, Image, View, Text, Alert } from "react-native";
+import {
+  ImageBackground,
+  Image,
+  View,
+  Text,
+  Alert,
+  KeyboardAvoidingView,
+} from "react-native";
 import {
   GiftedChat,
   Send,
@@ -13,11 +20,12 @@ import {
   InputToolbar,
 } from "react-native-gifted-chat";
 import { styles } from "./styles";
-import { bg_blue, window } from "../../theme/main";
+import { bg_blue, window, OS } from "../../theme/main";
 import { BackBtn, Lines } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { getUser } from "../../data";
+import { Strings } from "../../storage/strings";
 
 import { auth, db } from "../../firebase";
 import {
@@ -146,7 +154,7 @@ export const ChatOnceScreen = ({ route, navigation }) => {
       GiftedChat.append(previousMessages, messages)
     );
     const { _id, createdAt, text, user } = messages[0];
-    console.log(_id, createdAt, text, user)
+    console.log(_id, createdAt, text, user);
     addDoc(collection(db, "chats", "chats", chatID), {
       _id,
       createdAt,
@@ -160,38 +168,45 @@ export const ChatOnceScreen = ({ route, navigation }) => {
       <NewsHeader
         lIco={<BackBtn />}
         lEv={() => navigation.goBack()}
-        tTxt0={uName ? uName : "Чат"}
+        tTxt0={uName ? uName : Strings().chat_t}
         rIco={<Lines />}
       />
-      <View style={styles.content}>
-        <GiftedChat
-          messages={messages}
-          showAvatarForEveryMessage={false}
-          onSend={(messages) => onSend(messages)}
-          onPressAvatar={() => showUser()}
-          renderMessageText={(props) => renderMessageText(props)}
-          renderBubble={(props) => renderBubble(props)}
-          renderInputToolbar={(props) => renderInputToolbar(props)}
-          isCustomViewBottom={true}
-          listViewProps={{
-            showsVerticalScrollIndicator: false,
-            width: window.width * 0.94,
-            marginTop: -(window.height * 0.065),
-            marginBottom: 50,
-            alignSelf: "center",
-          }}
-          user={{
-            _id: auth?.currentUser?.email,
-            name: auth?.currentUser?.displayName,
-            avatar: auth?.currentUser?.photoURL
-              ? auth?.currentUser?.photoURL
-              : "",
-          }}
-          placeholder="Ваше сообщение..."
-          textInputProps={{ returnKeyType: "send" }}
-          textInputStyle={styles.msgInputTxt}
-        />
-      </View>
+      <KeyboardAvoidingView
+        behavior={"position"}
+        //enabled={OS ? false : true}
+        style={{ flex: 1, marginBottom: !OS ? 75 : 0 }}
+      >
+        <View style={styles.content}>
+          <GiftedChat
+            messages={messages}
+            showAvatarForEveryMessage={false}
+            onSend={(messages) => onSend(messages)}
+            onPressAvatar={() => showUser()}
+            renderMessageText={(props) => renderMessageText(props)}
+            renderBubble={(props) => renderBubble(props)}
+            renderInputToolbar={(props) => renderInputToolbar(props)}
+            isCustomViewBottom={true}
+            isKeyboardInternallyHandled={false}
+            listViewProps={{
+              showsVerticalScrollIndicator: false,
+              width: window.width * 0.94,
+              marginTop: -(window.height * 0.065),
+              marginBottom: !OS ? 10 : 30,
+              alignSelf: "center",
+            }}
+            user={{
+              _id: auth?.currentUser?.email,
+              name: auth?.currentUser?.displayName,
+              avatar: auth?.currentUser?.photoURL
+                ? auth?.currentUser?.photoURL
+                : "",
+            }}
+            placeholder={Strings().chat_p}
+            textInputProps={{ returnKeyType: "send" }}
+            textInputStyle={styles.msgInputTxt}
+          />
+        </View>
+      </KeyboardAvoidingView>
       <BottomShadow />
     </ImageBackground>
   );

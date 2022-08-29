@@ -9,6 +9,7 @@ import {
   Modal,
   TextInput,
   Alert,
+  DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
 import { COLORS, bg_blue } from "../../theme/main";
@@ -19,8 +20,10 @@ import { useStateValue } from "../../provider";
 import { logout, userEdit, userNewPassword } from "../../data";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import { userLocale } from "../../storage/locale";
+import { Strings } from "../../storage/strings";
 
-const states = ["Беременна", "Мама", "Планирую беременность"];
+const states = [Strings().set_st_s1, Strings().set_st_s2, Strings().set_st_s3];
 
 export const ProfileSettings = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -36,6 +39,7 @@ export const ProfileSettings = ({ navigation }) => {
     email: false,
     location: false,
     status: false,
+    lang: false,
   });
   const [data, setData] = React.useState({
     oldpswrd: null,
@@ -115,18 +119,94 @@ export const ProfileSettings = ({ navigation }) => {
     }
   }
 
+  async function lang(locale) {
+    await userLocale.set("lang", locale);
+    DeviceEventEmitter.emit("event.locale", locale);
+    DeviceEventEmitter.emit("event.updateProfile", true);
+    setTimeout(() => {
+      navigation.goBack();
+    }, 100);
+    return Strings();
+  }
+
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <NewsHeader lIco={<BackBtn />} lEv={() => saveBack()} tTxt0="Настройки" />
+      <NewsHeader
+        lIco={<BackBtn />}
+        lEv={() => saveBack()}
+        tTxt0={Strings().set_ti}
+      />
       <ScrollView style={[styles.main, { marginTop: -25 }]}>
         <View style={styles.block}>
           <TouchableOpacity style={styles.settingsBtn}>
-            <Text style={styles.settingsBtnTxt}>Приватность</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_pr}</Text>
             <ChevronRight />
           </TouchableOpacity>
           <View style={styles.divider} />
+          <TouchableOpacity
+            style={styles.settingsBtn}
+            onPress={() => setModals({ ...modals, lang: !modals.lang })}
+          >
+            <Text style={styles.settingsBtnTxt}>{Strings().set_lan}</Text>
+            <View style={styles.settingValue}>
+              <ChevronRight />
+            </View>
+          </TouchableOpacity>
+
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modals.lang}
+            onRequestClose={() => {
+              setModals({ ...modals, lang: false });
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text
+                  style={[
+                    styles.settingsBtnTxt,
+                    { fontSize: 18, marginBottom: 15 },
+                  ]}
+                >
+                  {Strings().set_lan_ti}
+                </Text>
+                <TouchableOpacity
+                  style={[styles.modalBtn, { marginTop: 15 }]}
+                  onPress={() => {
+                    lang("ru");
+                    setModals({ ...modals, lang: false });
+                  }}
+                >
+                  <Text style={styles.settingsBtnTxt}>
+                    {Strings().set_lan_ru}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.modalBtn, { marginTop: 15 }]}
+                  onPress={() => {
+                    lang("uk");
+                    setModals({ ...modals, lang: false });
+                  }}
+                >
+                  <Text style={styles.settingsBtnTxt}>
+                    {Strings().set_lan_ua}
+                  </Text>
+                </TouchableOpacity>
+                <Text
+                  style={[styles.settingsBtnTxt, { marginTop: 15 }]}
+                  onPress={() => {
+                    setModals({ ...modals, lang: false });
+                  }}
+                >
+                  {Strings().set_st_ca}
+                </Text>
+              </View>
+            </View>
+          </Modal>
+          <View style={styles.divider} />
           <TouchableOpacity style={styles.settingsBtn}>
-            <Text style={styles.settingsBtnTxt}>Push Уведомления</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_pu}</Text>
             <ChevronRight />
           </TouchableOpacity>
         </View>
@@ -135,12 +215,12 @@ export const ProfileSettings = ({ navigation }) => {
             style={styles.settingsBtn}
             onPress={() => navi("ProfileEdit")}
           >
-            <Text style={styles.settingsBtnTxt}>Данные профиля</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_da}</Text>
             <ChevronRight />
           </TouchableOpacity>
           <View style={styles.divider} />
           <TouchableOpacity style={styles.settingsBtn}>
-            <Text style={styles.settingsBtnTxt}>Семья</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_fa}</Text>
             <ChevronRight />
           </TouchableOpacity>
           <View style={styles.divider} />
@@ -148,7 +228,7 @@ export const ProfileSettings = ({ navigation }) => {
             style={styles.settingsBtn}
             onPress={() => setModals({ ...modals, status: !modals.status })}
           >
-            <Text style={styles.settingsBtnTxt}>Мой статус</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_st}</Text>
             <View style={styles.settingValue}>
               <Text style={styles.settingValueTxt}>{parseStatus()}</Text>
               <ChevronRight />
@@ -171,7 +251,7 @@ export const ProfileSettings = ({ navigation }) => {
                     { fontSize: 18, marginBottom: 15 },
                   ]}
                 >
-                  Выберите Ваш статус:
+                  {Strings().set_st_ti}
                 </Text>
                 {states.map((item) => (
                   <TouchableOpacity
@@ -192,7 +272,7 @@ export const ProfileSettings = ({ navigation }) => {
                     setData({ ...data, status: 0 });
                   }}
                 >
-                  Отменить
+                  {Strings().set_st_ca}
                 </Text>
               </View>
             </View>
@@ -202,7 +282,7 @@ export const ProfileSettings = ({ navigation }) => {
             style={styles.settingsBtn}
             onPress={() => setModals({ ...modals, location: !modals.location })}
           >
-            <Text style={styles.settingsBtnTxt}>Местоположение</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_ad}</Text>
             <View style={styles.settingValue}>
               <Text style={styles.settingValueTxt}>
                 {globalData.user?.city}
@@ -227,11 +307,11 @@ export const ProfileSettings = ({ navigation }) => {
                     { fontSize: 18, marginBottom: 15 },
                   ]}
                 >
-                  Изменение адреса
+                  {Strings().set_ad_ti}
                 </Text>
                 <TextInput
                   style={styles.input}
-                  placeholder="Новый адрес"
+                  placeholder={Strings().set_ad_pl}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, location: txt })}
                   maxLength={30}
@@ -245,7 +325,9 @@ export const ProfileSettings = ({ navigation }) => {
                     edit();
                   }}
                 >
-                  <Text style={styles.settingsBtnTxt}>Сохранить</Text>
+                  <Text style={styles.settingsBtnTxt}>
+                    {Strings().set_ad_sv}
+                  </Text>
                 </TouchableOpacity>
                 <Text
                   style={[styles.settingsBtnTxt, { marginTop: 15 }]}
@@ -254,7 +336,7 @@ export const ProfileSettings = ({ navigation }) => {
                     setData({ ...data, location: "" });
                   }}
                 >
-                  Отменить
+                  {Strings().set_st_ca}
                 </Text>
               </View>
             </View>
@@ -265,7 +347,7 @@ export const ProfileSettings = ({ navigation }) => {
             style={styles.settingsBtn}
             onPress={() => setModals({ ...modals, email: !modals.email })}
           >
-            <Text style={styles.settingsBtnTxt}>E-mail</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_em}</Text>
             <View style={styles.settingValue}>
               <Text style={styles.settingValueTxt}>
                 {globalData?.user.email}
@@ -290,11 +372,11 @@ export const ProfileSettings = ({ navigation }) => {
                     { fontSize: 18, marginBottom: 15 },
                   ]}
                 >
-                  Изменение почты
+                  {Strings().set_em_ti}
                 </Text>
                 <TextInput
                   style={styles.input}
-                  placeholder="Новый адрес эл.почты"
+                  placeholder={Strings().set_em_np}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, email0: txt })}
                   maxLength={30}
@@ -303,7 +385,7 @@ export const ProfileSettings = ({ navigation }) => {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Подтвердите новый адрес"
+                  placeholder={Strings().set_em_rp}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, email1: txt })}
                   maxLength={30}
@@ -317,7 +399,9 @@ export const ProfileSettings = ({ navigation }) => {
                     validate("email");
                   }}
                 >
-                  <Text style={styles.settingsBtnTxt}>Сохранить</Text>
+                  <Text style={styles.settingsBtnTxt}>
+                    {Strings().set_ad_sv}
+                  </Text>
                 </TouchableOpacity>
                 <Text
                   style={[styles.settingsBtnTxt, { marginTop: 15 }]}
@@ -326,7 +410,7 @@ export const ProfileSettings = ({ navigation }) => {
                     setData({ ...data, email0: "", email1: "" });
                   }}
                 >
-                  Отменить
+                  {Strings().set_st_ca}
                 </Text>
               </View>
             </View>
@@ -336,7 +420,7 @@ export const ProfileSettings = ({ navigation }) => {
             style={styles.settingsBtn}
             onPress={() => setModals({ ...modals, pswrd: !modals.pswrd })}
           >
-            <Text style={styles.settingsBtnTxt}>Пароль</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_ps}</Text>
             <ChevronRight />
           </TouchableOpacity>
 
@@ -356,11 +440,11 @@ export const ProfileSettings = ({ navigation }) => {
                     { fontSize: 18, marginBottom: 15 },
                   ]}
                 >
-                  Изменение пароля
+                  {Strings().set_ps_ti}
                 </Text>
                 <TextInput
                   style={styles.input}
-                  placeholder="Ваш текущий пароль"
+                  placeholder={Strings().set_ps_op}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, oldpswrd: txt })}
                   maxLength={30}
@@ -369,7 +453,7 @@ export const ProfileSettings = ({ navigation }) => {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Ваш новый пароль"
+                  placeholder={Strings().set_ps_n1}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, pswrd0: txt })}
                   maxLength={30}
@@ -379,7 +463,7 @@ export const ProfileSettings = ({ navigation }) => {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Подтвердите новый пароль"
+                  placeholder={Strings().set_ps_n2}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, pswrd1: txt })}
                   maxLength={30}
@@ -394,7 +478,9 @@ export const ProfileSettings = ({ navigation }) => {
                     validate("pswrd");
                   }}
                 >
-                  <Text style={styles.settingsBtnTxt}>Сохранить</Text>
+                  <Text style={styles.settingsBtnTxt}>
+                    {Strings().set_ad_sv}
+                  </Text>
                 </TouchableOpacity>
                 <Text
                   style={[styles.settingsBtnTxt, { marginTop: 15 }]}
@@ -403,7 +489,7 @@ export const ProfileSettings = ({ navigation }) => {
                     setData({ ...data, pswrd0: "", pswrd1: "" });
                   }}
                 >
-                  Отменить
+                  {Strings().set_st_ca}
                 </Text>
               </View>
             </View>
@@ -414,14 +500,14 @@ export const ProfileSettings = ({ navigation }) => {
             style={styles.settingsBtn}
             onPress={() => navi("Help")}
           >
-            <Text style={styles.settingsBtnTxt}>Помощь и поддержка</Text>
+            <Text style={styles.settingsBtnTxt}>{Strings().set_he}</Text>
             <ChevronRight />
           </TouchableOpacity>
         </View>
-        <View style={styles.block}>
+        <View style={[styles.block, { marginBottom: 170 }]}>
           <TouchableOpacity style={styles.settingsBtn} onPress={() => out()}>
             <Text style={[styles.settingsBtnTxt, { color: color }]}>
-              Выйти из аккаунта
+              {Strings().set_ex}
             </Text>
             <ChevronRight />
           </TouchableOpacity>

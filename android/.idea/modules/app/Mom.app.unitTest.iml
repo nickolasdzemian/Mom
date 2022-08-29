@@ -25,6 +25,7 @@
     <content url="file://$MODULE_DIR$/../../../app/src/testRelease" />
     <orderEntry type="jdk" jdkName="Android API 31 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Mom.react-native-doc-viewer.main" scope="TEST" />
     <orderEntry type="module" module-name="Mom.react-native-pager-view.main" scope="TEST" />
     <orderEntry type="module" module-name="Mom.react-native-async-storage_async-storage.main" scope="TEST" />
     <orderEntry type="module" module-name="Mom.react-native-community_checkbox.main" scope="TEST" />

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { COLORS, BUTTON, BLUETXT, fonts, window } from "../../theme/main";
+import { COLORS, BUTTON, BLUETXT, fonts, window, OS } from "../../theme/main";
 
 export const styles = StyleSheet.create({
   main: {
@@ -31,22 +31,24 @@ export const styles = StyleSheet.create({
   },
   msgInputContainer: {
     alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
+    //justifyContent: "center",
+    //alignItems: "center",
     width: window.width, //asd
     // height: 80,
     backgroundColor: COLORS.gray_buttons,
     padding: 10,
     paddingBottom: window.height * 0.15,
-    marginBottom: -90,
+    marginBottom: !OS ? -(window.height * 0.15) : -(window.height * 0.12),
+    // marginBottom: -120,
   },
   msgInputTxt: {
-    width: window.width * 0.90,
+    width: window.width * 0.9,
     margin: 0,
     height: 60,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
+    color: COLORS.black_txt,
   },
   sendBtn: {
     height: 40,
@@ -72,7 +74,6 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.gray_buttons,
   },
 
-  
   // Other
   libTitle: {
     ...BLUETXT,

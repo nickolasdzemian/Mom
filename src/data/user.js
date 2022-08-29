@@ -5,7 +5,11 @@ export async function getUser(token, username, navigation, myUname) {
   const URL = url + "user/profile/" + username;
 
   async function created(json) {
-    navigation.navigate("UserScreen", { info: json.data, token: token, myUname: myUname });
+    navigation.navigate("UserScreen", {
+      info: json.data,
+      token: token,
+      myUname: myUname,
+    });
   }
 
   try {

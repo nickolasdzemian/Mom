@@ -10,6 +10,7 @@ import {
 import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
 import { authIcons } from "../../../assets/auth/media";
+import { Strings } from "../../storage/strings";
 
 export const StatusScreen = ({ navigation }) => {
   const route = (r) => {
@@ -28,21 +29,19 @@ export const StatusScreen = ({ navigation }) => {
         <Image style={styles.smoky} source={authIcons.smoky} />
       </View>
       <View style={styles.center}>
-        <Text style={styles.title}>Какой у вас статус?</Text>
-        <Text style={styles.subTitle}>
-          Здесь будет краткое описание данного экрана. Несколько предложений!{" "}
-        </Text>
+        <Text style={styles.title}>{Strings().reg_hto}</Text>
+        <Text style={styles.subTitle}>{Strings().reg_htoDesc}</Text>
         <TouchableOpacity
           style={[styles.btn3, { marginTop: 45 }]}
           onPress={() => route("Preg")}
         >
-          <Text style={styles.btnTXT}>Беременна</Text>
+          <Text style={styles.btnTXT}>{Strings().reg_sP}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn3} onPress={() => route("Child")}>
-          <Text style={styles.btnTXT}>Уже мама</Text>
+          <Text style={styles.btnTXT}>{Strings().reg_sM}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn3} onPress={() => route("Reg")}>
-          <Text style={styles.btnTXT}>Планирую</Text>
+          <Text style={styles.btnTXT}>{Strings().reg_sN}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.bottom}>

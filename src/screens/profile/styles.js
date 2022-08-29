@@ -253,5 +253,4 @@ export const styles = StyleSheet.create({
     ...BLUETXT,
     color: COLORS.black1,
   },
-
 });

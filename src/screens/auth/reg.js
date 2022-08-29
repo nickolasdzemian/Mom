@@ -14,6 +14,7 @@ import { authIcons } from "../../../assets/auth/media";
 import { YellowButton } from "../../components";
 import { registration } from "../../data";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 export const RegistrationScreen = ({ route, navigation }) => {
   //alert(window.height)
@@ -50,13 +51,11 @@ export const RegistrationScreen = ({ route, navigation }) => {
           <Image style={styles.smoky2} source={authIcons.smoky2} />
         </View>
         <View style={[styles.center, { flex: 0.7 }]}>
-          <Text style={styles.title}>Создаем аккаунт</Text>
-          <Text style={styles.subTitle}>
-            Здесь будет краткое описание данного экрана. Несколько предложений!{" "}
-          </Text>
+          <Text style={styles.title}>{Strings().reg_acc_c}</Text>
+          <Text style={styles.subTitle}>{Strings().reg_acc_cd}</Text>
           <TextInput
             style={[styles.input, { marginTop: 45 }]}
-            placeholder="Имя"
+            placeholder={Strings().reg_acN}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, name: txt })}
             maxLength={30}
@@ -66,7 +65,7 @@ export const RegistrationScreen = ({ route, navigation }) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Город"
+            placeholder={Strings().reg_acc_cc}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, city: txt })}
             maxLength={30}
@@ -77,7 +76,7 @@ export const RegistrationScreen = ({ route, navigation }) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Эл. почта"
+            placeholder={Strings().reg_acc_ce}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, email: txt })}
             maxLength={30}
@@ -88,7 +87,7 @@ export const RegistrationScreen = ({ route, navigation }) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Пароль"
+            placeholder={Strings().reg_acc_cp}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, pswrd: txt })}
             maxLength={30}
@@ -99,31 +98,32 @@ export const RegistrationScreen = ({ route, navigation }) => {
             onBlur={() => setFocus(false)}
           />
           <YellowButton
-            txt="Создать аккаунт"
+            txt={Strings().reg_acc_cg}
             // route="Reg"
             style={{ marginTop: 45 }}
             nav={navigation}
             event={() => registration(data, global)}
           />
         </View>
-        {!focus ?
-        <View
-          style={[
-            styles.bottom,
-            {
-              marginTop: 50,
-              marginBottom:
-              window.height > 700 || window.width > 375
-                  ? window.height / 1.09 - window.height
-                  : window.height / 1.35 - window.height,
-            },
-          ]}
-        >
-          <Image style={styles.bottomimg} source={authIcons.bottomimg} />
-          <Image style={styles.star3} source={authIcons.star3} />
-          <Image style={styles.star4} source={authIcons.star4} />
-          <Image style={styles.pchel} source={authIcons.pchel} />
-        </View> : null}
+        {!focus ? (
+          <View
+            style={[
+              styles.bottom,
+              {
+                marginTop: 50,
+                marginBottom:
+                  window.height > 700 || window.width > 375
+                    ? window.height / 1.09 - window.height
+                    : window.height / 1.35 - window.height,
+              },
+            ]}
+          >
+            <Image style={styles.bottomimg} source={authIcons.bottomimg} />
+            <Image style={styles.star3} source={authIcons.star3} />
+            <Image style={styles.star4} source={authIcons.star4} />
+            <Image style={styles.pchel} source={authIcons.pchel} />
+          </View>
+        ) : null}
       </KeyboardAvoidingView>
     </ImageBackground>
   );

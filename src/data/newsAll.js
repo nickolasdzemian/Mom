@@ -8,7 +8,7 @@ export async function newsAll(
   setNext,
   global,
   searchW,
-  type = 0,
+  type = 0
 ) {
   const types = ["all", "subscribers", "channels"];
   let page = next ? next : "?page=1";

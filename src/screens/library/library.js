@@ -15,6 +15,7 @@ import { Cloud1, Cloud2, Cloud3 } from "../../../assets/SVGLibrary";
 import { NewsHeader, BottomShadow } from "../../components";
 import { channelsAll, libraryGet, getUser } from "../../data";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 const test = require("../../../assets/library/cal.png");
 const sampleMomIco = require("../../../assets/library/samplem.jpeg");
@@ -44,7 +45,7 @@ const sampleBlogs = [
   { name: "Петрович", img: sampleBlogIco },
 ];
 
-const clouds = [<Cloud1/>, <Cloud2/>, <Cloud3/>];
+const clouds = [<Cloud1 />, <Cloud2 />, <Cloud3 />];
 
 export const LibraryScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -62,6 +63,10 @@ export const LibraryScreen = ({ navigation }) => {
     );
   }
 
+  function showChannel(uuid, title) {
+    navigation.navigate("ChannelScreen", { uuid: uuid, title: title });
+  }
+
   React.useEffect(() => {
     channelsAll(token, setChannels);
     libraryGet(token, setCalendars);
@@ -69,13 +74,16 @@ export const LibraryScreen = ({ navigation }) => {
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <NewsHeader lIco={<BackBtn />} tTxt0="Библиотека" />
+      <NewsHeader lIco={<BackBtn />} tTxt0={Strings().lib_ti} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <Text style={styles.libTitle}>Каналы</Text>
+          <Text style={styles.libTitle}>{Strings().lib_ch}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {channels?.map((item, i) => (
-              <TouchableOpacity style={styles.cloud}>
+              <TouchableOpacity
+                style={styles.cloud}
+                onPress={() => showChannel(item.uuid, item.title)}
+              >
                 {clouds[i % 3]}
                 <Text
                   style={styles.inCloud}
@@ -87,7 +95,7 @@ export const LibraryScreen = ({ navigation }) => {
               </TouchableOpacity>
             ))}
           </ScrollView>
-          <Text style={styles.libTitle}>Энциклопедия</Text>
+          <Text style={styles.libTitle}>{Strings().lib_enc}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {calendars?.map((item) => (
               <TouchableOpacity
@@ -112,7 +120,7 @@ export const LibraryScreen = ({ navigation }) => {
             ))}
           </ScrollView>
 
-          <Text style={styles.libTitle}>Новые мамы</Text>
+          <Text style={styles.libTitle}>{Strings().lib_nm}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {sampleMoms?.map((item) => (
               <TouchableOpacity style={styles.calItem}>
@@ -131,7 +139,7 @@ export const LibraryScreen = ({ navigation }) => {
               </TouchableOpacity>
             ))}
           </ScrollView>
-          <Text style={styles.libTitle}>Популярные блоги</Text>
+          <Text style={styles.libTitle}>{Strings().lib_pb}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {sampleBlogs?.map((item) => (
               <TouchableOpacity style={styles.calItem}>

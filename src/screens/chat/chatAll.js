@@ -15,6 +15,7 @@ import { BackBtn, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { getUserChat } from "../../data";
+import { Strings } from "../../storage/strings";
 
 import { db } from "../../firebase";
 import { collection, query, onSnapshot } from "firebase/firestore";
@@ -44,7 +45,7 @@ export const AllChatsScreen = ({ navigation }) => {
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <NewsHeader lIco={<BackBtn />} tTxt0="Чаты" />
+      <NewsHeader lIco={<BackBtn />} tTxt0={Strings().chat_t} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.search}>
           <TouchableOpacity style={styles.searchIco}>
@@ -54,16 +55,19 @@ export const AllChatsScreen = ({ navigation }) => {
             style={styles.searchInput}
             onChangeText={(txt) => setSearch(txt)}
             value={search}
-            placeholder="Поиск по чатам и пользователям"
+            placeholder={Strings().chat_s}
             returnKeyType="search"
             placeholderTextColor={COLORS.gray1}
           />
         </View>
         <View style={styles.content}>
           {users ? (
-            users?.map((item) => (
+            users?.map((item, i) => (
               <TouchableOpacity
-                style={styles.postItem}
+                style={[
+                  styles.postItem,
+                  { marginBottom: i + 1 == users?.length ? 55 : 10 },
+                ]}
                 onPress={() =>
                   navigation.navigate("ChatTo", {
                     uName: item?.username,
@@ -93,7 +97,7 @@ export const AllChatsScreen = ({ navigation }) => {
             ))
           ) : (
             <Text style={[styles.libTitle, styles.noChats]}>
-              Нет активных чатов..
+              {Strings().chat_no}
             </Text>
           )}
         </View>

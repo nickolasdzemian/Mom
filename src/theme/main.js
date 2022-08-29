@@ -66,12 +66,12 @@ export const imageRatio = (url, width = 0) => {
   const image = Image.resolveAssetSource(url);
   const ratio = image.height / image.width;
   const height = ratio * width;
-  return {image, ratio, height};
+  return { image, ratio, height };
 };
 
 export const imageRatioStyle = (url, width = 0) => {
   const image = Image.resolveAssetSource(url);
   const ratio = image.height / image.width;
   const height = ratio * width;
-  return {width, height};
+  return { width, height };
 };

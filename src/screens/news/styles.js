@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 import { COLORS, BUTTON, BLUETXT, OS, fonts, window } from "../../theme/main";
 
 export const switcher = {
-  false: "rgba(120, 120, 128, 0.16)", 
-  true: "rgba(250, 136, 32, 1)"
-}
+  false: "rgba(120, 120, 128, 0.16)",
+  true: "rgba(250, 136, 32, 1)",
+};
 
 export const styles = StyleSheet.create({
   main: {
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
 
   // No comments
   nocomments: {
-    height: 'auto',
+    height: "auto",
   },
   nocommentsTxt: {
     ...BLUETXT,
@@ -119,6 +119,7 @@ export const styles = StyleSheet.create({
   newInput: {
     marginTop: 15,
     height: window.height / 1.8,
+    color: COLORS.black_txt,
   },
   gallery: {
     position: "absolute",
@@ -164,6 +165,59 @@ export const styles = StyleSheet.create({
   checkbox: {
     width: 18,
     height: 18,
-  }
+  },
 
+  // chScreen
+  chHeader: {
+    width: "95%",
+    alignSelf: "center",
+    borderRadius: 10,
+    backgroundColor: "white",
+    padding: 10,
+    // justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  chHeaderImg: {
+    borderRadius: 10,
+    width: "85%",
+    height: "50%",
+  },
+  chTitle: {
+    ...BLUETXT,
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  chDesc: {
+    fontFamily: fonts.Poppins,
+    fontSize: 13,
+    textAlign: "center",
+    marginBottom: 20,
+    color: COLORS.black_txt,
+  },
+  chBtns: {
+    width: "90%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    alignSelf: "center",
+    marginBottom: 25,
+  },
+  chBtn: {
+    height: 45,
+    backgroundColor: COLORS.yellow,
+    borderRadius: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+  },
+  chBtnTxt: {
+    ...BLUETXT,
+  },
 });
