@@ -50,6 +50,7 @@ export const ChannelScreen = ({ route, navigation }) => {
       myUname={globalData?.user.username}
       navigation={navigation}
       isChannel={type == 2}
+      isLast={index + 1 == channelData?.length}
     />
   );
 
@@ -134,7 +135,7 @@ export const ChannelScreen = ({ route, navigation }) => {
   }, []);
 
   const ChannelHeader = () => (
-    <View style={[styles.chHeader, { height: OS ? 500 : undefined }]}>
+    <View style={[styles.chHeader, { height: 450 }]}>
       <Image
         style={styles.chHeaderImg}
         source={ChBaseImg}

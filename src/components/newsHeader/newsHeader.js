@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, TextInput, Modal } from "react-native";
 import { styles } from "./styles";
 import { COLORS } from "../../theme/main";
 import { DropDown } from "../../../assets/SVGnewsHeader";
-import { newsAll } from "../../data";
 import { Strings } from "../../storage/strings";
 
 /**
@@ -16,12 +15,6 @@ import { Strings } from "../../storage/strings";
  * @param {Function} rEv Действие правой иконки хедера.
  * @param {Boolean} sch Есть ли в хедере компонент поиска.
  */
-
-const titles = [
-  Strings().news_h_all,
-  Strings().news_h_sub,
-  Strings().news_h_ch,
-];
 
 export const NewsHeader = ({
   lIco,
@@ -37,6 +30,11 @@ export const NewsHeader = ({
   setFilter,
   updateEv,
 }) => {
+  const titles = [
+    Strings().news_h_all,
+    Strings().news_h_sub,
+    Strings().news_h_ch,
+  ];
   const [modal, setModal] = React.useState(false);
   const [title, setTitle] = React.useState(titles[tTxt]);
 

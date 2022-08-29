@@ -96,7 +96,7 @@ export const PostItem = ({
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.info}>
-          <ThreePoints />
+          <ThreePoints color="white" />
         </TouchableOpacity>
       </View>
       <View style={styles.middle}>

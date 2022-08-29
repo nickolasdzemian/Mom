@@ -3,3 +3,6 @@
 
 // Prod
 export const url = "https://productionumom.store/api/";
+
+// Other urls
+export const feedbackMail = "mailto:info@u-mom.com.ua";

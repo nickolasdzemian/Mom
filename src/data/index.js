@@ -25,3 +25,5 @@ export { librarySinglePost } from "./libraryCalPost";
 export { getUserChat } from "./userChat";
 export { chPostsAll } from "./channelPosts";
 export { chSub } from "./channelSubscribe";
+export { libPop } from "./libraryPop";
+export { libRec } from "./libraryRec";

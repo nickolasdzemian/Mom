@@ -23,9 +23,8 @@ import { auth } from "../../firebase";
 import { userLocale } from "../../storage/locale";
 import { Strings } from "../../storage/strings";
 
-const states = [Strings().set_st_s1, Strings().set_st_s2, Strings().set_st_s3];
-
 export const ProfileSettings = ({ navigation }) => {
+  const states = [Strings().set_st_s1, Strings().set_st_s2, Strings().set_st_s3];
   const [{ globalData }, dispatch] = useStateValue();
   const global = (newData) =>
     dispatch({

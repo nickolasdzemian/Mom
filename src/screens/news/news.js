@@ -72,7 +72,18 @@ export const NewsScreen = ({ navigation }) => {
 
   React.useEffect(() => {
     setNext(null);
-    newsAll(globalData, time, next, setNext, global, null, type);
+    const loadAll = newsAll(
+      globalData,
+      time,
+      next,
+      setNext,
+      global,
+      null,
+      type
+    );
+    return () => {
+      loadAll;
+    };
   }, []);
 
   return (

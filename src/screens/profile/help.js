@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
+  Linking,
 } from "react-native";
 import OpenFile from "react-native-doc-viewer";
 import { styles } from "./styles";
@@ -15,6 +16,7 @@ import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { ChevronRight } from "../../../assets/SVGprofile";
 import { NewsHeader, BottomShadow } from "../../components";
 import { Strings } from "../../storage/strings";
+import { feedbackMail } from "../../data/env";
 
 export const HelpTo = ({ navigation }) => {
   const [loading, setLoading] = React.useState({ policy: false, rules: false });
@@ -59,8 +61,8 @@ export const HelpTo = ({ navigation }) => {
         ],
         (error, url) => {
           if (error) {
-            if (error.slice(0, 8) == 'Activity') {
-              alert('Отсутствует приложение для просмотра PDF!')
+            if (error.slice(0, 8) == "Activity") {
+              alert("Отсутствует приложение для просмотра PDF!");
             }
             setLoading({ policy: false, rules: false });
             console.error(error);
@@ -84,7 +86,10 @@ export const HelpTo = ({ navigation }) => {
       />
       <ScrollView style={[styles.main, { marginTop: -25 }]}>
         <View style={styles.block}>
-          <TouchableOpacity style={styles.settingsBtn}>
+          <TouchableOpacity
+            style={styles.settingsBtn}
+            onPress={() => Linking.openURL(feedbackMail)}
+          >
             <Text style={styles.settingsBtnTxt}>{Strings().set_h_re}</Text>
             <ChevronRight />
           </TouchableOpacity>

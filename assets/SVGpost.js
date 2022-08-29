@@ -30,7 +30,7 @@ export function Clock({ color = colorRef }) {
 
 export function ThreePoints({ color = colorRef }) {
   return (
-    <View style={[styles.view, { width: 17, height: 10, alignSelf: 'center' }]}>
+    <View style={[styles.view, { width: 17, height: 10, alignSelf: "center" }]}>
       <Svg height="100%" width="100%">
         <Circle cx={1.5} cy={1.5} r={1.5} fill={color} />
         <Circle cx={1.5} cy={1.5} r={1.5} fill={color} />

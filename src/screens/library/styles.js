@@ -132,7 +132,7 @@ export const styles = StyleSheet.create({
   },
   postContentTxt: {
     fontFamily: fonts.Poppins,
-    fontSize: 11,
+    fontSize: 13,
     color: COLORS.black_txt,
     marginBottom: 15,
     alignSelf: "center",

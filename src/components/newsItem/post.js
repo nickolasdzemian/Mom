@@ -134,7 +134,7 @@ export const Post = ({
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.info}>
-          <ThreePoints />
+          <ThreePoints color="white" />
         </TouchableOpacity>
       </View>
       <ScrollView

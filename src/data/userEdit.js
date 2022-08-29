@@ -1,16 +1,8 @@
 import { url } from "./env";
 import { Alert } from "react-native";
-import { auth } from "../firebase";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { sec } from "../storage/sec";
+import { getAuth, updateProfile } from "firebase/auth";
 
 export async function userEdit(globalData, data, global, assets) {
-  const token = await sec.get("sec");
   const URL = url + "user/profile";
 
   let formdata = new FormData();

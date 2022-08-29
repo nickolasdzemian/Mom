@@ -27,6 +27,28 @@ export const AllChatsScreen = ({ navigation }) => {
   const [search, setSearch] = React.useState("");
   const [users, setUsers] = React.useState();
 
+  function filler() {
+    let filtered;
+    if (search !== "") {
+      filtered = users.filter((item) => item.name.search(search) != -1);
+      setUsers(filtered);
+    } else {
+      const q = query(collection(db, "user", globalData.user.username, "list"));
+      onSnapshot(q, (snapshot) => {
+        const u = snapshot.docs.map((item) => item.username);
+        if (users?.length !== u?.length) {
+          getUserChat(
+            globalData.token,
+            snapshot.docs.map((doc) => ({
+              username: doc.data()._id,
+            })),
+            setUsers
+          );
+        }
+      });
+    }
+  }
+
   React.useEffect(() => {
     const q = query(collection(db, "user", globalData.user.username, "list"));
     onSnapshot(q, (snapshot) => {
@@ -54,6 +76,7 @@ export const AllChatsScreen = ({ navigation }) => {
           <TextInput
             style={styles.searchInput}
             onChangeText={(txt) => setSearch(txt)}
+            onSubmitEditing={() => filler()}
             value={search}
             placeholder={Strings().chat_s}
             returnKeyType="search"

@@ -25,6 +25,16 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
   const [search, setSearch] = React.useState("");
   const [posts, setPosts] = React.useState();
 
+  function filler() {
+    let filtered;
+    if (search !== "") {
+      filtered = posts.filter((item) => item.title.search(search) != -1);
+      setPosts(filtered);
+    } else {
+      libraryCalendarAllPosts(globalData.token, id, posts, setPosts);
+    }
+  }
+
   React.useEffect(() => {
     libraryCalendarAllPosts(globalData.token, id, posts, setPosts);
   }, []);
@@ -44,6 +54,7 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
           <TextInput
             style={styles.searchInput}
             onChangeText={(txt) => setSearch(txt)}
+            onSubmitEditing={() => filler()}
             value={search}
             placeholder={Strings().cal_all}
             returnKeyType="search"

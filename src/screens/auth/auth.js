@@ -49,7 +49,7 @@ export const SimpleAuthScreen = ({ navigation }) => {
           <Text style={[styles.title, { marginTop: 20 }]}>
             {Strings().acc_sku}
           </Text>
-          <Text style={styles.subTitle}>Введите данные для входа </Text>
+          <Text style={styles.subTitle}>{Strings().acc_data}</Text>
           <TextInput
             style={[styles.input, { marginTop: 45 }]}
             placeholder={Strings().acc_email}

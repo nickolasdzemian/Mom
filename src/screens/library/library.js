@@ -13,37 +13,37 @@ import { bg_blue } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { Cloud1, Cloud2, Cloud3 } from "../../../assets/SVGLibrary";
 import { NewsHeader, BottomShadow } from "../../components";
-import { channelsAll, libraryGet, getUser } from "../../data";
+import { channelsAll, libraryGet, getUser, libRec, libPop } from "../../data";
 import { useStateValue } from "../../provider";
 import { Strings } from "../../storage/strings";
 
 const test = require("../../../assets/library/cal.png");
 const sampleMomIco = require("../../../assets/library/samplem.jpeg");
 const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
-const sampleMoms = [
-  { name: "Евангелина", img: sampleMomIco },
-  { name: "Кристина", img: sampleMomIco },
-  { name: "Карина", img: sampleMomIco },
-  { name: "Виталина", img: sampleMomIco },
-  { name: "Евгения", img: sampleMomIco },
-  { name: "Руслан", img: sampleMomIco },
-  { name: "Анастасия", img: sampleMomIco },
-  { name: "Изабелла", img: sampleMomIco },
-  { name: "Жанна", img: sampleMomIco },
-  { name: "Петрович", img: sampleMomIco },
-];
-const sampleBlogs = [
-  { name: "Евангелина", img: sampleBlogIco },
-  { name: "Кристина", img: sampleBlogIco },
-  { name: "Карина", img: sampleBlogIco },
-  { name: "Виталина", img: sampleBlogIco },
-  { name: "Евгения", img: sampleBlogIco },
-  { name: "Руслан", img: sampleBlogIco },
-  { name: "Анастасия", img: sampleBlogIco },
-  { name: "Изабелла", img: sampleBlogIco },
-  { name: "Жанна", img: sampleBlogIco },
-  { name: "Петрович", img: sampleBlogIco },
-];
+// const sampleMoms = [
+//   { name: "Евангелина", img: sampleMomIco },
+//   { name: "Кристина", img: sampleMomIco },
+//   { name: "Карина", img: sampleMomIco },
+//   { name: "Виталина", img: sampleMomIco },
+//   { name: "Евгения", img: sampleMomIco },
+//   { name: "Руслан", img: sampleMomIco },
+//   { name: "Анастасия", img: sampleMomIco },
+//   { name: "Изабелла", img: sampleMomIco },
+//   { name: "Жанна", img: sampleMomIco },
+//   { name: "Петрович", img: sampleMomIco },
+// ];
+// const sampleBlogs = [
+//   { name: "Евангелина", img: sampleBlogIco },
+//   { name: "Кристина", img: sampleBlogIco },
+//   { name: "Карина", img: sampleBlogIco },
+//   { name: "Виталина", img: sampleBlogIco },
+//   { name: "Евгения", img: sampleBlogIco },
+//   { name: "Руслан", img: sampleBlogIco },
+//   { name: "Анастасия", img: sampleBlogIco },
+//   { name: "Изабелла", img: sampleBlogIco },
+//   { name: "Жанна", img: sampleBlogIco },
+//   { name: "Петрович", img: sampleBlogIco },
+// ];
 
 const clouds = [<Cloud1 />, <Cloud2 />, <Cloud3 />];
 
@@ -51,6 +51,8 @@ export const LibraryScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
   const [channels, setChannels] = React.useState();
   const [calendars, setCalendars] = React.useState();
+  const [rec, setRec] = React.useState();
+  const [pop, setPop] = React.useState();
 
   const token = globalData.token;
 
@@ -70,6 +72,8 @@ export const LibraryScreen = ({ navigation }) => {
   React.useEffect(() => {
     channelsAll(token, setChannels);
     libraryGet(token, setCalendars);
+    libRec(token, setRec);
+    libPop(token, setPop);
   }, []);
 
   return (
@@ -122,11 +126,16 @@ export const LibraryScreen = ({ navigation }) => {
 
           <Text style={styles.libTitle}>{Strings().lib_nm}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {sampleMoms?.map((item) => (
-              <TouchableOpacity style={styles.calItem}>
+            {rec?.map((item) => (
+              <TouchableOpacity
+                style={styles.calItem}
+                onPress={() => showUser(item.username)}
+              >
                 <Image
                   style={styles.momItemImg}
-                  source={item?.image_url ? { uri: item.image_url } : item.img}
+                  source={
+                    item?.avatar_url ? { uri: item.avatar_url } : sampleMomIco
+                  }
                   resizeMode="contain"
                 />
                 <Text
@@ -140,12 +149,21 @@ export const LibraryScreen = ({ navigation }) => {
             ))}
           </ScrollView>
           <Text style={styles.libTitle}>{Strings().lib_pb}</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {sampleBlogs?.map((item) => (
-              <TouchableOpacity style={styles.calItem}>
+          <ScrollView
+            style={{ marginBottom: 75 }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {pop?.map((item) => (
+              <TouchableOpacity
+                style={styles.calItem}
+                onPress={() => showUser(item.username)}
+              >
                 <Image
                   style={styles.momItemImg}
-                  source={item?.image_url ? { uri: item.image_url } : item.img}
+                  source={
+                    item?.avatar_url ? { uri: item.avatar_url } : sampleBlogIco
+                  }
                   resizeMode="contain"
                 />
                 <Text

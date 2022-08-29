@@ -103,7 +103,8 @@ export const styles = StyleSheet.create({
   nocommentsTxt: {
     ...BLUETXT,
     alignSelf: "center",
-    marginTop: "45%",
+    marginTop: "15%",
+    marginBottom: 85,
     //marginLeft: "35%" // for big list only
   },
 
@@ -208,7 +209,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     alignSelf: "center",
-    marginBottom: 25,
+    //marginBottom: 25,
   },
   chBtn: {
     height: 45,

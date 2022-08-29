@@ -32,6 +32,7 @@ import { NewsStack } from "./NewsStack";
 import { ProfileStack } from "./ProfileStack";
 import { LibraryStack } from "./LibraryStack";
 import { ChatStack } from "./ChatStack";
+import { Strings } from "../storage/strings";
 
 // function BlankScreen() {
 //   return (
@@ -58,6 +59,7 @@ export const AppNavigation = () => {
 
   // *** [Initialization, getting and setting all DATA] ***
   React.useEffect(() => {
+    Strings();
     userData.get("user").then((response) => {
       if (response !== undefined && globalData == undefined) {
         authProvider(global, setSplash, true);
