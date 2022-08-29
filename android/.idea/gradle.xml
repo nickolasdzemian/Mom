@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/../node_modules/@react-native-async-storage/async-storage/android" />
             <option value="$PROJECT_DIR$/../node_modules/@react-native-community/checkbox/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-date-picker/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-doc-viewer/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-gradle-plugin" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-image-picker/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-linear-gradient/android" />

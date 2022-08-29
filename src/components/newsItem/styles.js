@@ -1,5 +1,12 @@
 import { StyleSheet } from "react-native";
-import { COLORS, NICKNAME, BUTTON, BLUETXT, fonts, window } from "../../theme/main";
+import {
+  COLORS,
+  NICKNAME,
+  BUTTON,
+  BLUETXT,
+  fonts,
+  window,
+} from "../../theme/main";
 
 export const styles = StyleSheet.create({
   container: {

@@ -1,7 +1,14 @@
 import { url } from "./env";
 import { Alert } from "react-native";
 
-export async function userSubscribe(token, username, sub, setSub, subCount, setSubCount) {
+export async function userSubscribe(
+  token,
+  username,
+  sub,
+  setSub,
+  subCount,
+  setSubCount
+) {
   const URL = url + "user/subscription/" + username;
 
   async function created() {

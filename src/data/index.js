@@ -23,3 +23,5 @@ export { libraryCalWeek } from "./libraryCalWeek";
 export { libraryCalendarAllPosts } from "./libraryCalAllPsts";
 export { librarySinglePost } from "./libraryCalPost";
 export { getUserChat } from "./userChat";
+export { chPostsAll } from "./channelPosts";
+export { chSub } from "./channelSubscribe";

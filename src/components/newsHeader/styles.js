@@ -4,7 +4,7 @@ import { BLUETXT, OS, fonts } from "../../theme/main";
 export const styles = StyleSheet.create({
   // Normal
   header: {
-    width: '100%',
+    width: "100%",
     flexDirection: "row",
     alignContent: "space-between",
     justifyContent: "space-between",
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
 
   // Search
   search: {
-    width: '85%',
+    width: "85%",
     height: 43,
     marginVertical: -1.5,
     paddingLeft: 16,
@@ -58,8 +58,8 @@ export const styles = StyleSheet.create({
 
   // Top dropdown menu
   centeredView: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     // borderColor: "black",
     // borderWidth: 20,
     marginTop: OS ? 65 : 110,
@@ -82,5 +82,5 @@ export const styles = StyleSheet.create({
     fontFamily: OS ? fonts.AlbertThin : fonts.Albert,
     fontWeight: "normal",
     marginVertical: 5,
-  }
+  },
 });

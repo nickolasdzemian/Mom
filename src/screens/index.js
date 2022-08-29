@@ -30,6 +30,7 @@ export { LibraryScreen } from "./library/library";
 export { CalendarScreen } from "./library/calendar";
 export { CalendarPostScreen } from "./library/calendarPost";
 export { CalendarAllPostsScreen } from "./library/calendarAllPosts";
+export { ChannelScreen } from "./news/channelScreen";
 
 // Chat
 export { ChatOnceScreen } from "./chat/chat";

@@ -1,7 +1,13 @@
 import { url } from "./env";
 import { Alert } from "react-native";
 
-export async function commentPost(token, uuid, text, commentsCount, setCommentsCount) {
+export async function commentPost(
+  token,
+  uuid,
+  text,
+  commentsCount,
+  setCommentsCount
+) {
   const URL = url + "comment";
 
   function done() {

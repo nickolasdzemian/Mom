@@ -19,6 +19,7 @@ import { Edit } from "../../../assets/SVGprofile";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
 import { childStore } from "../../data";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -62,7 +63,7 @@ export const ChildAddScreen = ({ navigation }) => {
         <NewsHeader
           lIco={<BackBtn />}
           lEv={() => navigation.goBack()}
-          tTxt0="Член семьи"
+          tTxt0={Strings().cha_ti}
           rIco={<Check />}
           rEv={() => childStore(globalData, data, global, assets, navigation)}
         />
@@ -90,7 +91,7 @@ export const ChildAddScreen = ({ navigation }) => {
             onPress={() => setModals({ ...modals, name: true })}
           >
             <Text style={[styles.name, { marginTop: 0, marginRight: 5 }]}>
-              {data.name ? data.name : "Имя ребенка >"}
+              {data.name ? data.name : Strings().cha_en_ti}
             </Text>
             <Edit />
             <Modal
@@ -109,11 +110,11 @@ export const ChildAddScreen = ({ navigation }) => {
                       { fontSize: 18, marginBottom: 15 },
                     ]}
                   >
-                    Имя ребенка
+                    {Strings().cha_en_ti2}
                   </Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="Введите имя"
+                    placeholder={Strings().cha_en_np}
                     placeholderTextColor={COLORS.gray1}
                     onChangeText={(txt) => setData({ ...data, name: txt })}
                     maxLength={30}
@@ -125,7 +126,9 @@ export const ChildAddScreen = ({ navigation }) => {
                       setModals({ ...modals, name: false });
                     }}
                   >
-                    <Text style={styles.settingsBtnTxt}>Сохранить</Text>
+                    <Text style={styles.settingsBtnTxt}>
+                      {Strings().set_ad_sv}
+                    </Text>
                   </TouchableOpacity>
                   <Text
                     style={[styles.settingsBtnTxt, { marginTop: 15 }]}
@@ -134,7 +137,7 @@ export const ChildAddScreen = ({ navigation }) => {
                       setData({ ...data, name: undefined });
                     }}
                   >
-                    Отменить
+                    {Strings().set_st_ca}
                   </Text>
                 </View>
               </View>
@@ -151,22 +154,23 @@ export const ChildAddScreen = ({ navigation }) => {
               style={[styles.nick, { marginTop: 0, marginRight: 5 }]}
               onPress={() => setModals({ ...modals, birthday: true })}
             >
-              {data.birthday ? data.birthday : "Дата рождения >"}
+              {data.birthday ? data.birthday : Strings().cha_db}
             </Text>
             <Edit />
             <DatePicker
               modal
+              theme="light"
               mode="date"
               open={modals.birthday}
               date={date}
               locale="ru_RU"
-              title="Выберите дату:"
-              confirmText="Сохранить"
+              title={Strings().dp_title}
+              confirmText={Strings().set_ad_sv}
               onConfirm={(date) => {
                 setModals({ ...modals, birthday: false });
                 setData({ ...data, birthday: parsedDate(date) });
               }}
-              cancelText="Отменить"
+              cancelText={Strings().set_st_ca}
               onCancel={() => {
                 setModals({ ...modals, birthday: false });
                 setData({ ...data, birthday: undefined });
@@ -191,7 +195,7 @@ export const ChildAddScreen = ({ navigation }) => {
               ]}
               onPress={() => setData({ ...data, gender: 0 })}
             >
-              <Text style={styles.selTxt}>Мальчик</Text>
+              <Text style={styles.selTxt}>{Strings().reg_s1}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -209,7 +213,7 @@ export const ChildAddScreen = ({ navigation }) => {
               ]}
               onPress={() => setData({ ...data, gender: 1 })}
             >
-              <Text style={styles.selTxt}>Девочка</Text>
+              <Text style={styles.selTxt}>{Strings().reg_s2}</Text>
             </TouchableOpacity>
           </View>
         </View>

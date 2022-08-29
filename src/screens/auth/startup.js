@@ -11,6 +11,7 @@ import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
 import { authIcons } from "../../../assets/auth/media";
 import { YellowButton } from "../../components";
+import { Strings } from "../../storage/strings";
 
 export const StartupScreen = ({ navigation }) => {
   return (
@@ -23,7 +24,7 @@ export const StartupScreen = ({ navigation }) => {
       <View style={styles.center}>
         <Image style={styles.default} source={authIcons.logoC} />
         <YellowButton
-          txt="Создать аккаунт"
+          txt={Strings().acc_create}
           route="Status"
           style={{ marginTop: 30 }}
           nav={navigation}
@@ -33,7 +34,7 @@ export const StartupScreen = ({ navigation }) => {
           style={[styles.btn, { marginTop: 8 }]}
         >
           <Text style={[styles.btnTXT, { color: "#FFF5DC" }]}>
-            У меня уже есть аккаунт
+            {Strings().acc_login}
           </Text>
         </TouchableOpacity>
       </View>

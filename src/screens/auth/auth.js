@@ -14,6 +14,7 @@ import { authIcons } from "../../../assets/auth/media";
 import { YellowButton } from "../../components";
 import { login } from "../../data";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 export const SimpleAuthScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -46,12 +47,12 @@ export const SimpleAuthScreen = ({ navigation }) => {
             source={authIcons.logoC}
           />
           <Text style={[styles.title, { marginTop: 20 }]}>
-            Мы скучали по вам!
+            {Strings().acc_sku}
           </Text>
           <Text style={styles.subTitle}>Введите данные для входа </Text>
           <TextInput
             style={[styles.input, { marginTop: 45 }]}
-            placeholder="Эл. почта"
+            placeholder={Strings().acc_email}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, email: txt })}
             value={data.email}
@@ -61,7 +62,7 @@ export const SimpleAuthScreen = ({ navigation }) => {
           />
           <TextInput
             style={styles.input}
-            placeholder="Пароль"
+            placeholder={Strings().acc_pswrd}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, pswrd: txt })}
             maxLength={30}
@@ -72,7 +73,7 @@ export const SimpleAuthScreen = ({ navigation }) => {
             onBlur={() => setFocus(false)}
           />
           <YellowButton
-            txt="Войти"
+            txt={Strings().acc_enter}
             style={{ marginTop: 45 }}
             nav={navigation}
             event={() => login(data, global)}

@@ -13,11 +13,12 @@ import {
 import { launchImageLibrary } from "react-native-image-picker";
 import { styles } from "./styles";
 import { styles as post } from "../../components/newsItem/styles";
-import { bg_blue, window, OSA } from "../../theme/main";
+import { bg_blue, window, OSA, COLORS } from "../../theme/main";
 import { BackBtn, Check } from "../../../assets/SVGnewsHeader";
 import { Geo, Gallery } from "../../../assets/SVGpost";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -38,7 +39,7 @@ export const NewScreen = ({ navigation }) => {
         <NewsHeader
           lIco={<BackBtn />}
           lEv={() => DeviceEventEmitter.emit("event.newPost", false)}
-          tTxt0="Новая запись"
+          tTxt0={Strings().news_n_t}
           rIco={<Check />}
           rEv={() =>
             navigation.navigate("NewScreenSet", {
@@ -79,7 +80,8 @@ export const NewScreen = ({ navigation }) => {
               setFbtn(window.height / 1.65);
               setFTxt(window.height / 1.8);
             }}
-            placeholder={`Задайте вопрос, поделитесь\nэмоциями, историей или\nпереживаниями ...`}
+            placeholder={Strings().news_n_ph}
+            placeholderTextColor={COLORS.gray1}
           />
           <TouchableOpacity
             style={[styles.gallery, { marginTop: fbtn }]}

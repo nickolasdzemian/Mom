@@ -16,6 +16,7 @@ import { BackBtn, Check } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
 import { channelsAll, newsAdd } from "../../data";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -88,13 +89,13 @@ export const NewScreenSet = ({ route, navigation }) => {
       <NewsHeader
         lIco={<BackBtn />}
         lEv={() => saveBack()}
-        tTxt0="Настройки записи"
+        tTxt0={Strings().news_n_st}
         rIco={<Check />}
         rEv={() => publish()}
       />
       <View style={styles.main}>
         <Text style={[styles.upperTitle, { fontSize: 18 }]}>
-          Опубликовать в:
+          {Strings().news_n_p}
         </Text>
         <View style={[styles.btnCont, { marginTop: 20, marginBottom: 25 }]}>
           <TouchableOpacity
@@ -113,7 +114,7 @@ export const NewScreenSet = ({ route, navigation }) => {
             ]}
             onPress={() => setSet({ ...set, type: !set.type })}
           >
-            <Text style={styles.selTxt2}>Ленту</Text>
+            <Text style={styles.selTxt2}>{Strings().news_n_n}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
@@ -131,16 +132,16 @@ export const NewScreenSet = ({ route, navigation }) => {
             ]}
             onPress={() => setSet({ ...set, type: !set.type })}
           >
-            <Text style={styles.selTxt2}>Канал</Text>
+            <Text style={styles.selTxt2}>{Strings().news_n_ch}</Text>
           </TouchableOpacity>
         </View>
         {!set.type ? (
           <View>
             <Text style={[styles.upperTitle, { fontSize: 18 }]}>
-              Дополнительно:
+              {Strings().news_n_ad}
             </Text>
             <View style={styles.field}>
-              <Text style={styles.fieldTitle}>Отключить комментарии</Text>
+              <Text style={styles.fieldTitle}>{Strings().news_n_oc}</Text>
               <Switch
                 trackColor={{ false: switcher.false, true: switcher.true }}
                 thumbColor="white"
@@ -151,11 +152,9 @@ export const NewScreenSet = ({ route, navigation }) => {
                 value={set.comments_disabled}
               />
             </View>
-            <Text style={styles.fieldSubTitle}>
-              Пользователи не смогут комментировать запись
-            </Text>
+            <Text style={styles.fieldSubTitle}>{Strings().news_n_ocD}</Text>
             <View style={styles.field}>
-              <Text style={styles.fieldTitle}>Скрыть комментарии</Text>
+              <Text style={styles.fieldTitle}>{Strings().news_n_hc}</Text>
               <Switch
                 trackColor={{ false: switcher.false, true: switcher.true }}
                 thumbColor="white"
@@ -166,11 +165,9 @@ export const NewScreenSet = ({ route, navigation }) => {
                 value={set.comments_hidden}
               />
             </View>
-            <Text style={styles.fieldSubTitle}>
-              Только вы видите все комментарии
-            </Text>
+            <Text style={styles.fieldSubTitle}>{Strings().news_n_hcD}</Text>
             <View style={styles.field}>
-              <Text style={styles.fieldTitle}>Только подписчикам</Text>
+              <Text style={styles.fieldTitle}>{Strings().news_n_os}</Text>
               <Switch
                 trackColor={{ false: switcher.false, true: switcher.true }}
                 thumbColor="white"
@@ -181,14 +178,12 @@ export const NewScreenSet = ({ route, navigation }) => {
                 value={set.subscribers_only}
               />
             </View>
-            <Text style={styles.fieldSubTitle}>
-              Запись будет видна только вашим подписчикам
-            </Text>
+            <Text style={styles.fieldSubTitle}>{Strings().news_n_osD}</Text>
           </View>
         ) : (
           <View>
             <Text style={[styles.upperTitle, { fontSize: 18 }]}>
-              Канал для публикации:
+              {Strings().news_n_sCh}
             </Text>
             <FlatList
               data={channels}
@@ -198,9 +193,7 @@ export const NewScreenSet = ({ route, navigation }) => {
               removeClippedSubviews
               refreshing={channels == undefined}
               ListEmptyComponent={
-                <Text style={styles.nocommentsTxt}>
-                  Здесь пока ничего нет..
-                </Text>
+                <Text style={styles.nocommentsTxt}>{Strings().no_data}</Text>
               }
             />
           </View>

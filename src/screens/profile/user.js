@@ -8,7 +8,6 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
-  DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
 import { bg_blue, preg_state, child } from "../../theme/main";
@@ -17,6 +16,7 @@ import { UserThreePoints, Geo } from "../../../assets/SVGpost";
 import { NewsHeader, PostItem, BottomShadow } from "../../components";
 import { userSubscribe, newsUser } from "../../data";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -95,6 +95,7 @@ export const UserScreen = ({ route, navigation }) => {
       myUname={globalData?.user.username}
       navigation={navigation}
       isChannel={type == 2}
+      isLast={index + 1 == news?.length}
     />
   );
 
@@ -120,15 +121,15 @@ export const UserScreen = ({ route, navigation }) => {
         <View style={styles.counters}>
           <View style={styles.border}>
             <Text style={styles.counterTxt}>{info.posts_count}</Text>
-            <Text style={styles.counterSubTxt}>Записей</Text>
+            <Text style={styles.counterSubTxt}>{Strings().pr_pc}</Text>
           </View>
           <View style={styles.center}>
             <Text style={styles.counterTxt}>{subCount}</Text>
-            <Text style={styles.counterSubTxt}>Подписчики</Text>
+            <Text style={styles.counterSubTxt}>{Strings().pr_sc}</Text>
           </View>
           <View style={styles.border}>
             <Text style={styles.counterTxt}>{info.subscriptions_count}</Text>
-            <Text style={styles.counterSubTxt}>Подписки</Text>
+            <Text style={styles.counterSubTxt}>{Strings().pr_ssc}</Text>
           </View>
         </View>
         {info.username != myUname ? (
@@ -140,7 +141,7 @@ export const UserScreen = ({ route, navigation }) => {
               }}
             >
               <Text style={styles.btnTxt}>
-                {sub ? "Отписаться" : "Подписаться"}
+                {sub ? Strings().pr_uuS : Strings().pr_uS}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -149,11 +150,11 @@ export const UserScreen = ({ route, navigation }) => {
                 navigation.navigate("ChatTo", { uName: info.username });
               }}
             >
-              <Text style={styles.btnTxt}>Написать</Text>
+              <Text style={styles.btnTxt}>{Strings().pr_uCh}</Text>
             </TouchableOpacity>
           </View>
         ) : null}
-        <Text style={styles.title}>Семья</Text>
+        <Text style={styles.title}>{Strings().pr_f}</Text>
         <ScrollView
           style={styles.family}
           horizontal
@@ -177,7 +178,12 @@ export const UserScreen = ({ route, navigation }) => {
                 </View>
               </ImageBackground>
               <Text style={styles.pregCountSubTxt}>
-                {info.gestational_age + " неделя, " + "5 дней"}
+                {info.gestational_age +
+                  " " +
+                  Strings().reg_sVw +
+                  ", " +
+                  "5 " +
+                  Strings().pr_udd}
               </Text>
             </View>
           ) : null}
@@ -197,7 +203,7 @@ export const UserScreen = ({ route, navigation }) => {
             </View>
           ) : null}
         </ScrollView>
-        <Text style={styles.title}>Записи</Text>
+        <Text style={styles.title}>{Strings().pr_pcT}</Text>
       </View>
     </View>
   );
@@ -219,7 +225,7 @@ export const UserScreen = ({ route, navigation }) => {
         onEndReachedThreshold={1}
         ListEmptyComponent={
           <View style={styles.nocomments}>
-            <Text style={styles.nocommentsTxt}>Здесь пока ничего нет..</Text>
+            <Text style={styles.nocommentsTxt}>{Strings().no_data}</Text>
           </View>
         }
         ListHeaderComponent={Header}

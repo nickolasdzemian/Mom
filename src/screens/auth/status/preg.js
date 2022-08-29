@@ -6,13 +6,14 @@ import { styles } from "../styles";
 import { bg_blue, window } from "../../../theme/main";
 import { authIcons } from "../../../../assets/auth/media";
 import { YellowButton } from "../../../components";
+import { Strings } from "../../../storage/strings";
 
 export const PregScreen = ({ navigation }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(10);
   const WeekPicker = () => {
     let weeks = [];
     for (let i = 1; i <= 40; i++) {
-      weeks.push([i] + " недель");
+      weeks.push([i] + Strings().reg_sVw);
     }
     return (
       <WheelPicker
@@ -39,13 +40,11 @@ export const PregScreen = ({ navigation }) => {
         <Image style={styles.bottle} source={authIcons.bottle} />
       </View>
       <View style={styles.center}>
-        <Text style={styles.title}>На каком вы сроке?</Text>
-        <Text style={styles.subTitle}>
-          Здесь будет краткое описание данного экрана. Несколько предложений!{" "}
-        </Text>
+        <Text style={styles.title}>{Strings().reg_sVt}</Text>
+        <Text style={styles.subTitle}>{Strings().reg_sVd}</Text>
         {WeekPicker()}
         <YellowButton
-          txt="Продолжить"
+          txt={Strings().reg_sVCC}
           route="Reg"
           style={{ marginTop: 40 }}
           nav={navigation}

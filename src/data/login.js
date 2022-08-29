@@ -2,7 +2,7 @@ import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
 import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from "firebase/auth";
 // import { sec } from '../storage/sec';
 
 export async function login(data, global) {
@@ -11,7 +11,7 @@ export async function login(data, global) {
   const signin = (username) => {
     signInWithEmailAndPassword(auth, data.email, data.pswrd)
       .then((userCredential) => {
-        console.log(userCredential, 'sfjhdghdhsfhzdhzdfhzdfhzdfzdhfh');
+        console.log(userCredential, "user");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -24,7 +24,9 @@ export async function login(data, global) {
     global(json.data);
     await userData.set("user", json);
     // await sec.set("sec", data.pswrd);
-    setTimeout(() => {signin();}, 100);
+    setTimeout(() => {
+      signin();
+    }, 100);
   }
 
   try {

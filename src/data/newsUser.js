@@ -21,13 +21,17 @@ export async function newsUser(
     if (json?.links?.next != null) {
       const num = json.links.next.slice(-5).match(/\d+/g);
       page = `?page=${num[0]}`;
-      setNext ? setNext(page) : DeviceEventEmitter.emit("event.next.user", page);
+      setNext
+        ? setNext(page)
+        : DeviceEventEmitter.emit("event.next.user", page);
     } else {
-      setNext ? setNext(null) : DeviceEventEmitter.emit("event.next.user", null);
+      setNext
+        ? setNext(null)
+        : DeviceEventEmitter.emit("event.next.user", null);
     }
     if (next) {
       feed = [...news, ...feed];
-    };
+    }
     setNews(feed);
   }
 

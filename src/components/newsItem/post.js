@@ -21,6 +21,7 @@ import {
   Reptiler,
 } from "../../../assets/SVGpost";
 import { commentPost, getUser } from "../../data";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -63,9 +64,11 @@ export const Post = ({
   const mm = date.getMinutes();
   date =
     thisDate == day
-      ? "Сегодня"
+      ? Strings().news_p_to
       : parseInt(thisDate, 10) - 1 == day
-      ? `Вчера в ${hh < 10 ? `0${hh}` : hh}:${mm < 10 ? `0${mm}` : mm}`
+      ? `${Strings().news_p_ye}${hh < 10 ? `0${hh}` : hh}:${
+          mm < 10 ? `0${mm}` : mm
+        }`
       : `${day < 10 ? `0${day}` : day}.${mon < 10 ? `0${mon}` : mon}.${yy}, ${
           hh < 10 ? `0${hh}` : hh
         }:${mm < 10 ? `0${mm}` : mm}`;
@@ -88,6 +91,12 @@ export const Post = ({
   function showUser(username) {
     getUser(token, username, navigation, myUname);
   }
+  function showChannel() {
+    navigation.navigate("ChannelScreen", {
+      uuid: item.channel.uuid,
+      title: item.channel.title,
+    });
+  }
 
   return (
     <View
@@ -103,13 +112,13 @@ export const Post = ({
       <View style={styles.topContent}>
         <TouchableOpacity
           style={styles.info}
-          onPress={() => (!isChannel ? showUser(item?.user.username) : null)}
+          onPress={() =>
+            !isChannel ? showUser(item?.user.username) : showChannel()
+          }
         >
           <Image
             style={styles.userImg}
-            source={
-              item?.user?.avatar ? { uri: item.user.avatar } : test.img
-            }
+            source={item?.user?.avatar ? { uri: item.user.avatar } : test.img}
             resizeMode="cover"
           />
           <View style={styles.postInfo}>
@@ -151,7 +160,7 @@ export const Post = ({
             ? item?.content.substring(0, 500) + " ..."
             : item?.content}
           <Text style={styles.postShowTxt} onPress={() => setMore(!more)}>
-            {more && !isAlone ? " Показать полностью" : null}
+            {more && !isAlone ? Strings().news_p_sa : null}
           </Text>
         </Text>
       </View>
@@ -207,7 +216,7 @@ export const Post = ({
           <View>
             <TextInput
               style={styles.input}
-              placeholder="Введите текст комментария.."
+              placeholder={Strings().news_p_cp}
               placeholderTextColor={COLORS.blue_text}
               onChangeText={(txt) => setText(txt)}
               maxLength={300}
@@ -228,7 +237,7 @@ export const Post = ({
               ]}
               onPress={() => sendComment()}
             >
-              Отправить
+              {Strings().news_p_sc}
             </Text>
           </View>
         ) : null}

@@ -13,6 +13,7 @@ import { Parmalat, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow, PostItem } from "../../components";
 import { useStateValue } from "../../provider";
 import { newsAll } from "../../data";
+import { Strings } from "../../storage/strings";
 
 export const NewsScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -43,6 +44,7 @@ export const NewsScreen = ({ navigation }) => {
       myUname={globalData?.user.username}
       navigation={navigation}
       isChannel={type == 2}
+      isLast={index + 1 == globalData?.feed?.length}
     />
   );
 
@@ -119,7 +121,7 @@ export const NewsScreen = ({ navigation }) => {
         onEndReached={() => (next ? more() : null)}
         onEndReachedThreshold={1}
         ListEmptyComponent={
-          <Text style={styles.nocommentsTxt}>Здесь пока ничего нет..</Text>
+          <Text style={styles.nocommentsTxt}>{Strings().no_data}</Text>
         }
         ListHeaderComponent={
           <NewsHeader

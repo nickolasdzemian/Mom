@@ -13,6 +13,7 @@ import { bg_blue, OS } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow, Post } from "../../components";
 import { getComments, getUser } from "../../data";
+import { Strings } from "../../storage/strings";
 
 export const NewsPost = ({ route, navigation }) => {
   const { item, token, isChannel, myUname } = route.params;
@@ -28,6 +29,7 @@ export const NewsPost = ({ route, navigation }) => {
           borderBottomStartRadius: index + 1 == comments?.length ? 10 : 0,
           borderBottomEndRadius: index + 1 == comments?.length ? 10 : 0,
           paddingBottom: index + 1 == comments?.length ? 30 : 15,
+          marginBottom: index + 1 == comments?.length ? 50 : 0,
         },
       ]}
     >
@@ -85,9 +87,7 @@ export const NewsPost = ({ route, navigation }) => {
           onEndReachedThreshold={1}
           ListEmptyComponent={
             "comments_count" in item ? null : (
-              <Text style={styles.nocommentsTxt}>
-                Комментарии к данному посту отключены :(
-              </Text>
+              <Text style={styles.nocommentsTxt}>{Strings().news_p_noc}</Text>
             )
           }
           ListHeaderComponent={

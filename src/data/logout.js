@@ -2,8 +2,9 @@ import { url } from "./env";
 import { Alert } from "react-native";
 import { userData } from "../storage/auth";
 import { childsData } from "../storage/childs";
-import { auth } from '../firebase';
-import { signOut } from 'firebase/auth';
+import { userLocale } from "../storage/locale";
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
 export async function logout(token, global) {
   const URL = url + "auth/logout";
@@ -20,6 +21,7 @@ export async function logout(token, global) {
       });
     await userData.clearAll();
     await childsData.clearAll();
+    await userLocale.clearAll();
   }
 
   try {

@@ -33,8 +33,10 @@ export const CalendarPostScreen = ({ route, navigation }) => {
         tTxt0={title}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.content}>
-          <Text style={[styles.libTitle, {marginTop: 10}]}>{data?.title}</Text>
+        <View style={[styles.content, { marginBottom: 75 }]}>
+          <Text style={[styles.libTitle, { marginTop: 10 }]}>
+            {data?.title}
+          </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {data?.images?.map((item) => (
               <Image
@@ -44,9 +46,9 @@ export const CalendarPostScreen = ({ route, navigation }) => {
               />
             ))}
           </ScrollView>
-          <View style={[styles.trimArea, {justifyContent: 'space-between'}]}>
+          <View style={[styles.trimArea, { justifyContent: "space-between" }]}>
             {attributes?.keys?.map((key, i) => (
-              <View style={{marginRight: 110}}>
+              <View style={{ marginRight: 110 }}>
                 <Text
                   style={[
                     styles.calItemTxt,

@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   FlatList,
+  DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
 import { bg_blue, preg_state, child } from "../../theme/main";
@@ -15,6 +16,7 @@ import { Geo } from "../../../assets/SVGpost";
 import { NewsHeader, PostItem, BottomShadow } from "../../components";
 import { newsUser } from "../../data";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -29,9 +31,11 @@ export const ProfileScreen = ({ navigation }) => {
 
   const [news, setNews] = React.useState();
 
-  // DeviceEventEmitter.addListener("event.next.user", (eventData) =>
-  //   setNext(eventData)
-  // );
+  DeviceEventEmitter.addListener("event.updateProfile", (eventData) => {
+    if (eventData) {
+      update();
+    }
+  });
 
   const update = () => {
     setTime(Date.now());
@@ -86,6 +90,7 @@ export const ProfileScreen = ({ navigation }) => {
       myUname={globalData?.user.username}
       navigation={navigation}
       isChannel={type == 2}
+      isLast={index + 1 == news?.length}
     />
   );
 
@@ -100,7 +105,9 @@ export const ProfileScreen = ({ navigation }) => {
         <Image
           style={styles.userImg}
           source={
-            globalData?.user?.avatar_url ? {uri: globalData.user.avatar_url} : test.img
+            globalData?.user?.avatar_url
+              ? { uri: globalData.user.avatar_url }
+              : test.img
           }
           resizeMode="cover"
         />
@@ -115,7 +122,7 @@ export const ProfileScreen = ({ navigation }) => {
             <Text style={styles.counterTxt}>
               {globalData?.user.posts_count ? globalData.user.posts_count : 0}
             </Text>
-            <Text style={styles.counterSubTxt}>Записей</Text>
+            <Text style={styles.counterSubTxt}>{Strings().pr_pc}</Text>
           </View>
           <View style={styles.center}>
             <Text style={styles.counterTxt}>
@@ -123,7 +130,7 @@ export const ProfileScreen = ({ navigation }) => {
                 ? globalData.user.subscribers_count
                 : 0}
             </Text>
-            <Text style={styles.counterSubTxt}>Подписчики</Text>
+            <Text style={styles.counterSubTxt}>{Strings().pr_sc}</Text>
           </View>
           <View style={styles.border}>
             <Text style={styles.counterTxt}>
@@ -131,10 +138,10 @@ export const ProfileScreen = ({ navigation }) => {
                 ? globalData.user.subscriptions_count
                 : 0}
             </Text>
-            <Text style={styles.counterSubTxt}>Подписки</Text>
+            <Text style={styles.counterSubTxt}>{Strings().pr_ssc}</Text>
           </View>
         </View>
-        <Text style={styles.title}>Семья</Text>
+        <Text style={styles.title}>{Strings().pr_f}</Text>
         <ScrollView
           style={styles.family}
           horizontal
@@ -159,7 +166,12 @@ export const ProfileScreen = ({ navigation }) => {
                 </View>
               </ImageBackground>
               <Text style={styles.pregCountSubTxt}>
-                {globalData?.user.gestational_age + " неделя, " + "5 дней"}
+                {globalData?.user.gestational_age +
+                  " " +
+                  Strings().reg_sVw +
+                  ", " +
+                  "5 " +
+                  Strings().pr_udd}
               </Text>
             </View>
           ) : null}
@@ -170,7 +182,7 @@ export const ProfileScreen = ({ navigation }) => {
                 <View>
                   <Image
                     style={[styles.pregState, { marginLeft: 10 }]}
-                    source={item?.avatar_url ? {uri: item.avatar_url} : child}
+                    source={item?.avatar_url ? { uri: item.avatar_url } : child}
                   />
                   <Text style={[styles.pregCountSubTxt, { marginLeft: 10 }]}>
                     {item.name}
@@ -180,7 +192,7 @@ export const ProfileScreen = ({ navigation }) => {
             </View>
           ) : null}
         </ScrollView>
-        <Text style={styles.title}>Записи</Text>
+        <Text style={styles.title}>{Strings().pr_pcT}</Text>
       </View>
     </View>
   );
@@ -202,7 +214,7 @@ export const ProfileScreen = ({ navigation }) => {
         onEndReachedThreshold={1}
         ListEmptyComponent={
           <View style={styles.nocomments}>
-            <Text style={styles.nocommentsTxt}>Здесь пока ничего нет..</Text>
+            <Text style={styles.nocommentsTxt}>{Strings().no_data}</Text>
           </View>
         }
         ListHeaderComponent={Header}

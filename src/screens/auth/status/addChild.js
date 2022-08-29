@@ -17,6 +17,7 @@ import { Calendar } from "../../../../assets/SVGstartup";
 import { YellowButton } from "../../../components";
 
 import { addChild } from "../../../data/childAdd";
+import { Strings } from "../../../storage/strings";
 
 export const AddChild = ({ navigation }) => {
   const date = new Date();
@@ -54,13 +55,11 @@ export const AddChild = ({ navigation }) => {
           <Image style={styles.babyShirt} source={authIcons.babyShirt} />
         </View>
         <View style={styles.center}>
-          <Text style={styles.title}>Добавьте вашего малыша</Text>
-          <Text style={styles.subTitle}>
-            Здесь будет краткое описание данного экрана. Несколько предложений!{" "}
-          </Text>
+          <Text style={styles.title}>{Strings().reg_aC}</Text>
+          <Text style={styles.subTitle}>{Strings().reg_aCd}</Text>
           <TextInput
             style={[styles.input, { marginTop: 45 }]}
-            placeholder="Имя"
+            placeholder={Strings().reg_acN}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setChildData({ ...childData, name: txt })}
             maxLength={30}
@@ -73,7 +72,7 @@ export const AddChild = ({ navigation }) => {
             onPress={() => setOpen(!open)}
           >
             <Text style={styles.btnTXT}>
-              {childData.date == "" ? "Дата рождения" : childData.date}
+              {childData.date == "" ? Strings().reg_acDate : childData.date}
             </Text>
             <Calendar />
           </TouchableOpacity>
@@ -94,7 +93,7 @@ export const AddChild = ({ navigation }) => {
               ]}
               onPress={() => setChildData({ ...childData, gender: 0 })}
             >
-              <Text style={styles.selTxt}>Мальчик</Text>
+              <Text style={styles.selTxt}>{Strings().reg_s1}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -112,30 +111,31 @@ export const AddChild = ({ navigation }) => {
               ]}
               onPress={() => setChildData({ ...childData, gender: 1 })}
             >
-              <Text style={styles.selTxt}>Девочка</Text>
+              <Text style={styles.selTxt}>{Strings().reg_s2}</Text>
             </TouchableOpacity>
           </View>
 
           <DatePicker
             modal
+            theme="light"
             mode="date"
             open={open}
             date={date}
             locale="ru_RU"
-            title="Выберите дату:"
-            confirmText="Сохранить"
+            title={Strings().dp_title}
+            confirmText={Strings().dp_save}
             onConfirm={(date) => {
               setOpen(false);
               setChildData({ ...childData, date: parsedDate(date) });
             }}
-            cancelText="Отменить"
+            cancelText={Strings().dp_cancel}
             onCancel={() => {
               setOpen(false);
             }}
           />
 
           <YellowButton
-            txt="Продолжить"
+            txt={Strings().reg_sVCC}
             style={{ marginTop: 40 }}
             nav={navigation}
             event={() => addChild(childData, null, navigation, "Reg")}
@@ -149,7 +149,7 @@ export const AddChild = ({ navigation }) => {
             style={[styles.btn, { marginTop: 8 }]}
           >
             <Text style={[styles.btnTXT, { color: "#FFF5DC" }]}>
-              Добавить еще одного ребенка
+              {Strings().reg_aMore}
             </Text>
           </TouchableOpacity>
         </View>

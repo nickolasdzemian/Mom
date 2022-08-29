@@ -15,6 +15,7 @@ import { BackBtn, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
 import { libraryCalendarAllPosts, librarySinglePost } from "../../data";
+import { Strings } from "../../storage/strings";
 
 const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
 
@@ -33,7 +34,7 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
       <NewsHeader
         lIco={<BackBtn />}
         lEv={() => navigation.goBack()}
-        tTxt0="Статьи"
+        tTxt0={Strings().cal_all_ti}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.search}>
@@ -44,15 +45,18 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
             style={styles.searchInput}
             onChangeText={(txt) => setSearch(txt)}
             value={search}
-            placeholder="Ищите любые темы в статьях"
+            placeholder={Strings().cal_all}
             returnKeyType="search"
             placeholderTextColor={COLORS.gray1}
           />
         </View>
         <View style={styles.content}>
-          {posts?.map((item) => (
+          {posts?.map((item, i) => (
             <TouchableOpacity
-              style={styles.postItem}
+              style={[
+                styles.postItem,
+                { marginBottom: i + 1 == posts?.length ? 55 : 0 },
+              ]}
               onPress={() =>
                 librarySinglePost(
                   globalData.token,

@@ -15,6 +15,7 @@ import { Book } from "../../../assets/SVGLibrary";
 import { NewsHeader } from "../../components";
 import { libraryCalWeek } from "../../data";
 import { useStateValue } from "../../provider";
+import { Strings } from "../../storage/strings";
 
 const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
 const tri1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
@@ -54,11 +55,9 @@ export const CalendarScreen = ({ route, navigation }) => {
             </View>
             <View style={styles.pediaTxtArea}>
               <Text style={[styles.libTitle, { marginBottom: 0 }]}>
-                Энциклопедия беременности
+                {Strings().cal_btn}
               </Text>
-              <Text style={styles.calItemTxt}>
-                Текст с подробным описанием раздела
-              </Text>
+              <Text style={styles.calItemTxt}>{Strings().cal_btnD}</Text>
             </View>
           </TouchableOpacity>
           <Text style={styles.libTitle}>1 триместр</Text>
@@ -84,7 +83,7 @@ export const CalendarScreen = ({ route, navigation }) => {
             ))}
           </View>
           <Text style={styles.libTitle}>3 триместр</Text>
-          <View style={styles.trimArea}>
+          <View style={[styles.trimArea, { marginBottom: 80 }]}>
             {tri3?.map((week, i) => (
               <TouchableOpacity
                 style={[styles.triItem, { backgroundColor: "#FFC897" }]}

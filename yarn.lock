@@ -6424,6 +6424,11 @@ react-native-date-picker@^4.2.2:
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.2.2.tgz#07fb8a9021fb48ef9a20b043d33c14e858220883"
   integrity sha512-x0jxWbJXKDXivRDwsUx58tKOxe719XoVqqq6UzMSYSsTiPL2i13r7PyDxop3f3et/62qbcMgeswl+/CLdX6+Eg==
 
+react-native-doc-viewer@^2.7.8:
+  version "2.7.8"
+  resolved "https://registry.yarnpkg.com/react-native-doc-viewer/-/react-native-doc-viewer-2.7.8.tgz#43d065328fb1b7ec90d321e5bd234711e807c8f6"
+  integrity sha512-6rAHGfU6CedfGhr8SoqbdtA3MHKRnbKqwjzzCFnTEniynM0PgJxC4vXZF3MxbJdh6nGWPVVuM23zCfWNLvAuRg==
+
 react-native-gifted-chat@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/react-native-gifted-chat/-/react-native-gifted-chat-1.0.4.tgz#36d11ecc44896a83ca188aeefab2f2e4c098a080"

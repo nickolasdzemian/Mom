@@ -12,6 +12,7 @@ import {
   Reptiler,
 } from "../../../assets/SVGpost";
 import { getUser } from "../../data";
+import { Strings } from "../../storage/strings";
 
 const test = {
   img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
@@ -26,7 +27,14 @@ const test = {
     "Привет, с удовольствием помогу вам, напишите мне в личку. Буду ждать)",
 };
 
-export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
+export const PostItem = ({
+  item,
+  token,
+  myUname,
+  navigation,
+  isChannel,
+  isLast,
+}) => {
   const [more, setMore] = React.useState(item?.content.length > 500);
   const [like, setLike] = React.useState(item.like_status);
   const [likes, setLikes] = React.useState(item.likes_count);
@@ -44,9 +52,9 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
   const time = `${hh < 10 ? `0${hh}` : hh}:${mm < 10 ? `0${mm}` : mm}`;
   date =
     thisDate == day
-      ? "Сегодня"
+      ? Strings().news_p_to
       : parseInt(thisDate, 10) - 1 == day
-      ? `Вчера в ${time}`
+      ? `${Strings().news_p_ye}${time}`
       : `${day < 10 ? `0${day}` : day}.${
           mon < 10 ? `0${mon}` : mon
         }.${yy}, ${time}`;
@@ -54,19 +62,25 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
   function showUser(username) {
     getUser(token, username, navigation, myUname);
   }
+  function showChannel() {
+    navigation.navigate("ChannelScreen", {
+      uuid: item.channel.uuid,
+      title: item.channel.title,
+    });
+  }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { marginBottom: isLast ? 50 : 0 }]}>
       <View style={styles.topContent}>
         <TouchableOpacity
           style={styles.info}
-          onPress={() => (!isChannel ? showUser(item?.user.username) : null)}
+          onPress={() =>
+            !isChannel ? showUser(item?.user.username) : showChannel()
+          }
         >
           <Image
             style={styles.userImg}
-            source={
-              item?.user?.avatar ? { uri: item.user.avatar } : test.img
-            }
+            source={item?.user?.avatar ? { uri: item.user.avatar } : test.img}
             resizeMode="cover"
           />
           <View style={styles.postInfo}>
@@ -109,7 +123,7 @@ export const PostItem = ({ item, token, myUname, navigation, isChannel }) => {
         <Text style={styles.post}>
           {more ? item?.content.substring(0, 500) + " ..." : item?.content}
           <Text style={styles.postShowTxt} onPress={() => setMore(!more)}>
-            {more ? " Показать полностью" : null}
+            {more ? Strings().news_p_sa : null}
           </Text>
         </Text>
       </View>

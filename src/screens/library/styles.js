@@ -170,7 +170,7 @@ export const styles = StyleSheet.create({
     borderRadius: 180,
     marginRight: 15,
   },
-  postTitle:{
+  postTitle: {
     //alignItems: "center",
   },
   postTitleTxt: {

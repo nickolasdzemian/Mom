@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 export async function newsLike(token, uuid) {
   const URL = url + "feed/like/" + uuid;
 
-  async function created(json) {};
+  async function created(json) {}
 
   try {
     const response = await fetch(URL, {
