@@ -2,7 +2,7 @@ import { url } from "./env";
 import { Alert } from "react-native";
 import { getAuth, updateProfile } from "firebase/auth";
 
-export async function userEdit(globalData, data, global, assets) {
+export async function userEdit(globalData, data, global, assets, setLoading) {
   const URL = url + "user/profile";
 
   let formdata = new FormData();
@@ -49,6 +49,7 @@ export async function userEdit(globalData, data, global, assets) {
     let newData = json.data;
     newData = { ...globalData, user: newData };
     global(newData);
+    setLoading(false);
 
     const auth = getAuth();
     updateProfile(auth.currentUser, {
@@ -73,6 +74,9 @@ export async function userEdit(globalData, data, global, assets) {
       body: formdata,
     });
     const json = await response.json();
+    if (json?.errors || json?.message) {
+      setLoading(false);
+    }
     json?.errors?.content
       ? Alert.alert("Ошибка", json?.errors?.content[0], [{ text: "OK" }])
       : json?.message
@@ -85,6 +89,7 @@ export async function userEdit(globalData, data, global, assets) {
 
     console.log(json);
   } catch (e) {
+    setLoading(false);
     alert(String(e));
     console.warn(e);
   }

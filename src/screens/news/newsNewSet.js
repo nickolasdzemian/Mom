@@ -39,7 +39,8 @@ export const NewScreenSet = ({ route, navigation }) => {
   function saveBack() {
     navigation.goBack();
   }
-  function publish() {
+  function publish(setLoading) {
+    setLoading(true);
     let channel;
     if (channels) {
       channel = channels.find((el, id) => id == selCh);
@@ -50,7 +51,8 @@ export const NewScreenSet = ({ route, navigation }) => {
       channel,
       text,
       assets ? assets : null,
-      navigation
+      navigation,
+      setLoading,
     );
   }
 
@@ -91,7 +93,8 @@ export const NewScreenSet = ({ route, navigation }) => {
         lEv={() => saveBack()}
         tTxt0={Strings().news_n_st}
         rIco={<Check />}
-        rEv={() => publish()}
+        rEv={(setLoading) => publish(setLoading)}
+        load={true}
       />
       <View style={styles.main}>
         <Text style={[styles.upperTitle, { fontSize: 18 }]}>

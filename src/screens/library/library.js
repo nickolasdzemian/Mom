@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
 import { bg_blue } from "../../theme/main";
@@ -78,7 +79,11 @@ export const LibraryScreen = ({ navigation }) => {
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <NewsHeader lIco={<BackBtn />} tTxt0={Strings().lib_ti} />
+      <NewsHeader
+        lIco={<BackBtn />}
+        lEv={() => DeviceEventEmitter.emit("event.HOME", true)}
+        tTxt0={Strings().lib_ti}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
           <Text style={styles.libTitle}>{Strings().lib_ch}</Text>

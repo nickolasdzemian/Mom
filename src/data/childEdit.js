@@ -2,7 +2,14 @@ import { url } from "./env";
 import { auth } from "./auth";
 import { Alert } from "react-native";
 
-export async function childEdit(globalData, data, global, assets, navigation) {
+export async function childEdit(
+  globalData,
+  data,
+  global,
+  assets,
+  navigation,
+  setLoading
+) {
   const URL = url + "child/" + data.id;
 
   let formdata = new FormData();
@@ -22,6 +29,7 @@ export async function childEdit(globalData, data, global, assets, navigation) {
     auth(global);
     Alert.alert("Выполнено", "Данные успешно обновлены", [{ text: "OK" }]);
     setTimeout(() => {
+      setLoading(false);
       navigation.goBack();
     }, 250);
   }
@@ -38,6 +46,9 @@ export async function childEdit(globalData, data, global, assets, navigation) {
       body: formdata,
     });
     const json = await response.json();
+    if (json?.errors || json?.message) {
+      setLoading(false);
+    }
     json?.errors
       ? Alert.alert(
           "Ошибка",
@@ -58,6 +69,7 @@ export async function childEdit(globalData, data, global, assets, navigation) {
 
     console.log(json);
   } catch (e) {
+    setLoading(false);
     alert(String(e));
     console.warn(e);
   }

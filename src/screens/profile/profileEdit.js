@@ -52,7 +52,17 @@ export const ProfileEditScreen = ({ navigation }) => {
           lEv={() => navigation.goBack()}
           tTxt0={Strings().pe_ti}
           rIco={<Check />}
-          rEv={() => userEdit(globalData, data, global, assets ? assets : null)}
+          rEv={(setLoading) => {
+            setLoading(true);
+            userEdit(
+              globalData,
+              data,
+              global,
+              assets ? assets : null,
+              setLoading
+            );
+          }}
+          load={true}
         />
         <View style={styles.profileContent}>
           <TouchableOpacity

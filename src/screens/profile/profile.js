@@ -98,6 +98,7 @@ export const ProfileScreen = ({ navigation }) => {
     <View style={styles.background}>
       <NewsHeader
         lIco={<BackBtn />}
+        lEv={() => DeviceEventEmitter.emit("event.HOME", true)}
         rIco={<Lines />}
         rEv={() => navigation.navigate("ProfileSettings")}
       />

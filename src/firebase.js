@@ -9,13 +9,7 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA6nUBcMy72Fo80SaiG11v1aPA1RpYsQWw",
-  authDomain: "u-mom-app-s-chat.firebaseapp.com",
-  projectId: "u-mom-app-s-chat",
-  storageBucket: "u-mom-app-s-chat.appspot.com",
-  messagingSenderId: "513897980518",
-  appId: "1:513897980518:web:aab4abc97377f5e68fc3a7",
-  measurementId: "G-MGJMDM4H0H",
+
 };
 
 // Initialize Firebase

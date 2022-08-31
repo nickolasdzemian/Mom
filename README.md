@@ -5,8 +5,9 @@
 
 
 
->>> DocViewer fix
+>>> DocViewer fix for Android
 - delete import ReactWebViewManager in [/node_modules/react-native-doc-viewer/android/src/main/java/com/reactlibrary]
+- or use react-native-doc-viewer-newest (Android only patch)
 
 # License
 Copyright © 2022-2023

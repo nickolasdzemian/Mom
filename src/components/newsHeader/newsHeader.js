@@ -1,5 +1,12 @@
 import * as React from "react";
-import { View, Text, TouchableOpacity, TextInput, Modal } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Modal,
+  ActivityIndicator,
+} from "react-native";
 import { styles } from "./styles";
 import { COLORS } from "../../theme/main";
 import { DropDown } from "../../../assets/SVGnewsHeader";
@@ -25,6 +32,7 @@ export const NewsHeader = ({
   tEv,
   rIco,
   rEv,
+  load,
   sch,
   filter,
   setFilter,
@@ -37,6 +45,7 @@ export const NewsHeader = ({
   ];
   const [modal, setModal] = React.useState(false);
   const [title, setTitle] = React.useState(titles[tTxt]);
+  const [loading, setLoading] = React.useState(false);
 
   const changeNews = (item) => {
     setTitle(item);
@@ -120,9 +129,13 @@ export const NewsHeader = ({
             borderColor: rIco ? "white" : "transparent",
           },
         ]}
-        onPress={() => (rEv ? rEv() : null)}
+        onPress={() => (rEv && load ? rEv(setLoading) : rEv ? rEv() : null)}
       >
-        {rIco}
+        {loading ? (
+          <ActivityIndicator size="small" color={COLORS.gray1} />
+        ) : (
+          rIco
+        )}
       </TouchableOpacity>
     </View>
   );

@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
 import { bg_blue, COLORS } from "../../theme/main";
@@ -67,7 +68,11 @@ export const AllChatsScreen = ({ navigation }) => {
 
   return (
     <ImageBackground style={styles.background} source={bg_blue}>
-      <NewsHeader lIco={<BackBtn />} tTxt0={Strings().chat_t} />
+      <NewsHeader
+        lIco={<BackBtn />}
+        lEv={() => DeviceEventEmitter.emit("event.HOME", true)}
+        tTxt0={Strings().chat_t}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.search}>
           <TouchableOpacity style={styles.searchIco}>

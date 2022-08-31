@@ -65,7 +65,18 @@ export const ChildAddScreen = ({ navigation }) => {
           lEv={() => navigation.goBack()}
           tTxt0={Strings().cha_ti}
           rIco={<Check />}
-          rEv={() => childStore(globalData, data, global, assets, navigation)}
+          rEv={(setLoading) => {
+            setLoading(true);
+            childStore(
+              globalData,
+              data,
+              global,
+              assets,
+              navigation,
+              setLoading
+            );
+          }}
+          load={true}
         />
         <View style={styles.profileContent}>
           <TouchableOpacity

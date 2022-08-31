@@ -1,7 +1,15 @@
 import { url } from "./env";
 import { Alert, DeviceEventEmitter } from "react-native";
 
-export async function newsAdd(token, set, channel, text, assets, navigation) {
+export async function newsAdd(
+  token,
+  set,
+  channel,
+  text,
+  assets,
+  navigation,
+  setLoading
+) {
   const URL = url + "feed";
 
   let formdata = new FormData();
@@ -26,6 +34,7 @@ export async function newsAdd(token, set, channel, text, assets, navigation) {
   function done() {
     navigation.navigate("News");
     DeviceEventEmitter.emit("event.update", true);
+    setLoading(false);
   }
 
   try {
@@ -40,18 +49,21 @@ export async function newsAdd(token, set, channel, text, assets, navigation) {
       body: formdata,
     });
     const json = await response.json();
-    json?.errors?.content
-      ? Alert.alert("Ошибка", json?.errors?.content[0], [{ text: "OK" }])
-      : json?.message
-      ? Alert.alert(
-          "Ошибка",
-          "Возникла непредвиденная ошибка, повторите попытку позднее",
-          [{ text: "OK" }]
-        )
-      : done();
+    if (json?.errors?.content) {
+      Alert.alert("Ошибка", json?.errors?.content[0], [{ text: "OK" }]);
+      setLoading(false);
+    } else if (json?.message) {
+      Alert.alert(
+        "Ошибка",
+        "Возникла непредвиденная ошибка, повторите попытку позднее",
+        [{ text: "OK" }]
+      );
+      setLoading(false);
+    } else done();
 
     console.log(json);
   } catch (e) {
+    setLoading(false);
     alert(String(e));
     console.warn(e);
   }

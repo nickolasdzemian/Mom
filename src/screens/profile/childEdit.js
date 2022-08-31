@@ -66,7 +66,11 @@ export const ChildEditScreen = ({ route, navigation }) => {
           lEv={() => navigation.goBack()}
           tTxt0={item.name}
           rIco={<Check />}
-          rEv={() => childEdit(globalData, data, global, assets, navigation)}
+          rEv={(setLoading) => {
+            setLoading(true);
+            childEdit(globalData, data, global, assets, navigation, setLoading);
+          }}
+          load={true}
         />
         <View style={styles.profileContent}>
           <TouchableOpacity

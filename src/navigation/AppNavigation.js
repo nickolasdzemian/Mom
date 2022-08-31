@@ -1,12 +1,11 @@
 import * as React from "react";
 import {
   StatusBar,
-  View,
   ImageBackground,
   ActivityIndicator,
-  Text,
   TouchableOpacity,
   DeviceEventEmitter,
+  Animated,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
@@ -34,21 +33,11 @@ import { LibraryStack } from "./LibraryStack";
 import { ChatStack } from "./ChatStack";
 import { Strings } from "../storage/strings";
 
-// function BlankScreen() {
-//   return (
-//     // eslint-disable-next-line react-native/no-inline-styles
-//     <View style={{ flex: 1, backgroundColor: "red" }}>
-//       <Text style={{ alignSelf: "center", marginTop: "40%" }}>
-//         Blank screen. This is a placeholder
-//       </Text>
-//     </View>
-//   );
-// }
-
 export const AppNavigation = () => {
   const [{ globalData }, dispatch] = useStateValue();
   const [splash, setSplash] = React.useState(true);
   const [newPost, setNewPost] = React.useState(false);
+  const [rel, setRel] = React.useState(false);
 
   // *** [Global listener from provider] ***
   const global = (newData) =>
@@ -56,6 +45,29 @@ export const AppNavigation = () => {
       type: "changeData",
       newGlobalData: newData,
     });
+
+  const fadeAnim = React.useRef(new Animated.Value(1)).current;
+
+  DeviceEventEmitter.addListener("event.HOME", (eventData) => {
+    if (eventData) {
+      setTimeout(() => {
+        setRel(true);
+      }, 50);
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
+      setTimeout(() => {
+        setRel(false);
+              Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
+      }, 100);
+    }
+  });
 
   // *** [Initialization, getting and setting all DATA] ***
   React.useEffect(() => {
@@ -120,6 +132,14 @@ export const AppNavigation = () => {
 
   return (
     <NavigationContainer>
+    <Animated.View style={[
+      {
+        flex: 1,
+        // Bind opacity to animated value
+        opacity: fadeAnim
+      }
+    ]}
+  >
       {OS ? (
         <StatusBar
           animated={true}
@@ -130,7 +150,7 @@ export const AppNavigation = () => {
       ) : null}
       {splash ? (
         _renderSplash()
-      ) : globalData ? (
+      ) : globalData && !rel ? (
         <CurvedBottomBar.Navigator
           type="up"
           style={styles.styles.bottomBar}
@@ -178,9 +198,12 @@ export const AppNavigation = () => {
             position="right"
           />
         </CurvedBottomBar.Navigator>
+      ) : globalData && rel ? (
+        _renderSplash()
       ) : (
         <AuthStack />
       )}
+        </Animated.View>
     </NavigationContainer>
   );
 };
