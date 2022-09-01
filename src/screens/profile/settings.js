@@ -17,14 +17,18 @@ import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { ChevronRight } from "../../../assets/SVGprofile";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
-import { logout, userEdit, userNewPassword } from "../../data";
+import { logout, userEdit, userNewPassword, userDelete } from "../../data";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { userLocale } from "../../storage/locale";
 import { Strings } from "../../storage/strings";
 
 export const ProfileSettings = ({ navigation }) => {
-  const states = [Strings().set_st_s1, Strings().set_st_s2, Strings().set_st_s3];
+  const states = [
+    Strings().set_st_s1,
+    Strings().set_st_s2,
+    Strings().set_st_s3,
+  ];
   const [{ globalData }, dispatch] = useStateValue();
   const global = (newData) =>
     dispatch({
@@ -33,12 +37,14 @@ export const ProfileSettings = ({ navigation }) => {
     });
 
   const [color, setColor] = React.useState(COLORS.blue_text);
+  const [delCount, setDelCount] = React.useState(undefined);
   const [modals, setModals] = React.useState({
     pswrd: false,
     email: false,
     location: false,
     status: false,
     lang: false,
+    del: false,
   });
   const [data, setData] = React.useState({
     oldpswrd: null,
@@ -86,6 +92,23 @@ export const ProfileSettings = ({ navigation }) => {
       logout(globalData?.token, global);
       signOutNow();
     }, 750);
+  }
+
+  function delAccount() {
+    let i = 5;
+    function time() {
+      if (i == 0 && modals.del == true) {
+        userDelete(globalData?.token, global);
+        setModals({ ...modals, del: false });
+        setDelCount(undefined);
+        i = 5;
+        clearInterval(counter);
+      }
+      setDelCount(i--);
+    }
+    const counter = setInterval(() => {
+      time();
+    }, 950);
   }
 
   function validate(type) {
@@ -503,13 +526,92 @@ export const ProfileSettings = ({ navigation }) => {
             <ChevronRight />
           </TouchableOpacity>
         </View>
-        <View style={[styles.block, { marginBottom: 170 }]}>
+        <View style={styles.block}>
           <TouchableOpacity style={styles.settingsBtn} onPress={() => out()}>
             <Text style={[styles.settingsBtnTxt, { color: color }]}>
               {Strings().set_ex}
             </Text>
             <ChevronRight />
           </TouchableOpacity>
+        </View>
+        <View
+          style={[
+            styles.block,
+            {
+              backgroundColor: "transparent",
+              marginTop: 0,
+              marginBottom: 170,
+            },
+          ]}
+        >
+          <TouchableOpacity
+            style={styles.settingsBtn}
+            onPress={() => setModals({ ...modals, del: !modals.del })}
+          >
+            <Text
+              style={[
+                styles.settingsBtnTxt,
+                { color: "red", fontWeight: "300" },
+              ]}
+            >
+              {Strings().set_DEL}
+            </Text>
+            <ChevronRight />
+          </TouchableOpacity>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modals.del}
+            onRequestClose={() => {
+              setModals({ ...modals, del: false });
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text
+                  style={[
+                    styles.settingsBtnTxt,
+                    { fontSize: 18, marginBottom: 15 },
+                  ]}
+                >
+                  {Strings().set_del_ti}
+                </Text>
+                <Text
+                  style={[
+                    styles.modalBtn,
+                    styles.settingsBtnTxt,
+                    { marginTop: 15, backgroundColor: "transparent" },
+                  ]}
+                >
+                  {delCount
+                    ? `${Strings().set_del_th}${delCount}`
+                    : Strings().set_del_qwe}
+                </Text>
+                <TouchableOpacity
+                  style={[styles.modalBtn, { marginTop: 15 }]}
+                  onPress={() => {
+                    setModals({ ...modals, del: false });
+                    setDelCount(undefined);
+                  }}
+                >
+                  <Text style={styles.settingsBtnTxt}>
+                    {Strings().set_del_ca}
+                  </Text>
+                </TouchableOpacity>
+                <Text
+                  style={[
+                    styles.settingsBtnTxt,
+                    { marginTop: 15, color: "red" },
+                  ]}
+                  onPress={() => {
+                    delAccount();
+                  }}
+                >
+                  {Strings().set_del_dl}
+                </Text>
+              </View>
+            </View>
+          </Modal>
         </View>
       </ScrollView>
       <BottomShadow />
