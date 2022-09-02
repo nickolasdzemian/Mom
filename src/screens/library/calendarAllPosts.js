@@ -10,14 +10,12 @@ import {
   ScrollView,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, COLORS } from "../../theme/main";
+import { bg_blue, COLORS, avatar } from "../../theme/main";
 import { BackBtn, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
 import { libraryCalendarAllPosts, librarySinglePost } from "../../data";
 import { Strings } from "../../storage/strings";
-
-const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
 
 export const CalendarAllPostsScreen = ({ route, navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -25,18 +23,21 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
   const [search, setSearch] = React.useState("");
   const [posts, setPosts] = React.useState();
 
+  const getAll = () =>
+    libraryCalendarAllPosts(globalData.token, id, posts, setPosts);
+
   function filler() {
     let filtered;
-    if (search !== "") {
+    if (search !== "" && posts) {
       filtered = posts.filter((item) => item.title.search(search) != -1);
       setPosts(filtered);
     } else {
-      libraryCalendarAllPosts(globalData.token, id, posts, setPosts);
+      getAll();
     }
   }
 
   React.useEffect(() => {
-    libraryCalendarAllPosts(globalData.token, id, posts, setPosts);
+    getAll();
   }, []);
 
   return (
@@ -48,7 +49,7 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.search}>
-          <TouchableOpacity style={styles.searchIco}>
+          <TouchableOpacity style={styles.searchIco} onPress={() => filler()}>
             <Looopa />
           </TouchableOpacity>
           <TextInput
@@ -79,9 +80,7 @@ export const CalendarAllPostsScreen = ({ route, navigation }) => {
             >
               <Image
                 style={styles.calPostAv}
-                source={
-                  item?.image_url ? { uri: item.image_url } : sampleBlogIco
-                }
+                source={item?.image_url ? { uri: item.image_url } : avatar}
                 resizeMode="contain"
               />
               <View style={styles.postTitle}>

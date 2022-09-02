@@ -20,7 +20,7 @@ import {
   InputToolbar,
 } from "react-native-gifted-chat";
 import { styles } from "./styles";
-import { bg_blue, window, OS } from "../../theme/main";
+import { bg_blue, window, OS, avatar } from "../../theme/main";
 import { BackBtn, Lines } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
@@ -168,6 +168,7 @@ export const ChatOnceScreen = ({ route, navigation }) => {
       <NewsHeader
         lIco={<BackBtn />}
         lEv={() => navigation.goBack()}
+        tEv={() => showUser()}
         tTxt0={uName ? uName : Strings().chat_t}
         rIco={<Lines />}
       />
@@ -199,7 +200,7 @@ export const ChatOnceScreen = ({ route, navigation }) => {
               name: auth?.currentUser?.displayName,
               avatar: auth?.currentUser?.photoURL
                 ? auth?.currentUser?.photoURL
-                : "",
+                : null,
             }}
             placeholder={Strings().chat_p}
             textInputProps={{ returnKeyType: "send" }}

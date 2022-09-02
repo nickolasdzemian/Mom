@@ -6,11 +6,10 @@ import {
   Image,
   ScrollView,
   TextInput,
-  KeyboardAvoidingView,
 } from "react-native";
 import { newsLike } from "../../data";
 import { styles } from "./styles";
-import { COLORS } from "../../theme/main";
+import { COLORS, avatar } from "../../theme/main";
 import {
   Clock,
   Geo,
@@ -22,19 +21,6 @@ import {
 } from "../../../assets/SVGpost";
 import { commentPost, getUser } from "../../data";
 import { Strings } from "../../storage/strings";
-
-const test = {
-  img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
-  username: "sandra1997",
-  time: "Сегодня",
-  location: "Киев",
-  text1:
-    "aЗдравствуйте дорогие мамы, я провожу исследовательскую работу, как питаются дети. Помогите пожалуйста, пройдите опрос. Буду очень благодарна!aЗдравствуйте дорогие мамы, я провожу исследовательскую работу, как питаются дети. Помогите пожалуйста, пройдите опрос. Буду очень благодарна!  ",
-  text2:
-    "Мамочки, здравствуйте! Моему сынишке пошла третья неделя и он стал беспокойным по ночам. Я подозреваю, что начались колики. Это мой первый ребенок и я опыта не имею в этом вопросе. Посоветуйте, кому что эффективно помогало? Спасибо заранее!",
-  comment:
-    "Привет, с удовольствием помогу вам, напишите мне в личку. Буду ждать)",
-};
 
 export const Post = ({
   item,
@@ -118,7 +104,7 @@ export const Post = ({
         >
           <Image
             style={styles.userImg}
-            source={item?.user?.avatar ? { uri: item.user.avatar } : test.img}
+            source={item?.user?.avatar ? { uri: item.user.avatar } : avatar}
             resizeMode="cover"
           />
           <View style={styles.postInfo}>

@@ -10,18 +10,13 @@ import {
   DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, preg_state, child } from "../../theme/main";
+import { bg_blue, preg_state, child, avatar } from "../../theme/main";
 import { BackBtn, Lines } from "../../../assets/SVGnewsHeader";
 import { Geo } from "../../../assets/SVGpost";
 import { NewsHeader, PostItem, BottomShadow } from "../../components";
 import { newsUser } from "../../data";
 import { useStateValue } from "../../provider";
 import { Strings } from "../../storage/strings";
-
-const test = {
-  img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
-  location: "Киев",
-};
 
 export const ProfileScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
@@ -30,12 +25,6 @@ export const ProfileScreen = ({ navigation }) => {
   const type = 0;
 
   const [news, setNews] = React.useState();
-
-  DeviceEventEmitter.addListener("event.updateProfile", (eventData) => {
-    if (eventData) {
-      update();
-    }
-  });
 
   const update = () => {
     setTime(Date.now());
@@ -108,7 +97,7 @@ export const ProfileScreen = ({ navigation }) => {
           source={
             globalData?.user?.avatar_url
               ? { uri: globalData.user.avatar_url }
-              : test.img
+              : avatar
           }
           resizeMode="cover"
         />

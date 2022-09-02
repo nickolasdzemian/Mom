@@ -13,17 +13,12 @@ import {
 import { launchImageLibrary } from "react-native-image-picker";
 import { styles } from "./styles";
 import { styles as post } from "../../components/newsItem/styles";
-import { bg_blue, window, OSA, COLORS } from "../../theme/main";
+import { bg_blue, window, OSA, COLORS, avatar } from "../../theme/main";
 import { BackBtn, Check } from "../../../assets/SVGnewsHeader";
 import { Geo, Gallery } from "../../../assets/SVGpost";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
 import { Strings } from "../../storage/strings";
-
-const test = {
-  img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
-  location: "Киев",
-};
 
 const options = { mediaType: "mixed", presentationStyle: "pageSheet" };
 
@@ -55,7 +50,7 @@ export const NewScreen = ({ navigation }) => {
               source={
                 globalData?.user?.avatar_url
                   ? { uri: globalData.user.avatar_url }
-                  : test.img
+                  : avatar
               }
               resizeMode="cover"
             />

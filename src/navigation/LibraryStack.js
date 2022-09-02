@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import {
   LibraryScreen,
   UserScreen,
+  ChatOnceScreen,
   CalendarScreen,
   CalendarPostScreen,
   CalendarAllPostsScreen,
@@ -25,6 +26,11 @@ export function LibraryStack() {
         <StackLibrary.Screen
           name="UserScreen"
           component={UserScreen}
+          options={{ headerShown: false }}
+        />
+        <StackLibrary.Screen
+          name="ChatTo"
+          component={ChatOnceScreen}
           options={{ headerShown: false }}
         />
         <StackLibrary.Screen

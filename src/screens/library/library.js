@@ -10,7 +10,7 @@ import {
   DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue } from "../../theme/main";
+import { bg_blue, avatar } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { Cloud1, Cloud2, Cloud3 } from "../../../assets/SVGLibrary";
 import { NewsHeader, BottomShadow } from "../../components";
@@ -19,32 +19,8 @@ import { useStateValue } from "../../provider";
 import { Strings } from "../../storage/strings";
 
 const test = require("../../../assets/library/cal.png");
-const sampleMomIco = require("../../../assets/library/samplem.jpeg");
-const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
-// const sampleMoms = [
-//   { name: "Евангелина", img: sampleMomIco },
-//   { name: "Кристина", img: sampleMomIco },
-//   { name: "Карина", img: sampleMomIco },
-//   { name: "Виталина", img: sampleMomIco },
-//   { name: "Евгения", img: sampleMomIco },
-//   { name: "Руслан", img: sampleMomIco },
-//   { name: "Анастасия", img: sampleMomIco },
-//   { name: "Изабелла", img: sampleMomIco },
-//   { name: "Жанна", img: sampleMomIco },
-//   { name: "Петрович", img: sampleMomIco },
-// ];
-// const sampleBlogs = [
-//   { name: "Евангелина", img: sampleBlogIco },
-//   { name: "Кристина", img: sampleBlogIco },
-//   { name: "Карина", img: sampleBlogIco },
-//   { name: "Виталина", img: sampleBlogIco },
-//   { name: "Евгения", img: sampleBlogIco },
-//   { name: "Руслан", img: sampleBlogIco },
-//   { name: "Анастасия", img: sampleBlogIco },
-//   { name: "Изабелла", img: sampleBlogIco },
-//   { name: "Жанна", img: sampleBlogIco },
-//   { name: "Петрович", img: sampleBlogIco },
-// ];
+const sampleMomIco = avatar;
+const sampleBlogIco = avatar;
 
 const clouds = [<Cloud1 />, <Cloud2 />, <Cloud3 />];
 
@@ -90,6 +66,7 @@ export const LibraryScreen = ({ navigation }) => {
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {channels?.map((item, i) => (
               <TouchableOpacity
+                key={i}
                 style={styles.cloud}
                 onPress={() => showChannel(item.uuid, item.title)}
               >
@@ -106,8 +83,9 @@ export const LibraryScreen = ({ navigation }) => {
           </ScrollView>
           <Text style={styles.libTitle}>{Strings().lib_enc}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {calendars?.map((item) => (
+            {calendars?.map((item, i) => (
               <TouchableOpacity
+                key={i}
                 style={styles.calItem}
                 onPress={() =>
                   navigation.navigate("CalendarScreen", { item: item })
@@ -131,8 +109,9 @@ export const LibraryScreen = ({ navigation }) => {
 
           <Text style={styles.libTitle}>{Strings().lib_nm}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {rec?.map((item) => (
+            {rec?.map((item, i) => (
               <TouchableOpacity
+                key={i}
                 style={styles.calItem}
                 onPress={() => showUser(item.username)}
               >
@@ -159,8 +138,9 @@ export const LibraryScreen = ({ navigation }) => {
             horizontal
             showsHorizontalScrollIndicator={false}
           >
-            {pop?.map((item) => (
+            {pop?.map((item, i) => (
               <TouchableOpacity
+                key={i}
                 style={styles.calItem}
                 onPress={() => showUser(item.username)}
               >

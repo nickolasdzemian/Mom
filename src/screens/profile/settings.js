@@ -141,13 +141,17 @@ export const ProfileSettings = ({ navigation }) => {
     }
   }
 
-  async function lang(locale) {
+  async function setLocale(locale) {
     await userLocale.set("lang", locale);
+  }
+  function lang(locale) {
+    setLocale(locale);
     DeviceEventEmitter.emit("event.locale", locale);
-    DeviceEventEmitter.emit("event.updateProfile", true);
-    setTimeout(() => {
-      navigation.goBack();
-    }, 100);
+    // DeviceEventEmitter.emit("event.updateProfile", true);
+    DeviceEventEmitter.emit("event.HOME", true);
+    // setTimeout(() => {
+    //   navigation.goBack();
+    // }, 100);
     return Strings();
   }
 
@@ -275,8 +279,9 @@ export const ProfileSettings = ({ navigation }) => {
                 >
                   {Strings().set_st_ti}
                 </Text>
-                {states.map((item) => (
+                {states.map((item, i) => (
                   <TouchableOpacity
+                    key={i}
                     style={[styles.modalBtn, { marginTop: 15 }]}
                     onPress={() => {
                       setModals({ ...modals, status: false });
@@ -556,7 +561,7 @@ export const ProfileSettings = ({ navigation }) => {
             >
               {Strings().set_DEL}
             </Text>
-            <ChevronRight />
+            <View />
           </TouchableOpacity>
           <Modal
             animationType="slide"

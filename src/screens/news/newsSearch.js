@@ -39,16 +39,9 @@ export const NewsSearch = ({ route, navigation }) => {
   ];
   function saveBack() {
     if (filter.text != "") {
-      newsAll(
-        globalData,
-        Date.now(),
-        null,
-        null,
-        global,
-        filter.text.replace("#", "%23"),
-        type
-      );
-      DeviceEventEmitter.emit("event.search", filter.text.replace("#", "%23"));
+      const text = filter.text.replace("#", "%23");
+      newsAll(globalData, Date.now(), null, null, global, text, type);
+      DeviceEventEmitter.emit("event.search", text);
     }
     navigation.goBack();
   }

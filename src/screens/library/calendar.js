@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, COLORS } from "../../theme/main";
+import { bg_blue, avatar } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { Book } from "../../../assets/SVGLibrary";
 import { NewsHeader } from "../../components";
@@ -17,7 +17,6 @@ import { libraryCalWeek } from "../../data";
 import { useStateValue } from "../../provider";
 import { Strings } from "../../storage/strings";
 
-const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
 const tri1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 const tri2 = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
 const tri3 = [27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42];
@@ -41,7 +40,7 @@ export const CalendarScreen = ({ route, navigation }) => {
         <View style={styles.content}>
           <Image
             style={styles.calTopImg}
-            source={item?.image_url ? { uri: item.image_url } : sampleBlogIco}
+            source={item?.image_url ? { uri: item.image_url } : avatar}
             resizeMode="contain"
           />
           <TouchableOpacity

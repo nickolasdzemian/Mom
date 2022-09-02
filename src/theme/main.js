@@ -24,6 +24,7 @@ export const fonts = OS
 export const bg_blue = require("../../assets/auth/bg_blue.png");
 export const preg_state = require("../../assets/profile/Puzo.png");
 export const child = require("../../assets/profile/Baby.png");
+export const avatar = require("../../assets/Noavatar.png");
 
 // Colors
 export const COLORS = {

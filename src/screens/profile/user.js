@@ -10,18 +10,13 @@ import {
   FlatList,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, preg_state, child } from "../../theme/main";
+import { bg_blue, preg_state, child, avatar } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { UserThreePoints, Geo } from "../../../assets/SVGpost";
 import { NewsHeader, PostItem, BottomShadow } from "../../components";
 import { userSubscribe, newsUser } from "../../data";
 import { useStateValue } from "../../provider";
 import { Strings } from "../../storage/strings";
-
-const test = {
-  img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
-  location: "Киев",
-};
 
 export const UserScreen = ({ route, navigation }) => {
   const { info, token, myUname } = route.params;
@@ -109,7 +104,7 @@ export const UserScreen = ({ route, navigation }) => {
       <View style={styles.profileContent}>
         <Image
           style={styles.userImg}
-          source={info?.avatar_url ? { uri: info.avatar_url } : test.img}
+          source={info?.avatar_url ? { uri: info.avatar_url } : avatar}
           resizeMode="cover"
         />
         <Text style={styles.name}>{info.name}</Text>
@@ -189,8 +184,8 @@ export const UserScreen = ({ route, navigation }) => {
           ) : null}
           {info?.children?.length > 0 || globalData?.user.status == 1 ? (
             <View style={{ flexDirection: "row" }}>
-              {info?.children.map((item) => (
-                <View>
+              {info?.children.map((item, i) => (
+                <View key={i}>
                   <Image
                     style={[styles.pregState, { marginLeft: 10 }]}
                     source={item?.avatar_url ? { uri: item.avatar_url } : child}

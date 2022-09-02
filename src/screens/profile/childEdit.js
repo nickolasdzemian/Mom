@@ -20,11 +20,7 @@ import { useStateValue } from "../../provider";
 import { childEdit } from "../../data";
 import { Strings } from "../../storage/strings";
 
-const test = {
-  img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
-  location: "Киев",
-};
-
+const babyImg = require("../../../assets/profile/Baby.png");
 const options = { mediaType: "mixed", presentationStyle: "pageSheet" };
 
 export const ChildEditScreen = ({ route, navigation }) => {
@@ -86,7 +82,7 @@ export const ChildEditScreen = ({ route, navigation }) => {
                   ? { uri: item.avatar_url }
                   : assets?.assets
                   ? { uri: assets.assets[0].uri }
-                  : test.img
+                  : babyImg
               }
               resizeMode="cover"
             />

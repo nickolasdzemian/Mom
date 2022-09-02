@@ -21,11 +21,7 @@ import { useStateValue } from "../../provider";
 import { childStore } from "../../data";
 import { Strings } from "../../storage/strings";
 
-const test = {
-  img: require("../../../assets/tests/m8ivcpkrvfaq1vfm53mhxafmzna.jpeg"),
-  location: "Киев",
-};
-
+const babyImg = require("../../../assets/profile/Baby.png");
 const options = { mediaType: "mixed", presentationStyle: "pageSheet" };
 
 export const ChildAddScreen = ({ navigation }) => {
@@ -87,7 +83,7 @@ export const ChildAddScreen = ({ navigation }) => {
           >
             <Image
               style={styles.userImg}
-              source={assets?.assets ? { uri: assets.assets[0].uri } : test.img}
+              source={assets?.assets ? { uri: assets.assets[0].uri } : babyImg}
               resizeMode="cover"
             />
             <View style={styles.editIco}>

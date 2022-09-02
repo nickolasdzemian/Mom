@@ -11,7 +11,7 @@ import {
   DeviceEventEmitter,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, COLORS } from "../../theme/main";
+import { bg_blue, COLORS, avatar } from "../../theme/main";
 import { BackBtn, Looopa } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow } from "../../components";
 import { useStateValue } from "../../provider";
@@ -21,8 +21,6 @@ import { Strings } from "../../storage/strings";
 import { db } from "../../firebase";
 import { collection, query, onSnapshot } from "firebase/firestore";
 
-const sampleBlogIco = require("../../../assets/library/sampleb.jpeg");
-
 export const AllChatsScreen = ({ navigation }) => {
   const [{ globalData }, dispatch] = useStateValue();
   const [search, setSearch] = React.useState("");
@@ -30,7 +28,7 @@ export const AllChatsScreen = ({ navigation }) => {
 
   function filler() {
     let filtered;
-    if (search !== "") {
+    if (users && search !== "") {
       filtered = users.filter((item) => item.name.search(search) != -1);
       setUsers(filtered);
     } else {
@@ -75,7 +73,7 @@ export const AllChatsScreen = ({ navigation }) => {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.search}>
-          <TouchableOpacity style={styles.searchIco}>
+          <TouchableOpacity style={styles.searchIco} onPress={() => filler()}>
             <Looopa />
           </TouchableOpacity>
           <TextInput
@@ -92,6 +90,7 @@ export const AllChatsScreen = ({ navigation }) => {
           {users ? (
             users?.map((item, i) => (
               <TouchableOpacity
+                key={i}
                 style={[
                   styles.postItem,
                   { marginBottom: i + 1 == users?.length ? 55 : 10 },
@@ -104,9 +103,7 @@ export const AllChatsScreen = ({ navigation }) => {
               >
                 <Image
                   style={styles.calPostAv}
-                  source={
-                    item?.avatar_url ? { uri: item.avatar_url } : sampleBlogIco
-                  }
+                  source={item?.avatar_url ? { uri: item.avatar_url } : avatar}
                   resizeMode="contain"
                 />
                 <View style={styles.postTitle}>

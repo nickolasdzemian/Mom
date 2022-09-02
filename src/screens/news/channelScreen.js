@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, OS } from "../../theme/main";
+import { bg_blue } from "../../theme/main";
 import { Looopa, BackBtn } from "../../../assets/SVGnewsHeader";
 import { NewsHeader, BottomShadow, PostItem } from "../../components";
 import { useStateValue } from "../../provider";

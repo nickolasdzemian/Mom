@@ -2,7 +2,7 @@
 import * as React from "react";
 import { ImageBackground, Image, View, Text, ScrollView } from "react-native";
 import { styles } from "./styles";
-import { bg_blue, COLORS } from "../../theme/main";
+import { bg_blue } from "../../theme/main";
 import { BackBtn } from "../../../assets/SVGnewsHeader";
 import { NewsHeader } from "../../components";
 import { useStateValue } from "../../provider";
