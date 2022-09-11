@@ -49,7 +49,7 @@ export const ChildEditScreen = ({ route, navigation }) => {
     const day =
       date.getDate() < 10 ? String("0" + date.getDate()) : date.getDate();
     const month =
-      date.getMonth() < 10 ? String("0" + date.getMonth()) : date.getMonth();
+      date.getMonth() < 10 ? String("0" + (date.getMonth() + 1)) : (date.getMonth() + 1);
     const year = date.getFullYear();
     return String(day + "-" + month + "-" + year);
   }
