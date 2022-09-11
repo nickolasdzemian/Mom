@@ -406,7 +406,6 @@ export const ProfileSettings = ({ navigation }) => {
                   placeholder={Strings().set_em_np}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, email0: txt })}
-                  maxLength={30}
                   value={data.email0}
                   textContentType="emailAddress"
                 />
@@ -415,7 +414,6 @@ export const ProfileSettings = ({ navigation }) => {
                   placeholder={Strings().set_em_rp}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, email1: txt })}
-                  maxLength={30}
                   value={data.email1}
                   textContentType="emailAddress"
                 />
@@ -474,7 +472,6 @@ export const ProfileSettings = ({ navigation }) => {
                   placeholder={Strings().set_ps_op}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, oldpswrd: txt })}
-                  maxLength={30}
                   value={data.oldpswrd}
                   secureTextEntry={true}
                 />
@@ -483,7 +480,6 @@ export const ProfileSettings = ({ navigation }) => {
                   placeholder={Strings().set_ps_n1}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, pswrd0: txt })}
-                  maxLength={30}
                   value={data.pswrd0}
                   secureTextEntry={true}
                   textContentType="newPassword"
@@ -493,7 +489,6 @@ export const ProfileSettings = ({ navigation }) => {
                   placeholder={Strings().set_ps_n2}
                   placeholderTextColor={COLORS.gray1}
                   onChangeText={(txt) => setData({ ...data, pswrd1: txt })}
-                  maxLength={30}
                   value={data.pswrd1}
                   secureTextEntry={true}
                   textContentType="newPassword"
