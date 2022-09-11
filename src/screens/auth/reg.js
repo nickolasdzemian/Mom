@@ -79,7 +79,6 @@ export const RegistrationScreen = ({ route, navigation }) => {
             placeholder={Strings().reg_acc_ce}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, email: txt })}
-            maxLength={30}
             value={data.email}
             textContentType="emailAddress"
             onFocus={() => setFocus(true)}
@@ -90,7 +89,6 @@ export const RegistrationScreen = ({ route, navigation }) => {
             placeholder={Strings().reg_acc_cp}
             placeholderTextColor={COLORS.blue_text}
             onChangeText={(txt) => setData({ ...data, pswrd: txt })}
-            maxLength={30}
             value={data.pswrd}
             secureTextEntry={true}
             textContentType="newPassword"
